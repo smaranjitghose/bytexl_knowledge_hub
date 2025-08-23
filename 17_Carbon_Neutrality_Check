@@ -1,0 +1,281 @@
+---
+- Title: "Carbon Neutrality Check"
+- Difficulty: easy
+- Bloom Taxonomy: "Apply"
+- Subjects: "problem-solving"
+- Topics: ["sample-topic"]
+- Sub Topics: ["sample-subtopic"]
+- Tags: ["practice-question"]
+- Company: # Keep it empty
+---
+### Problem Statement
+A sustainability analyst is studying whether a region is **carbon-neutral**. The region has multiple sectors that either **emit** (positive values) or **absorb** (negative values) carbon in three categories:
+
+* **Industry (x)**
+* **Agriculture (y)**
+* **Forestry (z)**
+
+For each sector, the net carbon contribution is represented as a vector `(x, y, z)`.
+
+A region is considered **carbon-neutral** if the **total net emissions/absorptions across all sectors add up to zero** in all three categories. In other words:
+* Total industry emissions = 0
+* Total agriculture emissions = 0
+* Total forestry emissions = 0
+
+You are tasked with checking whether the region is carbon-neutral.
+
+### Input Format
+* The first line contains an integer `n` (1 ≤ n ≤ 100), the number of sectors.
+* The next `n` lines each contain three integers `xi, yi, zi` (−100 ≤ xi, yi, zi ≤ 100), the carbon contribution of each sector.
+
+### Output Format
+Print:
+* `"YES"` if the region is carbon-neutral.
+* `"NO"` otherwise.
+
+### Constraints
+- 1 ≤ n ≤ 100
+- −100 ≤ xi, yi, zi ≤ 100
+
+---
+**Test Case 1**
+Input:
+```
+3
+1 1 0
+-1 -1 0
+0 0 0
+```
+Output:
+```
+YES
+```
+Explanation:
+```
+Sector 1: (1, 1, 0)
+Sector 2: (-1, -1, 0)
+Sector 3: (0, 0, 0)
+Total: (1-1+0, 1-1+0, 0+0+0) = (0, 0, 0)
+All categories sum to zero, so region is carbon-neutral: YES
+```
+
+**Test Case 2**
+Input:
+```
+2
+5 3 -2
+-5 -3 1
+```
+Output:
+```
+NO
+```
+Explanation:
+```
+Sector 1: (5, 3, -2)
+Sector 2: (-5, -3, 1)
+Total: (5-5, 3-3, -2+1) = (0, 0, -1)
+Forestry category sums to -1 (not zero), so region is not carbon-neutral: NO
+```
+
+**Test Case 3**
+Input:
+```
+4
+10 -5 3
+-8 2 -1
+-2 3 -2
+0 0 0
+```
+Output:
+```
+YES
+```
+Explanation:
+```
+Sector 1: (10, -5, 3)
+Sector 2: (-8, 2, -1)
+Sector 3: (-2, 3, -2)
+Sector 4: (0, 0, 0)
+Total: (10-8-2+0, -5+2+3+0, 3-1-2+0) = (0, 0, 0)
+All categories sum to zero, so region is carbon-neutral: YES
+```
+
+**Test Case 4**
+Input:
+```
+1
+0 0 0
+```
+Output:
+```
+YES
+```
+Explanation:
+```
+Single sector: (0, 0, 0)
+Total: (0, 0, 0)
+All categories sum to zero, so region is carbon-neutral: YES
+```
+
+**Test Case 5**
+Input:
+```
+3
+7 2 -4
+-3 -1 2
+-4 -1 3
+```
+Output:
+```
+NO
+```
+Explanation:
+```
+Sector 1: (7, 2, -4)
+Sector 2: (-3, -1, 2)
+Sector 3: (-4, -1, 3)
+Total: (7-3-4, 2-1-1, -4+2+3) = (0, 0, 1)
+Forestry category sums to 1 (not zero), so region is not carbon-neutral: NO
+```
+
+**Test Case 6**
+Input:
+```
+5
+1 2 3
+2 3 4
+3 4 5
+-3 -4 -5
+-3 -5 -7
+```
+Output:
+```
+YES
+```
+Explanation:
+```
+Sector 1: (1, 2, 3)
+Sector 2: (2, 3, 4)
+Sector 3: (3, 4, 5)
+Sector 4: (-3, -4, -5)
+Sector 5: (-3, -5, -7)
+Total: (1+2+3-3-3, 2+3+4-4-5, 3+4+5-5-7) = (0, 0, 0)
+All categories sum to zero, so region is carbon-neutral: YES
+```
+
+**Test Case 7**
+Input:
+```
+2
+15 -20 10
+-15 20 -9
+```
+Output:
+```
+NO
+```
+Explanation:
+```
+Sector 1: (15, -20, 10)
+Sector 2: (-15, 20, -9)
+Total: (15-15, -20+20, 10-9) = (0, 0, 1)
+Forestry category sums to 1 (not zero), so region is not carbon-neutral: NO
+```
+
+---
+## Python Solution
+```python
+def compute(n, sectors):
+    total_x = sum(sector[0] for sector in sectors)
+    total_y = sum(sector[1] for sector in sectors)
+    total_z = sum(sector[2] for sector in sectors)
+    
+    if total_x == 0 and total_y == 0 and total_z == 0:
+        return "YES"
+    else:
+        return "NO"
+
+n = int(input())
+sectors = []
+for i in range(n):
+    x, y, z = map(int, input().split())
+    sectors.append((x, y, z))
+
+result = compute(n, sectors)
+print(result)
+```
+
+## Java Solution
+```java
+import java.util.*;
+
+public class Main {
+    public static String compute(int n, int[][] sectors) {
+        int totalX = 0, totalY = 0, totalZ = 0;
+        
+        for (int i = 0; i < n; i++) {
+            totalX += sectors[i][0];
+            totalY += sectors[i][1];
+            totalZ += sectors[i][2];
+        }
+        
+        if (totalX == 0 && totalY == 0 && totalZ == 0) {
+            return "YES";
+        } else {
+            return "NO";
+        }
+    }
+    
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[][] sectors = new int[n][3];
+        
+        for (int i = 0; i < n; i++) {
+            sectors[i][0] = sc.nextInt();
+            sectors[i][1] = sc.nextInt();
+            sectors[i][2] = sc.nextInt();
+        }
+        
+        System.out.println(compute(n, sectors));
+        sc.close();
+    }
+}
+```
+
+## C++ Solution
+```cpp
+#include <iostream>
+#include <vector>
+using namespace std;
+
+string compute(int n, vector<vector<int>>& sectors) {
+    int totalX = 0, totalY = 0, totalZ = 0;
+    
+    for (int i = 0; i < n; i++) {
+        totalX += sectors[i][0];
+        totalY += sectors[i][1];
+        totalZ += sectors[i][2];
+    }
+    
+    if (totalX == 0 && totalY == 0 && totalZ == 0) {
+        return "YES";
+    } else {
+        return "NO";
+    }
+}
+
+int main() {
+    int n;
+    cin >> n;
+    
+    vector<vector<int>> sectors(n, vector<int>(3));
+    for (int i = 0; i < n; i++) {
+        cin >> sectors[i][0] >> sectors[i][1] >> sectors[i][2];
+    }
+    
+    cout << compute(n, sectors) << endl;
+    return 0;
+}
+```
