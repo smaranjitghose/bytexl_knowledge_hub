@@ -1,0 +1,298 @@
+---
+- Title: "Drone Landing at IIT Bombay Tech Expo" 
+- Difficulty: easy
+- Bloom Taxonomy: "Apply"
+- Subjects: "problem-solving"
+- Topics: ["sample-topic"]
+- Sub Topics: ["sample-subtopic"]
+- Tags: ["practice-question"]
+- Company: # Keep it empty
+---
+
+### Problem Statement
+At the IIT Bombay Tech Expo, engineers are showcasing an autonomous drone on a 5×5 landing pad grid.
+
+The grid has 24 empty spots (0) and one drone (1) somewhere on it. To impress the audience, the drone needs to land exactly at the central showcase pad (row 3, column 3).
+
+The drone can only move by:
+1. Swapping with the adjacent pad vertically (up/down).
+2. Swapping with the adjacent pad horizontally (left/right).
+
+Your task is to calculate the minimum number of moves needed.
+
+### Input Format
+5 lines, each containing 5 integers (0 or 1), representing the 5×5 grid. Exactly one cell contains 1 (the drone), and the rest contain 0 (empty spots).
+
+### Output Format
+A single integer representing the minimum number of moves needed to get the drone to position (3, 3).
+
+### Constraints
+- The grid is always 5×5
+- Exactly one cell contains 1, others contain 0
+- Grid coordinates are 1-indexed (rows and columns from 1 to 5)
+- The target position is always (3, 3)
+
+---
+
+**Test Case 1**
+
+Input:
+```
+1 0 0 0 0
+0 0 0 0 0
+0 0 0 0 0
+0 0 0 0 0
+0 0 0 0 0
+```
+
+Output:
+```
+4
+```
+
+Explanation:
+```
+Drone is at (1,1) and needs to reach (3,3). Manhattan distance = |1-3| + |1-3| = 2 + 2 = 4 moves.
+```
+
+**Test Case 2**
+
+Input:
+```
+0 0 0 0 0
+0 0 0 0 0
+0 0 1 0 0
+0 0 0 0 0
+0 0 0 0 0
+```
+
+Output:
+```
+0
+```
+
+Explanation:
+```
+Drone is already at (3,3), so 0 moves needed.
+```
+
+**Test Case 3**
+
+Input:
+```
+0 0 0 0 0
+0 0 0 0 0
+0 0 0 0 0
+0 0 0 0 0
+0 0 0 0 1
+```
+
+Output:
+```
+4
+```
+
+Explanation:
+```
+Drone is at (5,5) and needs to reach (3,3). Manhattan distance = |5-3| + |5-3| = 2 + 2 = 4 moves.
+```
+
+**Test Case 4**
+
+Input:
+```
+0 0 0 0 0
+0 0 1 0 0
+0 0 0 0 0
+0 0 0 0 0
+0 0 0 0 0
+```
+
+Output:
+```
+1
+```
+
+Explanation:
+```
+Drone is at (2,3) and needs to reach (3,3). Manhattan distance = |2-3| + |3-3| = 1 + 0 = 1 move.
+```
+
+**Test Case 5**
+
+Input:
+```
+0 0 0 0 0
+0 0 0 0 0
+0 0 0 0 0
+0 0 0 0 0
+1 0 0 0 0
+```
+
+Output:
+```
+4
+```
+
+Explanation:
+```
+Drone is at (5,1) and needs to reach (3,3). Manhattan distance = |5-3| + |1-3| = 2 + 2 = 4 moves.
+```
+
+**Test Case 6**
+
+Input:
+```
+0 0 0 0 0
+0 0 0 0 0
+0 1 0 0 0
+0 0 0 0 0
+0 0 0 0 0
+```
+
+Output:
+```
+1
+```
+
+Explanation:
+```
+Drone is at (3,2) and needs to reach (3,3). Manhattan distance = |3-3| + |2-3| = 0 + 1 = 1 move.
+```
+
+**Test Case 7**
+
+Input:
+```
+0 0 0 0 0
+0 0 0 0 0
+0 0 0 1 0
+0 0 0 0 0
+0 0 0 0 0
+```
+
+Output:
+```
+1
+```
+
+Explanation:
+```
+Drone is at (3,4) and needs to reach (3,3). Manhattan distance = |3-3| + |4-3| = 0 + 1 = 1 move.
+```
+
+---
+
+## Python Solution
+
+```python
+def compute(grid):
+    # Find the position of the drone (1) in the grid
+    drone_row, drone_col = 0, 0
+    for i in range(5):
+        for j in range(5):
+            if grid[i][j] == 1:
+                drone_row, drone_col = i + 1, j + 1  # Convert to 1-indexed
+                break
+    
+    # Target position is (3, 3)
+    target_row, target_col = 3, 3
+    
+    # Calculate Manhattan distance
+    moves = abs(drone_row - target_row) + abs(drone_col - target_col)
+    return moves
+
+grid = []
+for _ in range(5):
+    row = list(map(int, input().split()))
+    grid.append(row)
+
+result = compute(grid)
+print(result)
+```
+
+## Java Solution
+
+```java
+import java.util.*;
+
+public class Main {
+    public static int compute(int[][] grid) {
+        // Find the position of the drone (1) in the grid
+        int droneRow = 0, droneCol = 0;
+        for (int i = 0; i < 5; i++) {
+            for (int j = 0; j < 5; j++) {
+                if (grid[i][j] == 1) {
+                    droneRow = i + 1;  // Convert to 1-indexed
+                    droneCol = j + 1;  // Convert to 1-indexed
+                    break;
+                }
+            }
+        }
+        
+        // Target position is (3, 3)
+        int targetRow = 3, targetCol = 3;
+        
+        // Calculate Manhattan distance
+        int moves = Math.abs(droneRow - targetRow) + Math.abs(droneCol - targetCol);
+        return moves;
+    }
+    
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int[][] grid = new int[5][5];
+        
+        for (int i = 0; i < 5; i++) {
+            for (int j = 0; j < 5; j++) {
+                grid[i][j] = sc.nextInt();
+            }
+        }
+        
+        System.out.println(compute(grid));
+        sc.close();
+    }
+}
+```
+
+## C++ Solution
+
+```cpp
+#include <iostream>
+#include <vector>
+#include <cmath>
+using namespace std;
+
+int compute(vector<vector<int>>& grid) {
+    // Find the position of the drone (1) in the grid
+    int droneRow = 0, droneCol = 0;
+    for (int i = 0; i < 5; i++) {
+        for (int j = 0; j < 5; j++) {
+            if (grid[i][j] == 1) {
+                droneRow = i + 1;  // Convert to 1-indexed
+                droneCol = j + 1;  // Convert to 1-indexed
+                break;
+            }
+        }
+    }
+    
+    // Target position is (3, 3)
+    int targetRow = 3, targetCol = 3;
+    
+    // Calculate Manhattan distance
+    int moves = abs(droneRow - targetRow) + abs(droneCol - targetCol);
+    return moves;
+}
+
+int main() {
+    vector<vector<int>> grid(5, vector<int>(5));
+    
+    for (int i = 0; i < 5; i++) {
+        for (int j = 0; j < 5; j++) {
+            cin >> grid[i][j];
+        }
+    }
+    
+    cout << compute(grid) << endl;
+    return 0;
+}
+```
