@@ -1,0 +1,270 @@
+---
+- Title: "Social Media Hashtag Shortener" 
+- Difficulty: easy
+- Bloom Taxonomy: "Apply"
+- Subjects: "problem-solving"
+- Topics: ["sample-topic"]
+- Sub Topics: ["sample-subtopic"]
+- Tags: ["practice-question"]
+- Company: # Keep it empty
+---
+
+### Problem Statement
+In 2025, a popular Indian microblogging platform "Chatter" is trending worldwide. To fit more content in posts, long hashtags are automatically shortened.
+
+A hashtag is considered too long if its length is strictly more than 10 characters. The shortening rule works as follows:
+- Keep the first and last character of the word.
+- Replace all characters between them with the count of the removed letters.
+
+For example:
+- `"localization"` → `"l10n"`
+- `"internationalization"` → `"i18n"`
+
+Write a function that shortens all given hashtags accordingly.
+
+### Input Format
+The first line contains an integer `n`, the number of hashtags.
+The next `n` lines each contain a string representing a hashtag.
+
+### Output Format
+For each hashtag, output the shortened version on a new line. If the hashtag is 10 characters or less, output it unchanged.
+
+### Constraints
+- 1 ≤ n ≤ 100
+- 1 ≤ length of each hashtag ≤ 100
+- Each hashtag contains only lowercase English letters
+
+---
+
+**Test Case 1**
+
+Input:
+```
+3
+localization
+chat
+internationalization
+```
+
+Output:
+```
+l10n
+chat
+i18n
+```
+
+Explanation:
+```
+- "localization" has 12 characters (>10), so it becomes "l" + "10" + "n" = "l10n"
+- "chat" has 4 characters (≤10), so it remains "chat"
+- "internationalization" has 20 characters (>10), so it becomes "i" + "18" + "n" = "i18n"
+```
+
+**Test Case 2**
+
+Input:
+```
+2
+programming
+code
+```
+
+Output:
+```
+p9g
+code
+```
+
+Explanation:
+```
+- "programming" has 11 characters (>10), so it becomes "p" + "9" + "g" = "p9g"
+- "code" has 4 characters (≤10), so it remains "code"
+```
+
+**Test Case 3**
+
+Input:
+```
+1
+development
+```
+
+Output:
+```
+d9t
+```
+
+Explanation:
+```
+- "development" has 11 characters (>10), so it becomes "d" + "9" + "t" = "d9t"
+```
+
+**Test Case 4**
+
+Input:
+```
+2
+hello
+authentication
+```
+
+Output:
+```
+hello
+a12n
+```
+
+Explanation:
+```
+- "hello" has 5 characters (≤10), so it remains "hello"
+- "authentication" has 14 characters (>10), so it becomes "a" + "12" + "n" = "a12n"
+```
+
+**Test Case 5**
+
+Input:
+```
+1
+abbreviation
+```
+
+Output:
+```
+a10n
+```
+
+Explanation:
+```
+- "abbreviation" has 12 characters (>10), so it becomes "a" + "10" + "n" = "a10n"
+```
+
+**Test Case 6**
+
+Input:
+```
+3
+a
+ab
+abcdefghijk
+```
+
+Output:
+```
+a
+ab
+a9k
+```
+
+Explanation:
+```
+- "a" has 1 character (≤10), so it remains "a"
+- "ab" has 2 characters (≤10), so it remains "ab"
+- "abcdefghijk" has 11 characters (>10), so it becomes "a" + "9" + "k" = "a9k"
+```
+
+**Test Case 7**
+
+Input:
+```
+1
+abcdefghij
+```
+
+Output:
+```
+abcdefghij
+```
+
+Explanation:
+```
+- "abcdefghij" has exactly 10 characters (≤10), so it remains unchanged
+```
+
+---
+
+## Python Solution
+
+```python
+def compute(hashtags):
+    result = []
+    for hashtag in hashtags:
+        if len(hashtag) > 10:
+            # Shorten: first char + count of middle chars + last char
+            middle_count = len(hashtag) - 2
+            shortened = hashtag[0] + str(middle_count) + hashtag[-1]
+            result.append(shortened)
+        else:
+            result.append(hashtag)
+    return result
+
+n = int(input())
+hashtags = []
+for _ in range(n):
+    hashtags.append(input().strip())
+
+result = compute(hashtags)
+for hashtag in result:
+    print(hashtag)
+```
+
+## Java Solution
+
+```java
+import java.util.*;
+
+public class Main {
+    public static String compute(String hashtag) {
+        if (hashtag.length() > 10) {
+            // Shorten: first char + count of middle chars + last char
+            int middleCount = hashtag.length() - 2;
+            return hashtag.charAt(0) + String.valueOf(middleCount) + hashtag.charAt(hashtag.length() - 1);
+        } else {
+            return hashtag;
+        }
+    }
+    
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        sc.nextLine(); // consume newline
+        
+        for (int i = 0; i < n; i++) {
+            String hashtag = sc.nextLine().trim();
+            System.out.println(compute(hashtag));
+        }
+        sc.close();
+    }
+}
+```
+
+## C++ Solution
+
+```cpp
+#include <iostream>
+#include <string>
+using namespace std;
+
+string compute(string hashtag) {
+    if (hashtag.length() > 10) {
+        // Shorten: first char + count of middle chars + last char
+        int middleCount = hashtag.length() - 2;
+        return hashtag[0] + to_string(middleCount) + hashtag.back();
+    } else {
+        return hashtag;
+    }
+}
+
+int main() {
+    int n;
+    cin >> n;
+    cin.ignore(); // consume newline
+    
+    for (int i = 0; i < n; i++) {
+        string hashtag;
+        getline(cin, hashtag);
+        cout << compute(hashtag) << endl;
+    }
+    
+    return 0;
+}
+```
