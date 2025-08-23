@@ -1,0 +1,178 @@
+---
+- Title: "Zepto Delivery Run"
+- Difficulty: easy
+- Bloom Taxonomy: "Apply"
+- Subjects: "problem-solving"
+- Topics: ["sample-topic"]
+- Sub Topics: ["sample-subtopic"]
+- Tags: ["practice-question"]
+- Company: # Keep it empty
+---
+### Problem Statement
+Zepto is expanding its **10-minute delivery** service. A delivery agent starts from the **dark store at position 0** and needs to deliver an order to a customer located at position `x` (`x > 0`) on the same road.
+
+Due to **traffic rules and route optimizations**, the delivery agent can move forward **1, 2, 3, 4, or 5 km at a time** in a single trip segment.
+
+Find out the **minimum number of segments (hops)** needed for the agent to reach the customer.
+
+### Input Format
+An integer `x` (1 ≤ x ≤ 1,000,000) — the distance to the customer's home.
+
+### Output Format
+Print the minimum number of hops required.
+
+### Constraints
+- 1 ≤ x ≤ 1,000,000
+- Agent can move 1, 2, 3, 4, or 5 km in each segment
+
+---
+**Test Case 1**
+Input:
+```
+1
+```
+Output:
+```
+1
+```
+Explanation:
+```
+Distance = 1 km. Agent can reach in 1 hop by moving 1 km.
+```
+
+**Test Case 2**
+Input:
+```
+5
+```
+Output:
+```
+1
+```
+Explanation:
+```
+Distance = 5 km. Agent can reach in 1 hop by moving 5 km.
+```
+
+**Test Case 3**
+Input:
+```
+6
+```
+Output:
+```
+2
+```
+Explanation:
+```
+Distance = 6 km. Agent moves 5 km + 1 km = 6 km in 2 hops.
+```
+
+**Test Case 4**
+Input:
+```
+10
+```
+Output:
+```
+2
+```
+Explanation:
+```
+Distance = 10 km. Agent moves 5 km + 5 km = 10 km in 2 hops.
+```
+
+**Test Case 5**
+Input:
+```
+13
+```
+Output:
+```
+3
+```
+Explanation:
+```
+Distance = 13 km. Agent moves 5 km + 5 km + 3 km = 13 km in 3 hops.
+```
+
+**Test Case 6**
+Input:
+```
+25
+```
+Output:
+```
+5
+```
+Explanation:
+```
+Distance = 25 km. Agent moves 5 km five times = 25 km in 5 hops.
+```
+
+**Test Case 7**
+Input:
+```
+27
+```
+Output:
+```
+6
+```
+Explanation:
+```
+Distance = 27 km. Agent moves 5 km + 5 km + 5 km + 5 km + 5 km + 2 km = 27 km in 6 hops.
+```
+
+---
+## Python Solution
+```python
+def compute(x):
+    # To minimize hops, we should use the maximum possible distance (5) as much as possible
+    # Number of hops = ceiling(x / 5) = (x + 4) // 5
+    return (x + 4) // 5
+
+x = int(input())
+result = compute(x)
+print(result)
+```
+
+## Java Solution
+```java
+import java.util.*;
+
+public class Main {
+    public static int compute(int x) {
+        // To minimize hops, we should use the maximum possible distance (5) as much as possible
+        // Number of hops = ceiling(x / 5) = (x + 4) / 5
+        return (x + 4) / 5;
+    }
+    
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int x = sc.nextInt();
+        System.out.println(compute(x));
+        sc.close();
+    }
+}
+```
+
+## C++ Solution
+```cpp
+#include <iostream>
+using namespace std;
+
+int compute(int x) {
+    // To minimize hops, we should use the maximum possible distance (5) as much as possible
+    // Number of hops = ceiling(x / 5) = (x + 4) / 5
+    return (x + 4) / 5;
+}
+
+int main() {
+    int x;
+    cin >> x;
+    
+    cout << compute(x) << endl;
+    return 0;
+}
+```
