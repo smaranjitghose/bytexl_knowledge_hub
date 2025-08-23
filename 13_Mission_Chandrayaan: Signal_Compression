@@ -1,0 +1,223 @@
+---
+- Title: "Mission Chandrayaan: Signal Compression"
+- Difficulty: easy
+- Bloom Taxonomy: "Apply"
+- Subjects: "problem-solving"
+- Topics: ["sample-topic"]
+- Sub Topics: ["sample-subtopic"]
+- Tags: ["practice-question"]
+- Company: # Keep it empty
+---
+### Problem Statement
+ISRO is transmitting messages from its latest moon mission, Chandrayaan. To save bandwidth, mission control has developed a **Signal Compression Protocol (SCP)** with the following rules:
+
+1. **Remove all vowels** from the message (`A, O, Y, E, U, I` in both upper and lower case).
+2. **Convert all remaining letters to lowercase** (to maintain uniform signal encoding).
+3. **Prefix each remaining consonant with a dot (`.`)** for proper separation during transmission.
+
+Your task is to implement this SCP so that ISRO can send compressed signals effectively.
+
+### Input Format
+A single string `s` — the message to be compressed.
+- `s` consists only of uppercase and lowercase English letters.
+- Length of `s`: `1 ≤ |s| ≤ 100`.
+
+### Output Format
+Print the **compressed signal** according to the SCP rules.
+
+### Constraints
+- 1 ≤ |s| ≤ 100
+- String contains only English letters (a-z, A-Z)
+
+---
+**Test Case 1**
+Input:
+```
+Hello
+```
+Output:
+```
+.h.l.l
+```
+Explanation:
+```
+Original: "Hello"
+Remove vowels (e, o): "Hll"
+Convert to lowercase: "hll"
+Add dots: ".h.l.l"
+```
+
+**Test Case 2**
+Input:
+```
+ISRO
+```
+Output:
+```
+.s.r
+```
+Explanation:
+```
+Original: "ISRO"
+Remove vowels (I, O): "SR"
+Convert to lowercase: "sr"
+Add dots: ".s.r"
+```
+
+**Test Case 3**
+Input:
+```
+Chandrayaan
+```
+Output:
+```
+.c.h.n.d.r.n
+```
+Explanation:
+```
+Original: "Chandrayaan"
+Remove vowels (a, a, a, a): "Chndrydn" -> Wait, y is also a vowel: "Chndrn"
+Convert to lowercase: "chndrn"
+Add dots: ".c.h.n.d.r.n"
+```
+
+**Test Case 4**
+Input:
+```
+Moon
+```
+Output:
+```
+.m.n
+```
+Explanation:
+```
+Original: "Moon"
+Remove vowels (o, o): "Mn"
+Convert to lowercase: "mn"
+Add dots: ".m.n"
+```
+
+**Test Case 5**
+Input:
+```
+AEIOUYaeiou
+```
+Output:
+```
+
+```
+Explanation:
+```
+Original: "AEIOUYaeiou"
+Remove all vowels: ""
+No consonants left, so output is empty.
+```
+
+**Test Case 6**
+Input:
+```
+Space
+```
+Output:
+```
+.s.p.c
+```
+Explanation:
+```
+Original: "Space"
+Remove vowels (a, e): "Spc"
+Convert to lowercase: "spc"
+Add dots: ".s.p.c"
+```
+
+**Test Case 7**
+Input:
+```
+XyZ
+```
+Output:
+```
+.x.z
+```
+Explanation:
+```
+Original: "XyZ"
+Remove vowels (y): "XZ"
+Convert to lowercase: "xz"
+Add dots: ".x.z"
+```
+
+---
+## Python Solution
+```python
+def compute(s):
+    vowels = "AEIOUYaeiouy"
+    result = ""
+    
+    for char in s:
+        if char not in vowels:  # Keep only consonants
+            result += "." + char.lower()
+    
+    return result
+
+s = input().strip()
+result = compute(s)
+print(result)
+```
+
+## Java Solution
+```java
+import java.util.*;
+
+public class Main {
+    public static String compute(String s) {
+        String vowels = "AEIOUYaeiouy";
+        StringBuilder result = new StringBuilder();
+        
+        for (char c : s.toCharArray()) {
+            if (vowels.indexOf(c) == -1) {  // Keep only consonants
+                result.append(".").append(Character.toLowerCase(c));
+            }
+        }
+        
+        return result.toString();
+    }
+    
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        String s = sc.nextLine();
+        System.out.println(compute(s));
+        sc.close();
+    }
+}
+```
+
+## C++ Solution
+```cpp
+#include <iostream>
+#include <string>
+using namespace std;
+
+string compute(string s) {
+    string vowels = "AEIOUYaeiouy";
+    string result = "";
+    
+    for (char c : s) {
+        if (vowels.find(c) == string::npos) {  // Keep only consonants
+            result += ".";
+            result += tolower(c);
+        }
+    }
+    
+    return result;
+}
+
+int main() {
+    string s;
+    cin >> s;
+    
+    cout << compute(s) << endl;
+    return 0;
+}
+```
