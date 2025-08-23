@@ -1,0 +1,235 @@
+---
+- Title: "Faulty Assembly Line Alert"
+- Difficulty: easy
+- Bloom Taxonomy: "Apply"
+- Subjects: "problem-solving"
+- Topics: ["sample-topic"]
+- Sub Topics: ["sample-subtopic"]
+- Tags: ["practice-question"]
+- Company: # Keep it empty
+---
+### Problem Statement
+In an electronics factory, an assembly line is monitored by a sensor system that records the status of products moving through it. The system outputs a binary string where:
+
+* `0` means the product at that position passed inspection (normal).
+* `1` means the product at that position failed inspection (faulty).
+
+For quality control, the factory issues an **alert** if **7 or more consecutive products** are either all normal or all faulty — indicating a possible malfunction in the assembly line (either no variation due to a jam or a continuous defect streak).
+
+### Input Format
+A non-empty binary string `s` (length ≤ 100) representing the inspection log.
+
+### Output Format
+Print `"YES"` if there is a sequence of **7 or more consecutive identical readings** (`0` or `1`), otherwise print `"NO"`.
+
+### Constraints
+- 1 ≤ |s| ≤ 100
+- String contains only '0' and '1'
+- String contains at least one '0' and one '1'
+
+---
+**Test Case 1**
+Input:
+```
+0000000110
+```
+Output:
+```
+YES
+```
+Explanation:
+```
+Inspection log: 0000000110
+Starting from position 0, we have 7 consecutive '0's: 0000000
+This indicates 7 consecutive normal products, triggering an alert: YES
+```
+
+**Test Case 2**
+Input:
+```
+0101010101
+```
+Output:
+```
+NO
+```
+Explanation:
+```
+Inspection log: 0101010101
+The pattern alternates between 0 and 1, with no consecutive identical readings.
+Maximum consecutive count is 1, which is less than 7: NO
+```
+
+**Test Case 3**
+Input:
+```
+1111111000
+```
+Output:
+```
+YES
+```
+Explanation:
+```
+Inspection log: 1111111000
+Starting from position 0, we have 7 consecutive '1's: 1111111
+This indicates 7 consecutive faulty products, triggering an alert: YES
+```
+
+**Test Case 4**
+Input:
+```
+0011001100
+```
+Output:
+```
+NO
+```
+Explanation:
+```
+Inspection log: 0011001100
+Consecutive sequences: 00 (2), 11 (2), 00 (2), 11 (2), 00 (2)
+Maximum consecutive count is 2, which is less than 7: NO
+```
+
+**Test Case 5**
+Input:
+```
+1110000000011
+```
+Output:
+```
+YES
+```
+Explanation:
+```
+Inspection log: 1110000000011
+Looking at positions 3-10: 00000000 (8 consecutive '0's)
+This indicates 8 consecutive normal products, triggering an alert: YES
+```
+
+**Test Case 6**
+Input:
+```
+0000001111110
+```
+Output:
+```
+NO
+```
+Explanation:
+```
+Inspection log: 0000001111110
+Consecutive sequences: 000000 (6 '0's), 111111 (6 '1's), 0 (1 '0')
+Maximum consecutive count is 6, which is less than 7: NO
+```
+
+**Test Case 7**
+Input:
+```
+1011111111010
+```
+Output:
+```
+YES
+```
+Explanation:
+```
+Inspection log: 1011111111010
+Looking at positions 2-9: 11111111 (8 consecutive '1's)
+This indicates 8 consecutive faulty products, triggering an alert: YES
+```
+
+---
+## Python Solution
+```python
+def compute(s):
+    max_consecutive = 1
+    current_consecutive = 1
+    
+    for i in range(1, len(s)):
+        if s[i] == s[i-1]:
+            current_consecutive += 1
+            max_consecutive = max(max_consecutive, current_consecutive)
+        else:
+            current_consecutive = 1
+    
+    if max_consecutive >= 7:
+        return "YES"
+    else:
+        return "NO"
+
+s = input().strip()
+result = compute(s)
+print(result)
+```
+
+## Java Solution
+```java
+import java.util.*;
+
+public class Main {
+    public static String compute(String s) {
+        int maxConsecutive = 1;
+        int currentConsecutive = 1;
+        
+        for (int i = 1; i < s.length(); i++) {
+            if (s.charAt(i) == s.charAt(i-1)) {
+                currentConsecutive++;
+                maxConsecutive = Math.max(maxConsecutive, currentConsecutive);
+            } else {
+                currentConsecutive = 1;
+            }
+        }
+        
+        if (maxConsecutive >= 7) {
+            return "YES";
+        } else {
+            return "NO";
+        }
+    }
+    
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        String s = sc.nextLine();
+        System.out.println(compute(s));
+        sc.close();
+    }
+}
+```
+
+## C++ Solution
+```cpp
+#include <iostream>
+#include <string>
+#include <algorithm>
+using namespace std;
+
+string compute(string s) {
+    int maxConsecutive = 1;
+    int currentConsecutive = 1;
+    
+    for (int i = 1; i < s.length(); i++) {
+        if (s[i] == s[i-1]) {
+            currentConsecutive++;
+            maxConsecutive = max(maxConsecutive, currentConsecutive);
+        } else {
+            currentConsecutive = 1;
+        }
+    }
+    
+    if (maxConsecutive >= 7) {
+        return "YES";
+    } else {
+        return "NO";
+    }
+}
+
+int main() {
+    string s;
+    cin >> s;
+    
+    cout << compute(s) << endl;
+    return 0;
+}
+```
