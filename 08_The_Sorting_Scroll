@@ -1,0 +1,237 @@
+---
+- Title: "The Sorting Scroll" 
+- Difficulty: easy
+- Bloom Taxonomy: "Apply"
+- Subjects: "problem-solving"
+- Topics: ["sample-topic"]
+- Sub Topics: ["sample-subtopic"]
+- Tags: ["practice-question"]
+- Company: # Keep it empty
+---
+
+### Problem Statement
+At the annual Wizardry Entrance Ceremony, a magical Sorting Scroll determines which house each student belongs to. The scroll uses a quirky rule based on the uniqueness of a student's name:
+
+- It counts the number of **distinct letters** in the name (case-insensitive).
+- If the count is **odd**, the student is placed in **House Gryphonix** (brave and quirky).
+- If the count is **even**, the student is placed in **House Serpentail** (clever and composed).
+
+Your task is to help the scroll determine the correct house.
+
+### Input Format
+A single line with a non-empty string `name`, consisting of only lowercase English letters.
+
+### Output Format
+Print:
+- `"GRYPHONIX"` if the count of distinct letters is odd.
+- `"SERPENTAIL"` if the count of distinct letters is even.
+
+### Constraints
+- 1 ≤ length of name ≤ 100
+- Name consists of only lowercase English letters (a-z)
+
+---
+
+**Test Case 1**
+
+Input:
+```
+harry
+```
+
+Output:
+```
+SERPENTAIL
+```
+
+Explanation:
+```
+The name "harry" has distinct letters: h, a, r, y (4 distinct letters). Since 4 is even, the student goes to SERPENTAIL.
+```
+
+**Test Case 2**
+
+Input:
+```
+hermione
+```
+
+Output:
+```
+GRYPHONIX
+```
+
+Explanation:
+```
+The name "hermione" has distinct letters: h, e, r, m, i, o, n (7 distinct letters). Since 7 is odd, the student goes to GRYPHONIX.
+```
+
+**Test Case 3**
+
+Input:
+```
+ron
+```
+
+Output:
+```
+GRYPHONIX
+```
+
+Explanation:
+```
+The name "ron" has distinct letters: r, o, n (3 distinct letters). Since 3 is odd, the student goes to GRYPHONIX.
+```
+
+**Test Case 4**
+
+Input:
+```
+draco
+```
+
+Output:
+```
+GRYPHONIX
+```
+
+Explanation:
+```
+The name "draco" has distinct letters: d, r, a, c, o (5 distinct letters). Since 5 is odd, the student goes to GRYPHONIX.
+```
+
+**Test Case 5**
+
+Input:
+```
+luna
+```
+
+Output:
+```
+SERPENTAIL
+```
+
+Explanation:
+```
+The name "luna" has distinct letters: l, u, n, a (4 distinct letters). Since 4 is even, the student goes to SERPENTAIL.
+```
+
+**Test Case 6**
+
+Input:
+```
+neville
+```
+
+Output:
+```
+GRYPHONIX
+```
+
+Explanation:
+```
+The name "neville" has distinct letters: n, e, v, i, l (5 distinct letters). Since 5 is odd, the student goes to GRYPHONIX.
+```
+
+**Test Case 7**
+
+Input:
+```
+ginny
+```
+
+Output:
+```
+SERPENTAIL
+```
+
+Explanation:
+```
+The name "ginny" has distinct letters: g, i, n, y (4 distinct letters). Since 4 is even, the student goes to SERPENTAIL.
+```
+
+---
+
+## Python Solution
+
+```python
+def compute(name):
+    # Count distinct letters using a set
+    distinct_letters = set(name)
+    count = len(distinct_letters)
+    
+    # Check if count is odd or even
+    if count % 2 == 1:  # odd
+        return "GRYPHONIX"
+    else:  # even
+        return "SERPENTAIL"
+
+name = input().strip()
+result = compute(name)
+print(result)
+```
+
+## Java Solution
+
+```java
+import java.util.*;
+
+public class Main {
+    public static String compute(String name) {
+        // Count distinct letters using a HashSet
+        Set<Character> distinctLetters = new HashSet<>();
+        for (char c : name.toCharArray()) {
+            distinctLetters.add(c);
+        }
+        int count = distinctLetters.size();
+        
+        // Check if count is odd or even
+        if (count % 2 == 1) {  // odd
+            return "GRYPHONIX";
+        } else {  // even
+            return "SERPENTAIL";
+        }
+    }
+    
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        String name = sc.nextLine().trim();
+        System.out.println(compute(name));
+        sc.close();
+    }
+}
+```
+
+## C++ Solution
+
+```cpp
+#include <iostream>
+#include <string>
+#include <set>
+using namespace std;
+
+string compute(string name) {
+    // Count distinct letters using a set
+    set<char> distinctLetters;
+    for (char c : name) {
+        distinctLetters.insert(c);
+    }
+    int count = distinctLetters.size();
+    
+    // Check if count is odd or even
+    if (count % 2 == 1) {  // odd
+        return "GRYPHONIX";
+    } else {  // even
+        return "SERPENTAIL";
+    }
+}
+
+int main() {
+    string name;
+    getline(cin, name);
+    
+    cout << compute(name) << endl;
+    return 0;
+}
+```
