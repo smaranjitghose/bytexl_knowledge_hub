@@ -1,0 +1,238 @@
+---
+- Title: "G20 Press Release Formatting"
+- Difficulty: easy
+- Bloom Taxonomy: "Apply"
+- Subjects: "problem-solving"
+- Topics: ["sample-topic"]
+- Sub Topics: ["sample-subtopic"]
+- Tags: ["practice-question"]
+- Company: # Keep it empty
+---
+### Problem Statement
+The G20 secretariat is preparing its official press releases. Member countries keep sending the names of their leaders or nations in random mixes of upper and lower case like `InDiA`, `uSa`, `BrAzIl`. For the sake of consistency in official documents:
+
+* If a name has **more uppercase letters**, it should be printed **fully in uppercase** (used for official communiqués).
+* Otherwise (including equal counts), it should be printed **fully in lowercase** (used for informal briefs).
+
+You have been assigned to write a program to **standardize these names** according to the above rule.
+
+### Input Format
+A single word `s` — the country/leader name (1 ≤ |s| ≤ 100), consisting only of English letters.
+
+### Output Format
+Print the standardized name following the G20 formatting rules.
+
+### Constraints
+- 1 ≤ |s| ≤ 100
+- String contains only English letters (a-z, A-Z)
+
+---
+**Test Case 1**
+Input:
+```
+InDiA
+```
+Output:
+```
+INDIA
+```
+Explanation:
+```
+Word: "InDiA"
+Uppercase letters: I, D, A (count = 3)
+Lowercase letters: n, i (count = 2)
+Since uppercase > lowercase (3 > 2), convert to all uppercase: "INDIA"
+```
+
+**Test Case 2**
+Input:
+```
+uSa
+```
+Output:
+```
+usa
+```
+Explanation:
+```
+Word: "uSa"
+Uppercase letters: S (count = 1)
+Lowercase letters: u, a (count = 2)
+Since lowercase ≥ uppercase, convert to all lowercase: "usa"
+```
+
+**Test Case 3**
+Input:
+```
+BrAzIl
+```
+Output:
+```
+brazil
+```
+Explanation:
+```
+Word: "BrAzIl"
+Uppercase letters: B, A, I (count = 3)
+Lowercase letters: r, z, l (count = 3)
+Since counts are equal, convert to all lowercase: "brazil"
+```
+
+**Test Case 4**
+Input:
+```
+CHINA
+```
+Output:
+```
+CHINA
+```
+Explanation:
+```
+Word: "CHINA"
+Uppercase letters: C, H, I, N, A (count = 5)
+Lowercase letters: none (count = 0)
+Since uppercase > lowercase, keep all uppercase: "CHINA"
+```
+
+**Test Case 5**
+Input:
+```
+japan
+```
+Output:
+```
+japan
+```
+Explanation:
+```
+Word: "japan"
+Uppercase letters: none (count = 0)
+Lowercase letters: j, a, p, a, n (count = 5)
+Since lowercase ≥ uppercase, keep all lowercase: "japan"
+```
+
+**Test Case 6**
+Input:
+```
+RuSsIa
+```
+Output:
+```
+russia
+```
+Explanation:
+```
+Word: "RuSsIa"
+Uppercase letters: R, S, I (count = 3)
+Lowercase letters: u, s, a (count = 3)
+Since counts are equal, convert to all lowercase: "russia"
+```
+
+**Test Case 7**
+Input:
+```
+FrAnCe
+```
+Output:
+```
+france
+```
+Explanation:
+```
+Word: "FrAnCe"
+Uppercase letters: F, A, C (count = 3)
+Lowercase letters: r, n, e (count = 3)
+Since counts are equal, convert to all lowercase: "france"
+```
+
+---
+## Python Solution
+```python
+def compute(s):
+    uppercase_count = sum(1 for c in s if c.isupper())
+    lowercase_count = len(s) - uppercase_count
+    
+    if uppercase_count > lowercase_count:
+        return s.upper()
+    else:
+        return s.lower()
+
+s = input().strip()
+result = compute(s)
+print(result)
+```
+
+## Java Solution
+```java
+import java.util.*;
+
+public class Main {
+    public static String compute(String s) {
+        int uppercaseCount = 0;
+        int lowercaseCount = 0;
+        
+        for (char c : s.toCharArray()) {
+            if (Character.isUpperCase(c)) {
+                uppercaseCount++;
+            } else {
+                lowercaseCount++;
+            }
+        }
+        
+        if (uppercaseCount > lowercaseCount) {
+            return s.toUpperCase();
+        } else {
+            return s.toLowerCase();
+        }
+    }
+    
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        String s = sc.nextLine();
+        System.out.println(compute(s));
+        sc.close();
+    }
+}
+```
+
+## C++ Solution
+```cpp
+#include <iostream>
+#include <string>
+#include <cctype>
+using namespace std;
+
+string compute(string s) {
+    int uppercaseCount = 0;
+    int lowercaseCount = 0;
+    
+    for (char c : s) {
+        if (isupper(c)) {
+            uppercaseCount++;
+        } else {
+            lowercaseCount++;
+        }
+    }
+    
+    if (uppercaseCount > lowercaseCount) {
+        for (int i = 0; i < s.length(); i++) {
+            s[i] = toupper(s[i]);
+        }
+    } else {
+        for (int i = 0; i < s.length(); i++) {
+            s[i] = tolower(s[i]);
+        }
+    }
+    
+    return s;
+}
+
+int main() {
+    string s;
+    cin >> s;
+    
+    cout << compute(s) << endl;
+    return 0;
+}
+```
