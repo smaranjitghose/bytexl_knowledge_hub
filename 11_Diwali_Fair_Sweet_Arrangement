@@ -1,0 +1,248 @@
+---
+- Title: "Diwali Fair Sweet Arrangement" 
+- Difficulty: easy
+- Bloom Taxonomy: "Apply"
+- Subjects: "problem-solving"
+- Topics: ["sample-topic"]
+- Sub Topics: ["sample-subtopic"]
+- Tags: ["practice-question"]
+- Company: # Keep it empty
+---
+
+### Problem Statement
+At a Diwali fair in Ahmedabad, there's a long table with `n` sweets arranged in a row. Each sweet is one of three types:
+- `M` for Motichoor Laddu
+- `B` for Besan Laddu
+- `K` for Kaju Katli
+
+To make the platter look visually appealing for visitors, **no two consecutive sweets should be of the same type**.
+
+Your task is to determine the **minimum number of sweets that need to be replaced** so that any two neighboring sweets are of different types.
+
+### Input Format
+The first line contains an integer `n` (1 ≤ n ≤ 50) — the number of sweets.
+The second line contains a string `s` of length `n`, where each character is `M`, `B`, or `K` representing the sweet types in order.
+
+### Output Format
+Print a single integer — the minimum number of sweets to replace.
+
+### Constraints
+- 1 ≤ n ≤ 50
+- String contains only characters 'M', 'B', 'K'
+
+---
+
+**Test Case 1**
+
+Input:
+```
+5
+MMBKK
+```
+
+Output:
+```
+2
+```
+
+Explanation:
+```
+Original: M-M-B-K-K
+We need to replace the second M and second K to get: M-B-B-K-M (or similar)
+Minimum replacements needed: 2
+```
+
+**Test Case 2**
+
+Input:
+```
+7
+MBKMBKM
+```
+
+Output:
+```
+0
+```
+
+Explanation:
+```
+All consecutive sweets are already different types. No replacements needed.
+```
+
+**Test Case 3**
+
+Input:
+```
+1
+M
+```
+
+Output:
+```
+0
+```
+
+Explanation:
+```
+Single sweet, no consecutive pairs exist. No replacements needed.
+```
+
+**Test Case 4**
+
+Input:
+```
+4
+MMKK
+```
+
+Output:
+```
+2
+```
+
+Explanation:
+```
+Original: M-M-K-K
+We replace positions 2 and 4: M-B-K-B
+Minimum replacements needed: 2
+```
+
+**Test Case 5**
+
+Input:
+```
+6
+MMMMMM
+```
+
+Output:
+```
+3
+```
+
+Explanation:
+```
+Original: M-M-M-M-M-M
+We can replace every second position: M-B-M-B-M-B
+Minimum replacements needed: 3
+```
+
+**Test Case 6**
+
+Input:
+```
+3
+MBM
+```
+
+Output:
+```
+0
+```
+
+Explanation:
+```
+All consecutive sweets are already different. No replacements needed.
+```
+
+**Test Case 7**
+
+Input:
+```
+8
+MMBBKKMM
+```
+
+Output:
+```
+4
+```
+
+Explanation:
+```
+Original: M-M-B-B-K-K-M-M
+Consecutive duplicates at positions: (1,2), (3,4), (5,6), (7,8)
+We replace positions 2, 4, 6, 8: M-B-B-K-K-M-M-B
+Minimum replacements needed: 4
+```
+
+---
+
+## Python Solution
+
+```python
+def compute(n, s):
+    replacements = 0
+    
+    # Check each consecutive pair
+    for i in range(n - 1):
+        if s[i] == s[i + 1]:
+            replacements += 1
+    
+    return replacements
+
+n = int(input())
+s = input().strip()
+result = compute(n, s)
+print(result)
+```
+
+## Java Solution
+
+```java
+import java.util.*;
+
+public class Main {
+    public static int compute(int n, String s) {
+        int replacements = 0;
+        
+        // Check each consecutive pair
+        for (int i = 0; i < n - 1; i++) {
+            if (s.charAt(i) == s.charAt(i + 1)) {
+                replacements++;
+            }
+        }
+        
+        return replacements;
+    }
+    
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        String s = sc.next();
+        System.out.println(compute(n, s));
+        sc.close();
+    }
+}
+```
+
+## C++ Solution
+
+```cpp
+#include <iostream>
+#include <string>
+using namespace std;
+
+int compute(int n, string s) {
+    int replacements = 0;
+    
+    // Check each consecutive pair
+    for (int i = 0; i < n - 1; i++) {
+        if (s[i] == s[i + 1]) {
+            replacements++;
+        }
+    }
+    
+    return replacements;
+}
+
+int main() {
+    int n;
+    string s;
+    cin >> n >> s;
+    
+    cout << compute(n, s) << endl;
+    return 0;
+}
+```
