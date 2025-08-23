@@ -1,0 +1,210 @@
+---
+- Title: "Stadium Domino Placement" 
+- Difficulty: easy
+- Bloom Taxonomy: "Apply"
+- Subjects: "problem-solving"
+- Topics: ["sample-topic"]
+- Sub Topics: ["sample-subtopic"]
+- Tags: ["practice-question"]
+- Company: # Keep it empty
+---
+
+### Problem Statement
+During the Hyderabad Sports Fest, organizers need to cover a rectangular stadium walkway with as many domino tiles as possible.
+
+- The walkway is a grid of `M × N` square tiles.
+- Each domino covers **exactly 2 adjacent squares** and can be placed horizontally or vertically.
+- Dominoes cannot overlap and must lie entirely within the walkway boundaries.
+
+Determine the maximum number of dominoes that can fit on the walkway.
+
+### Input Format
+Two integers `M` and `N` representing the dimensions of the rectangular walkway grid.
+
+### Output Format
+A single integer representing the maximum number of dominoes that can be placed.
+
+### Constraints
+- 1 ≤ M ≤ 100
+- 1 ≤ N ≤ 100
+
+---
+
+**Test Case 1**
+
+Input:
+```
+2 4
+```
+
+Output:
+```
+4
+```
+
+Explanation:
+```
+A 2×4 grid has 8 squares total. Each domino covers 2 squares, so maximum dominoes = 8/2 = 4.
+```
+
+**Test Case 2**
+
+Input:
+```
+3 3
+```
+
+Output:
+```
+4
+```
+
+Explanation:
+```
+A 3×3 grid has 9 squares total. Each domino covers 2 squares, so we can place at most 4 dominoes (covering 8 squares), leaving 1 square uncovered.
+```
+
+**Test Case 3**
+
+Input:
+```
+1 1
+```
+
+Output:
+```
+0
+```
+
+Explanation:
+```
+A 1×1 grid has only 1 square. Since each domino needs 2 adjacent squares, no dominoes can be placed.
+```
+
+**Test Case 4**
+
+Input:
+```
+1 4
+```
+
+Output:
+```
+2
+```
+
+Explanation:
+```
+A 1×4 grid has 4 squares in a line. We can place 2 dominoes horizontally: [XX][XX], covering all 4 squares.
+```
+
+**Test Case 5**
+
+Input:
+```
+2 2
+```
+
+Output:
+```
+2
+```
+
+Explanation:
+```
+A 2×2 grid has 4 squares total. Each domino covers 2 squares, so maximum dominoes = 4/2 = 2.
+```
+
+**Test Case 6**
+
+Input:
+```
+5 3
+```
+
+Output:
+```
+7
+```
+
+Explanation:
+```
+A 5×3 grid has 15 squares total. Each domino covers 2 squares, so we can place at most 7 dominoes (covering 14 squares), leaving 1 square uncovered.
+```
+
+**Test Case 7**
+
+Input:
+```
+6 4
+```
+
+Output:
+```
+12
+```
+
+Explanation:
+```
+A 6×4 grid has 24 squares total. Each domino covers 2 squares, so maximum dominoes = 24/2 = 12.
+```
+
+---
+
+## Python Solution
+
+```python
+def compute(m, n):
+    # Maximum number of dominoes = total squares divided by 2
+    # Each domino covers exactly 2 squares
+    total_squares = m * n
+    return total_squares // 2
+
+m, n = map(int, input().split())
+result = compute(m, n)
+print(result)
+```
+
+## Java Solution
+
+```java
+import java.util.*;
+
+public class Main {
+    public static int compute(int m, int n) {
+        // Maximum number of dominoes = total squares divided by 2
+        // Each domino covers exactly 2 squares
+        int totalSquares = m * n;
+        return totalSquares / 2;
+    }
+    
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int m = sc.nextInt();
+        int n = sc.nextInt();
+        System.out.println(compute(m, n));
+        sc.close();
+    }
+}
+```
+
+## C++ Solution
+
+```cpp
+#include <iostream>
+using namespace std;
+
+int compute(int m, int n) {
+    // Maximum number of dominoes = total squares divided by 2
+    // Each domino covers exactly 2 squares
+    int totalSquares = m * n;
+    return totalSquares / 2;
+}
+
+int main() {
+    int m, n;
+    cin >> m >> n;
+    cout << compute(m, n) << endl;
+    return 0;
+}
+```
