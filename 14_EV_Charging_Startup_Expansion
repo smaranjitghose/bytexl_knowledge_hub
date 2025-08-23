@@ -1,0 +1,218 @@
+---
+- Title: "EV Charging Startup Expansion"
+- Difficulty: easy
+- Bloom Taxonomy: "Apply"
+- Subjects: "problem-solving"
+- Topics: ["sample-topic"]
+- Sub Topics: ["sample-subtopic"]
+- Tags: ["practice-question"]
+- Company: # Keep it empty
+---
+### Problem Statement
+An **EV startup founder** wants to set up `w` **charging stations** in a city.
+
+* The cost of installing the **first station** is `k` lakh rupees.
+* Due to increasing infrastructure and permits, the **i-th station** costs `i × k` lakh rupees.
+
+The founder currently has `n` lakh rupees in funding. How much **additional funding** does he need to raise to build all `w` charging stations? If he already has enough, print `0`.
+
+### Input Format
+The first line contains three integers `k`, `n`, `w`
+* `k` = cost of the first charging station
+* `n` = current available funds
+* `w` = total stations to build
+
+### Output Format
+One integer: the additional funding required.
+
+### Constraints
+- 1 ≤ k, n, w ≤ 1000
+- All values are in lakh rupees
+
+---
+**Test Case 1**
+Input:
+```
+3 17 4
+```
+Output:
+```
+13
+```
+Explanation:
+```
+k=3, n=17, w=4
+Station costs: 1×3 + 2×3 + 3×3 + 4×3 = 3 + 6 + 9 + 12 = 30 lakh
+Current funds: 17 lakh
+Additional needed: 30 - 17 = 13 lakh
+```
+
+**Test Case 2**
+Input:
+```
+5 20 3
+```
+Output:
+```
+10
+```
+Explanation:
+```
+k=5, n=20, w=3
+Station costs: 1×5 + 2×5 + 3×5 = 5 + 10 + 15 = 30 lakh
+Current funds: 20 lakh
+Additional needed: 30 - 20 = 10 lakh
+```
+
+**Test Case 3**
+Input:
+```
+2 50 5
+```
+Output:
+```
+0
+```
+Explanation:
+```
+k=2, n=50, w=5
+Station costs: 1×2 + 2×2 + 3×2 + 4×2 + 5×2 = 2 + 4 + 6 + 8 + 10 = 30 lakh
+Current funds: 50 lakh
+Since 50 ≥ 30, no additional funding needed: 0
+```
+
+**Test Case 4**
+Input:
+```
+1 1 1
+```
+Output:
+```
+0
+```
+Explanation:
+```
+k=1, n=1, w=1
+Station costs: 1×1 = 1 lakh
+Current funds: 1 lakh
+Since 1 ≥ 1, no additional funding needed: 0
+```
+
+**Test Case 5**
+Input:
+```
+10 15 2
+```
+Output:
+```
+15
+```
+Explanation:
+```
+k=10, n=15, w=2
+Station costs: 1×10 + 2×10 = 10 + 20 = 30 lakh
+Current funds: 15 lakh
+Additional needed: 30 - 15 = 15 lakh
+```
+
+**Test Case 6**
+Input:
+```
+4 100 6
+```
+Output:
+```
+0
+```
+Explanation:
+```
+k=4, n=100, w=6
+Station costs: 1×4 + 2×4 + 3×4 + 4×4 + 5×4 + 6×4 = 4 + 8 + 12 + 16 + 20 + 24 = 84 lakh
+Current funds: 100 lakh
+Since 100 ≥ 84, no additional funding needed: 0
+```
+
+**Test Case 7**
+Input:
+```
+7 25 4
+```
+Output:
+```
+45
+```
+Explanation:
+```
+k=7, n=25, w=4
+Station costs: 1×7 + 2×7 + 3×7 + 4×7 = 7 + 14 + 21 + 28 = 70 lakh
+Current funds: 25 lakh
+Additional needed: 70 - 25 = 45 lakh
+```
+
+---
+## Python Solution
+```python
+def compute(k, n, w):
+    # Total cost = k * (1 + 2 + 3 + ... + w) = k * w * (w + 1) / 2
+    total_cost = k * w * (w + 1) // 2
+    
+    # Additional funding needed
+    additional_needed = max(0, total_cost - n)
+    
+    return additional_needed
+
+k, n, w = map(int, input().split())
+result = compute(k, n, w)
+print(result)
+```
+
+## Java Solution
+```java
+import java.util.*;
+
+public class Main {
+    public static int compute(int k, int n, int w) {
+        // Total cost = k * (1 + 2 + 3 + ... + w) = k * w * (w + 1) / 2
+        int totalCost = k * w * (w + 1) / 2;
+        
+        // Additional funding needed
+        int additionalNeeded = Math.max(0, totalCost - n);
+        
+        return additionalNeeded;
+    }
+    
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int k = sc.nextInt();
+        int n = sc.nextInt();
+        int w = sc.nextInt();
+        System.out.println(compute(k, n, w));
+        sc.close();
+    }
+}
+```
+
+## C++ Solution
+```cpp
+#include <iostream>
+#include <algorithm>
+using namespace std;
+
+int compute(int k, int n, int w) {
+    // Total cost = k * (1 + 2 + 3 + ... + w) = k * w * (w + 1) / 2
+    int totalCost = k * w * (w + 1) / 2;
+    
+    // Additional funding needed
+    int additionalNeeded = max(0, totalCost - n);
+    
+    return additionalNeeded;
+}
+
+int main() {
+    int k, n, w;
+    cin >> k >> n >> w;
+    
+    cout << compute(k, n, w) << endl;
+    return 0;
+}
+```
