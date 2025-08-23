@@ -1,0 +1,235 @@
+---
+- Title: "Independence Day Parade Ground Tiling" 
+- Difficulty: easy
+- Bloom Taxonomy: "Apply"
+- Subjects: "problem-solving"
+- Topics: ["sample-topic"]
+- Sub Topics: ["sample-subtopic"]
+- Tags: ["practice-question"]
+- Company: # Keep it empty
+---
+
+### Problem Statement
+For India's Independence Day celebrations, a large rectangular parade ground in New Delhi needs to be covered with square LED panels for a drone light show.
+
+- The ground measures `n × m` meters.
+- Each LED panel is a square of size `a × a` meters.
+- The panels cannot be cut, and they must be aligned with the ground edges.
+- It is allowed if the panels extend beyond the parade ground, but the entire ground must be fully covered.
+
+You need to calculate the minimum number of LED panels required.
+
+### Input Format
+Three integers `n`, `m`, and `a` on separate lines, where:
+- `n`: length of the ground
+- `m`: width of the ground  
+- `a`: size of each square panel
+
+### Output Format
+A single integer representing the minimum number of panels needed.
+
+### Constraints
+- 1 ≤ n ≤ 10^9
+- 1 ≤ m ≤ 10^9
+- 1 ≤ a ≤ 10^9
+
+---
+
+**Test Case 1**
+
+Input:
+```
+4
+4
+4
+```
+
+Output:
+```
+1
+```
+
+Explanation:
+```
+The ground is 4×4 meters and each panel is 4×4 meters. One panel covers the entire ground exactly.
+```
+
+**Test Case 2**
+
+Input:
+```
+6
+6
+4
+```
+
+Output:
+```
+4
+```
+
+Explanation:
+```
+We need ceil(6/4) = 2 panels along length and ceil(6/4) = 2 panels along width. Total = 2 × 2 = 4 panels.
+```
+
+**Test Case 3**
+
+Input:
+```
+8
+3
+4
+```
+
+Output:
+```
+2
+```
+
+Explanation:
+```
+We need ceil(8/4) = 2 panels along length and ceil(3/4) = 1 panel along width. Total = 2 × 1 = 2 panels.
+```
+
+**Test Case 4**
+
+Input:
+```
+10
+10
+3
+```
+
+Output:
+```
+16
+```
+
+Explanation:
+```
+We need ceil(10/3) = 4 panels along length and ceil(10/3) = 4 panels along width. Total = 4 × 4 = 16 panels.
+```
+
+**Test Case 5**
+
+Input:
+```
+1
+1
+1
+```
+
+Output:
+```
+1
+```
+
+Explanation:
+```
+The ground is 1×1 meter and each panel is 1×1 meter. One panel covers the entire ground exactly.
+```
+
+**Test Case 6**
+
+Input:
+```
+1
+10
+2
+```
+
+Output:
+```
+5
+```
+
+Explanation:
+```
+We need ceil(1/2) = 1 panel along length and ceil(10/2) = 5 panels along width. Total = 1 × 5 = 5 panels.
+```
+
+**Test Case 7**
+
+Input:
+```
+1000000000
+1000000000
+1000000000
+```
+
+Output:
+```
+1
+```
+
+Explanation:
+```
+We need ceil(10^9/10^9) = 1 panel along both dimensions. Total = 1 × 1 = 1 panel.
+```
+
+---
+
+## Python Solution
+
+```python
+def compute(n, m, a):
+    # Calculate minimum panels needed along each dimension
+    # Using integer arithmetic to avoid floating point precision issues
+    panels_length = (n + a - 1) // a  # This is equivalent to ceil(n/a)
+    panels_width = (m + a - 1) // a   # This is equivalent to ceil(m/a)
+    return panels_length * panels_width
+
+n = int(input())
+m = int(input())
+a = int(input())
+result = compute(n, m, a)
+print(result)
+```
+
+## Java Solution
+
+```java
+import java.util.*;
+
+public class Main {
+    public static long compute(long n, long m, long a) {
+        // Calculate minimum panels needed along each dimension
+        // Using integer arithmetic to avoid floating point precision issues
+        long panelsLength = (n + a - 1) / a;  // This is equivalent to ceil(n/a)
+        long panelsWidth = (m + a - 1) / a;   // This is equivalent to ceil(m/a)
+        return panelsLength * panelsWidth;
+    }
+    
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        long n = sc.nextLong();
+        long m = sc.nextLong();
+        long a = sc.nextLong();
+        System.out.println(compute(n, m, a));
+        sc.close();
+    }
+}
+```
+
+## C++ Solution
+
+```cpp
+#include <iostream>
+using namespace std;
+
+long long compute(long long n, long long m, long long a) {
+    // Calculate minimum panels needed along each dimension
+    // Using integer arithmetic to avoid floating point precision issues
+    long long panelsLength = (n + a - 1) / a;  // This is equivalent to ceil(n/a)
+    long long panelsWidth = (m + a - 1) / a;   // This is equivalent to ceil(m/a)
+    return panelsLength * panelsWidth;
+}
+
+int main() {
+    long long n, m, a;
+    cin >> n >> m >> a;
+    cout << compute(n, m, a) << endl;
+    return 0;
+}
+```
