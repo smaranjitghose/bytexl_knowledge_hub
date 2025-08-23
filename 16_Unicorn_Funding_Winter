@@ -1,0 +1,221 @@
+---
+- Title: "Unicorn Funding Winter"
+- Difficulty: easy
+- Bloom Taxonomy: "Apply"
+- Subjects: "problem-solving"
+- Topics: ["sample-topic"]
+- Sub Topics: ["sample-subtopic"]
+- Tags: ["practice-question"]
+- Company: # Keep it empty
+---
+### Problem Statement
+A high-flying Indian unicorn is facing a funding winter. Its **valuation (n)** is being revised down over time as investors tighten their belts. But the **reduction process follows a quirky rule**:
+
+1. If the **last digit of the valuation is non-zero**, the valuation is decreased by 1 (minor markdown).
+2. If the **last digit is zero**, investors chop off the entire trailing zero (major reset, symbolic of a new funding round).
+
+Given the current valuation `n` (in millions) and the number of rounds `k`, determine the **valuation after all the markdowns**.
+
+### Input Format
+Two integers `n` and `k`
+* `2 ≤ n ≤ 10^9` (valuation in millions)
+* `1 ≤ k ≤ 50` (number of markdown rounds)
+
+### Output Format
+Print the valuation after `k` markdown rounds.
+
+### Constraints
+- 2 ≤ n ≤ 10^9
+- 1 ≤ k ≤ 50
+
+---
+**Test Case 1**
+Input:
+```
+512 4
+```
+Output:
+```
+50
+```
+Explanation:
+```
+Initial: 512
+Round 1: Last digit is 2 (non-zero), so 512 - 1 = 511
+Round 2: Last digit is 1 (non-zero), so 511 - 1 = 510
+Round 3: Last digit is 0, so remove trailing zero: 510 → 51
+Round 4: Last digit is 1 (non-zero), so 51 - 1 = 50
+Final valuation: 50
+```
+
+**Test Case 2**
+Input:
+```
+1000 3
+```
+Output:
+```
+1
+```
+Explanation:
+```
+Initial: 1000
+Round 1: Last digit is 0, so remove trailing zero: 1000 → 100
+Round 2: Last digit is 0, so remove trailing zero: 100 → 10
+Round 3: Last digit is 0, so remove trailing zero: 10 → 1
+Final valuation: 1
+```
+
+**Test Case 3**
+Input:
+```
+25 2
+```
+Output:
+```
+23
+```
+Explanation:
+```
+Initial: 25
+Round 1: Last digit is 5 (non-zero), so 25 - 1 = 24
+Round 2: Last digit is 4 (non-zero), so 24 - 1 = 23
+Final valuation: 23
+```
+
+**Test Case 4**
+Input:
+```
+100 1
+```
+Output:
+```
+10
+```
+Explanation:
+```
+Initial: 100
+Round 1: Last digit is 0, so remove trailing zero: 100 → 10
+Final valuation: 10
+```
+
+**Test Case 5**
+Input:
+```
+789 5
+```
+Output:
+```
+784
+```
+Explanation:
+```
+Initial: 789
+Round 1: Last digit is 9 (non-zero), so 789 - 1 = 788
+Round 2: Last digit is 8 (non-zero), so 788 - 1 = 787
+Round 3: Last digit is 7 (non-zero), so 787 - 1 = 786
+Round 4: Last digit is 6 (non-zero), so 786 - 1 = 785
+Round 5: Last digit is 5 (non-zero), so 785 - 1 = 784
+Final valuation: 784
+```
+
+**Test Case 6**
+Input:
+```
+50 3
+```
+Output:
+```
+3
+```
+Explanation:
+```
+Initial: 50
+Round 1: Last digit is 0, so remove trailing zero: 50 → 5
+Round 2: Last digit is 5 (non-zero), so 5 - 1 = 4
+Round 3: Last digit is 4 (non-zero), so 4 - 1 = 3
+Final valuation: 3
+```
+
+**Test Case 7**
+Input:
+```
+2 1
+```
+Output:
+```
+1
+```
+Explanation:
+```
+Initial: 2
+Round 1: Last digit is 2 (non-zero), so 2 - 1 = 1
+Final valuation: 1
+```
+
+---
+## Python Solution
+```python
+def compute(n, k):
+    for i in range(k):
+        if n % 10 == 0:
+            n //= 10
+        else:
+            n -= 1
+    return n
+
+n, k = map(int, input().split())
+result = compute(n, k)
+print(result)
+```
+
+## Java Solution
+```java
+import java.util.*;
+
+public class Main {
+    public static int compute(int n, int k) {
+        for (int i = 0; i < k; i++) {
+            if (n % 10 == 0) {
+                n /= 10;
+            } else {
+                n -= 1;
+            }
+        }
+        return n;
+    }
+    
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int k = sc.nextInt();
+        System.out.println(compute(n, k));
+        sc.close();
+    }
+}
+```
+
+## C++ Solution
+```cpp
+#include <iostream>
+using namespace std;
+
+int compute(int n, int k) {
+    for (int i = 0; i < k; i++) {
+        if (n % 10 == 0) {
+            n /= 10;
+        } else {
+            n -= 1;
+        }
+    }
+    return n;
+}
+
+int main() {
+    int n, k;
+    cin >> n >> k;
+    
+    cout << compute(n, k) << endl;
+    return 0;
+}
+```
