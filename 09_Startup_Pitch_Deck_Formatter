@@ -1,0 +1,219 @@
+---
+- Title: "Startup Pitch Deck Formatter" 
+- Difficulty: easy
+- Bloom Taxonomy: "Apply"
+- Subjects: "problem-solving"
+- Topics: ["sample-topic"]
+- Sub Topics: ["sample-subtopic"]
+- Tags: ["practice-question"]
+- Company: # Keep it empty
+---
+
+### Problem Statement
+You're part of the team preparing slides for the Startup India Pitch Fest. Every startup name must follow the branding guideline:
+
+- The **first letter** must be capitalized.
+- The rest of the letters should remain exactly as provided (since some names intentionally use stylized lower/uppercase formats).
+
+Your task is to format the given startup name accordingly.
+
+### Input Format
+A single line containing a non-empty string representing the startup name.
+
+### Output Format
+The formatted startup name with the first letter capitalized and the rest unchanged.
+
+### Constraints
+- 1 ≤ length of startup name ≤ 100
+- The startup name contains only English letters (a-z, A-Z)
+
+---
+
+**Test Case 1**
+
+Input:
+```
+flipkart
+```
+
+Output:
+```
+Flipkart
+```
+
+Explanation:
+```
+The first letter 'f' is capitalized to 'F', and the rest remains unchanged: "Flipkart".
+```
+
+**Test Case 2**
+
+Input:
+```
+zOMato
+```
+
+Output:
+```
+ZOMato
+```
+
+Explanation:
+```
+The first letter 'z' is capitalized to 'Z', and the rest "OMato" remains unchanged: "ZOMato".
+```
+
+**Test Case 3**
+
+Input:
+```
+PayTM
+```
+
+Output:
+```
+PayTM
+```
+
+Explanation:
+```
+The first letter 'P' is already capitalized, so the name remains unchanged: "PayTM".
+```
+
+**Test Case 4**
+
+Input:
+```
+byJUS
+```
+
+Output:
+```
+ByJUS
+```
+
+Explanation:
+```
+The first letter 'b' is capitalized to 'B', and the rest "yJUS" remains unchanged: "ByJUS".
+```
+
+**Test Case 5**
+
+Input:
+```
+OLA
+```
+
+Output:
+```
+OLA
+```
+
+Explanation:
+```
+The first letter 'O' is already capitalized, so the name remains unchanged: "OLA".
+```
+
+**Test Case 6**
+
+Input:
+```
+sWIGGY
+```
+
+Output:
+```
+SWIGGY
+```
+
+Explanation:
+```
+The first letter 's' is capitalized to 'S', and the rest "WIGGY" remains unchanged: "SWIGGY".
+```
+
+**Test Case 7**
+
+Input:
+```
+a
+```
+
+Output:
+```
+A
+```
+
+Explanation:
+```
+Single character 'a' is capitalized to 'A'.
+```
+
+---
+
+## Python Solution
+
+```python
+def compute(startup_name):
+    # Capitalize the first letter and keep the rest unchanged
+    if len(startup_name) == 0:
+        return startup_name
+    
+    formatted_name = startup_name[0].upper() + startup_name[1:]
+    return formatted_name
+
+startup_name = input().strip()
+result = compute(startup_name)
+print(result)
+```
+
+## Java Solution
+
+```java
+import java.util.*;
+
+public class Main {
+    public static String compute(String startupName) {
+        // Capitalize the first letter and keep the rest unchanged
+        if (startupName.length() == 0) {
+            return startupName;
+        }
+        
+        String formattedName = startupName.substring(0, 1).toUpperCase() + startupName.substring(1);
+        return formattedName;
+    }
+    
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        String startupName = sc.nextLine().trim();
+        System.out.println(compute(startupName));
+        sc.close();
+    }
+}
+```
+
+## C++ Solution
+
+```cpp
+#include <iostream>
+#include <string>
+#include <cctype>
+using namespace std;
+
+string compute(string startupName) {
+    // Capitalize the first letter and keep the rest unchanged
+    if (startupName.length() == 0) {
+        return startupName;
+    }
+    
+    startupName[0] = toupper(startupName[0]);
+    return startupName;
+}
+
+int main() {
+    string startupName;
+    getline(cin, startupName);
+    
+    cout << compute(startupName) << endl;
+    return 0;
+}
+```
