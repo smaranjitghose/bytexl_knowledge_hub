@@ -1,0 +1,263 @@
+---
+- Title: "Lucky-SIM Check"
+- Difficulty: easy
+- Bloom Taxonomy: "Apply"
+- Subjects: "problem-solving"
+- Topics: ["sample-topic"]
+- Sub Topics: ["sample-subtopic"]
+- Tags: ["practice-question"]
+- Company: # Keep it empty
+---
+### Problem Statement
+A telecom operator is running a **marketing campaign** to identify **"Lucky SIMs."** A SIM number (or mobile number) is considered **nearly lucky** if the **count of its lucky digits** is itself a **lucky number**.
+
+* Lucky digits are `4` and `7`.
+* A **lucky number** is a positive integer whose **every digit** is either `4` or `7`.
+
+The telecom team needs to automate this check across millions of SIM numbers.
+
+### Input Format
+A single integer `n` (1 ≤ n ≤ 10¹⁸) — the SIM or mobile number.
+
+### Output Format
+Print `YES` if the SIM number is **nearly lucky**, otherwise print `NO`.
+
+### Constraints
+- 1 ≤ n ≤ 10¹⁸
+
+---
+**Test Case 1**
+Input:
+```
+47474747
+```
+Output:
+```
+NO
+```
+Explanation:
+```
+SIM number: 47474747
+Digits: 4, 7, 4, 7, 4, 7, 4, 7
+Lucky digits (4 and 7): all 8 digits → count = 8 lucky digits
+Is 8 a lucky number? No, because 8 contains digit '8' which is not 4 or 7.
+Therefore, this is not a Lucky SIM: NO
+```
+
+**Test Case 2**
+Input:
+```
+7747774
+```
+Output:
+```
+YES
+```
+Explanation:
+```
+SIM number: 7747774
+Lucky digits (4 and 7): 7,7,4,7,7,7,4 → count = 7 lucky digits
+Is 7 a lucky number? Yes, because 7 contains only digit '7' which is a lucky digit.
+Therefore, this is a Lucky SIM: YES
+```
+
+**Test Case 3**
+Input:
+```
+474474
+```
+Output:
+```
+NO
+```
+Explanation:
+```
+SIM number: 474474
+Digits: 4, 7, 4, 4, 7, 4
+Lucky digits (4 and 7): all 6 digits → count = 6 lucky digits
+Is 6 a lucky number? No, because 6 contains digit '6' which is not 4 or 7.
+Therefore, this is not a Lucky SIM: NO
+```
+
+**Test Case 4**
+Input:
+```
+123
+```
+Output:
+```
+NO
+```
+Explanation:
+```
+SIM number: 123
+Lucky digits (4 and 7): none → count = 0 lucky digits
+Is 0 a lucky number? No, because 0 is not positive and contains digit '0' which is not 4 or 7.
+Therefore, this is not a Lucky SIM: NO
+```
+
+**Test Case 5**
+Input:
+```
+4747474
+```
+Output:
+```
+YES
+```
+Explanation:
+```
+SIM number: 4747474
+Lucky digits (4 and 7): 4,7,4,7,4,7,4 → count = 7 lucky digits
+Is 7 a lucky number? Yes, because 7 contains only digit '7' which is a lucky digit.
+Therefore, this is a Lucky SIM: YES
+```
+
+**Test Case 6**
+Input:
+```
+47747747
+```
+Output:
+```
+NO
+```
+Explanation:
+```
+SIM number: 47747747
+Lucky digits (4 and 7): 4,7,7,4,7,7,4,7 → count = 8 lucky digits
+Is 8 a lucky number? No, because 8 contains digit '8' which is not 4 or 7.
+Therefore, this is not a Lucky SIM: NO
+```
+
+**Test Case 7**
+Input:
+```
+444777
+```
+Output:
+```
+NO
+```
+Explanation:
+```
+SIM number: 444777
+Lucky digits (4 and 7): 4,4,4,7,7,7 → count = 6 lucky digits
+Is 6 a lucky number? No, because 6 contains digit '6' which is not 4 or 7.
+Therefore, this is not a Lucky SIM: NO
+```
+
+---
+## Python Solution
+```python
+def compute(n):
+    # Convert to string to process digits
+    s = str(n)
+    
+    # Count lucky digits (4 and 7)
+    lucky_count = 0
+    for digit in s:
+        if digit == '4' or digit == '7':
+            lucky_count += 1
+    
+    # Check if lucky_count is a lucky number
+    # A lucky number contains only digits 4 and 7
+    if lucky_count == 0:
+        return "NO"
+    
+    count_str = str(lucky_count)
+    for digit in count_str:
+        if digit != '4' and digit != '7':
+            return "NO"
+    
+    return "YES"
+
+n = int(input())
+result = compute(n)
+print(result)
+```
+
+## Java Solution
+```java
+import java.util.*;
+
+public class Main {
+    public static String compute(long n) {
+        // Convert to string to process digits
+        String s = Long.toString(n);
+        
+        // Count lucky digits (4 and 7)
+        int luckyCount = 0;
+        for (char digit : s.toCharArray()) {
+            if (digit == '4' || digit == '7') {
+                luckyCount++;
+            }
+        }
+        
+        // Check if luckyCount is a lucky number
+        // A lucky number contains only digits 4 and 7
+        if (luckyCount == 0) {
+            return "NO";
+        }
+        
+        String countStr = Integer.toString(luckyCount);
+        for (char digit : countStr.toCharArray()) {
+            if (digit != '4' && digit != '7') {
+                return "NO";
+            }
+        }
+        
+        return "YES";
+    }
+    
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        long n = sc.nextLong();
+        System.out.println(compute(n));
+        sc.close();
+    }
+}
+```
+
+## C++ Solution
+```cpp
+#include <iostream>
+#include <string>
+using namespace std;
+
+string compute(long long n) {
+    // Convert to string to process digits
+    string s = to_string(n);
+    
+    // Count lucky digits (4 and 7)
+    int luckyCount = 0;
+    for (char digit : s) {
+        if (digit == '4' || digit == '7') {
+            luckyCount++;
+        }
+    }
+    
+    // Check if luckyCount is a lucky number
+    // A lucky number contains only digits 4 and 7
+    if (luckyCount == 0) {
+        return "NO";
+    }
+    
+    string countStr = to_string(luckyCount);
+    for (char digit : countStr) {
+        if (digit != '4' && digit != '7') {
+            return "NO";
+        }
+    }
+    
+    return "YES";
+}
+
+int main() {
+    long long n;
+    cin >> n;
+    
+    cout << compute(n) << endl;
+    return 0;
+}
+```
