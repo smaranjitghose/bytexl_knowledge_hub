@@ -1,13 +1,12 @@
 ---
-
-* Title: "Parliament Debate: NDA vs UPA"
-* Difficulty: medium
-* Bloom Taxonomy: "Apply"
-* Subjects: "dsa"
-* Topics: []
-* Sub Topics:[]
-* Tags: []
-
+- Title: "Parliament Debate: NDA vs UPA"
+- Difficulty: medium
+- Bloom Taxonomy: "Apply"
+- Subjects: "dsa"
+- Topics: []
+- Sub Topics:[]
+- Tags: []
+-
 ---
 
 ### Problem Statement
