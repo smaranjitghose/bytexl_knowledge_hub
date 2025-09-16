@@ -1,4 +1,4 @@
-# 🪔 Diwali Divisibility: The Lamp of Harmony
+# 🪔 Diwali Divisibility
 
 During the festival of **Diwali**, master artisans in Varanasi craft sacred oil lamps called **Divya Deepams**, each inscribed with a unique number. But not every lamp is worthy of lighting in the temple courtyard.
 
