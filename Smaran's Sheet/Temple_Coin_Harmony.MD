@@ -11,15 +11,15 @@ Your task is to find the **largest possible portion size** — that is, the **GC
 
 ---
 
-## Constraints
+## Constraints:
 
 - `1 <= n <= 1000`
 
 ---
 
-## Test Cases
+## Test Cases:
 
-### Test Case 1
+#### Test Case 1
 **Input:** `n = 4`  
 **Output:** `4`  
 **Explanation:**  
@@ -29,7 +29,7 @@ Your task is to find the **largest possible portion size** — that is, the **GC
 
 ---
 
-### Test Case 2
+#### Test Case 2
 **Input:** `n = 5`  
 **Output:** `5`  
 **Explanation:**  
@@ -39,7 +39,7 @@ Your task is to find the **largest possible portion size** — that is, the **GC
 
 ---
 
-### Test Case 3
+#### Test Case 3
 **Input:** `n = 1`  
 **Output:** `1`  
 **Explanation:**  
@@ -49,7 +49,7 @@ Your task is to find the **largest possible portion size** — that is, the **GC
 
 ---
 
-### Test Case 4
+#### Test Case 4
 **Input:** `n = 3`  
 **Output:** `3`  
 **Explanation:**  
@@ -59,7 +59,7 @@ Your task is to find the **largest possible portion size** — that is, the **GC
 
 ---
 
-### Test Case 5
+#### Test Case 5
 **Input:** `n = 6`  
 **Output:** `6`  
 **Explanation:**  
@@ -69,7 +69,7 @@ Your task is to find the **largest possible portion size** — that is, the **GC
 
 ---
 
-### Test Case 6
+#### Test Case 6
 **Input:** `n = 7`  
 **Output:** `7`  
 **Explanation:**  
@@ -79,16 +79,10 @@ Your task is to find the **largest possible portion size** — that is, the **GC
 
 ---
 
-### Test Case 7
+#### Test Case 7
 **Input:** `n = 10`  
 **Output:** `10`  
 **Explanation:**  
 - Devotee A: Sum of first 10 odd numbers = 10² = **100**  
 - Devotee B: Sum of first 10 even numbers = 10×11 = **110**  
 - GCD(100, 110) = **10**
-
----
-
-> 💡 **Note:** The sum of the first `n` odd numbers is `n²`.  
-> The sum of the first `n` even numbers is `n(n+1)`.  
-> Therefore, the answer is `GCD(n², n(n+1)) = n × GCD(n, n+1) = n × 1 = n`.
