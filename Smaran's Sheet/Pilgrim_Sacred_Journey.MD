@@ -1,4 +1,4 @@
-# Trionic Array I: The Pilgrim’s Sacred Journey
+# Pilgrim Sacred Journey
 
 In the ancient Valley of Numbers, a pilgrim embarks on a sacred journey — one that must follow the divine rhythm of ascent, descent, and rebirth.
 
@@ -15,9 +15,9 @@ Your task is to determine if there exists a sacred route through this land — d
 3. The Rebirth Climb to the Final Horizon (q to end):  
    From the valley’s depth, the pilgrim rises again — ascending with purpose to the journey’s end. Strictly upward once more.
 
-If such a path exists — where the pilgrim rises, falls, then rises again — return `true`. The land is Trionic, blessed with the rhythm of balance.
+If such a path exists — where the pilgrim rises, falls, then rises again — return `true`. 
 
-If no such shrines `p` and `q` can be found — return `false`. The path is incomplete. The pilgrim cannot fulfill the sacred cycle.
+If no such shrines `p` and `q` can be found — return `false`. The pilgrim cannot fulfill the sacred cycle.
 
 ---
 
@@ -38,7 +38,9 @@ Shrine `p = 2` (peak at 5), Shrine `q = 4` (valley at 2)
 - Ascent: [1 → 3 → 5]  
 - Descent: [5 → 4 → 2]  
 - Rebirth: [2 → 6]  
-The Pilgrim completes the Sacred Journey.
+The Pilgrim completes the sacred journey
+
+
 
 ---
 
@@ -66,7 +68,8 @@ Shrine `p = 1` (peak at 4), Shrine `q = 2` (valley at 2)
 - Ascent: [1 → 4]  
 - Descent: [4 → 2]  
 - Rebirth: [2 → 3 → 5]  
-The Pilgrim finds balance.
+The Pilgrim completes the sacred journey
+
 
 ---
 
@@ -97,7 +100,4 @@ Shrine `p = 1` (peak at 5), Shrine `q = 3` (valley at 3)
 - Ascent: [1 → 5]  
 - Descent: [5 → 4 → 3]  
 - Rebirth: [3 → 6 → 7]  
-The Pilgrim completes the Trionic Cycle. The land is blessed.
-
-
-```
+The Pilgrim completes the sacred journey
