@@ -7,7 +7,7 @@ You are given a string `titles` containing movie names separated by a single spa
 Return the number of movie titles that can still be fully read from the board.  
 
 
-## Constraints
+## Constraints:
 - `1 <= titles.length <= 10^4`  
 - `0 <= brokenLetters.length <= 26`  
 - `titles` consists of movie names separated by a single space without leading or trailing spaces.  
@@ -16,7 +16,7 @@ Return the number of movie titles that can still be fully read from the board.
 
 ---
 
-## Test Cases
+## Test Cases:
 
 
 #### Test Case 1
