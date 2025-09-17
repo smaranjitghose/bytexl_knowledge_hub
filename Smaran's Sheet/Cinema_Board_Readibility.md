@@ -52,7 +52,7 @@ Return the number of movie titles that can still be fully read from the board.
 **Input:**  
 `titles = "dangal chakde lagaan", brokenLetters = "dgn"`  
 **Output:**  
-`1`  
+`0`  
 
 #### Test Case 6
 
