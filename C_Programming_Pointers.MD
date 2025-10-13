@@ -1,6 +1,4 @@
-Perfect — I’ve removed the **Constraints** section and added a **complete C solution** for each of the 10 **2D array** problems. Each problem keeps the single-paragraph narrative, followed by **Input Format**, **Output Format**, **7 test cases**, and the **C program** that solves it (using only arrays and loops; no functions/pointers/strings beyond basic I/O).
 
----
 
 ## 1) Classroom Occupancy Map
 
