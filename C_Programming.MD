@@ -1,0 +1,690 @@
+
+
+## **1. Social Post Validator**
+
+Your university’s new social networking platform, *BuzzBoard*, limits every post to 140 characters. Users often type long messages, and before their post is accepted, the system must check its length and suggest trimming if it’s too long. Write a program that reads a post (which may include spaces), counts the number of characters using `strlen()`, and prints `"OK"` if it fits the limit or `"TRIM n"` if it exceeds it, where `n` is the number of extra characters.
+
+### **Input Format**
+
+* A single line containing a string (may include spaces).
+
+### **Output Format**
+
+* Print `"OK"` if the post length ≤ 140.
+* Otherwise print `"TRIM n"` where `n` = number of characters over the limit.
+
+### **Test Cases**
+
+1.
+
+Input: `Hello World!`
+Output: `OK`
+
+2.
+
+Input: `This is a test post with exactly 140 characters..............................................................................................................`
+Output: `OK`
+
+3.
+
+Input: `This post goes beyond the limit because it keeps going and going and going until it surely crosses one hundred and forty characters.`
+Output: `TRIM 16`
+
+4.
+
+Input: (Empty line)
+Output: `OK`
+
+5.
+
+Input: `A very short post.`
+Output: `OK`
+
+6.
+
+Input: `1234567890` repeated 14 times (140 characters exactly)
+Output: `OK`
+
+7.
+
+Input: `1234567890` repeated 15 times (150 characters)
+Output: `TRIM 10`
+
+---
+
+## **2. Profile Name Mirror**
+
+The college portal stores a user’s display name securely before updating it across systems. To ensure correctness, the system needs to display a read-only mirror of whatever name the user has entered. Write a program that reads a user’s name, copies it into another string using `strcpy()`, and prints the mirrored copy so users can confirm their identity before submission.
+
+### **Input Format**
+
+* A single line containing the user’s display name.
+
+### **Output Format**
+
+* Print the copied string.
+
+### **Test Cases**
+
+1.
+
+Input: `byteXL Learner`
+Output: `byteXL Learner`
+
+2.
+
+Input: `Amit`
+Output: `Amit`
+
+3.
+
+Input: `Rohan Sharma`
+Output: `Rohan Sharma`
+
+4.
+
+Input: (Empty line)
+Output: (Empty line)
+
+5.
+
+Input: `name_with_underscores`
+Output: `name_with_underscores`
+
+6.
+
+Input: `12345`
+Output: `12345`
+
+7.
+
+Input: `ThisNameIsExactlyHundredCharactersLong..............................................................................`
+Output: Same string
+
+---
+
+## **3. Case-Insensitive Username Filter**
+
+In the signup module of your portal, duplicate usernames must be avoided regardless of case. For instance, “Riya” and “riya” should be considered the same user. Write a program that takes two usernames and compares them manually, character by character, ignoring case differences. If the two usernames are identical ignoring case, print `"DUPLICATE"`, otherwise print `"UNIQUE"`.
+
+### **Input Format**
+
+* Two lines:
+
+  * Line 1: First username
+  * Line 2: Second username
+
+### **Output Format**
+
+* Print `"DUPLICATE"` or `"UNIQUE"`
+
+### **Test Cases**
+
+1.
+
+Input:
+
+```
+Riya
+riya
+```
+
+Output: `DUPLICATE`
+
+2.
+
+Input:
+
+```
+Aman
+Aman
+```
+
+Output: `DUPLICATE`
+
+3.
+
+Input:
+
+```
+John
+Johnny
+```
+
+Output: `UNIQUE`
+
+4.
+
+Input:
+
+```
+HELLO
+hello
+```
+
+Output: `DUPLICATE`
+
+5.
+
+Input:
+
+```
+CSStudent
+CsStudent
+```
+
+Output: `DUPLICATE`
+
+6.
+
+Input:
+
+```
+alex
+ALExa
+```
+
+Output: `UNIQUE`
+
+7.
+
+Input:
+
+```
+Code
+code123
+```
+
+Output: `UNIQUE`
+
+---
+
+## **4. File Path Builder**
+
+The IT support team frequently stores student data in separate directories on the server. When generating reports, they often need to combine a directory path and a filename into a complete file path. Write a program that reads a directory and a filename and joins them using `strcat()`, making sure there is exactly one `/` between them.
+
+### **Input Format**
+
+* Two lines:
+
+  * Line 1: Directory path
+  * Line 2: Filename
+
+### **Output Format**
+
+* Print the combined path.
+
+### **Test Cases**
+
+1.
+
+Input:
+
+```
+/home/student
+notes.txt
+```
+
+Output: `/home/student/notes.txt`
+
+2.
+
+Input:
+
+```
+/home/student/
+/data.csv
+```
+
+Output: `/home/student//data.csv`
+
+3.
+
+Input:
+
+```
+/usr/local
+log.txt
+```
+
+Output: `/usr/local/log.txt`
+
+4.
+
+Input:
+
+```
+/
+config.yaml
+```
+
+Output: `//config.yaml`
+
+5.
+
+Input:
+
+```
+docs
+report.docx
+```
+
+Output: `docs/report.docx`
+
+6.
+
+Input:
+
+```
+D:
+file.c
+```
+
+Output: `D:/file.c`
+
+7.
+
+Input:
+
+```
+/tmp
+```
+
+Output: `/tmp/`
+
+---
+
+## **5. Secure Log Redactor**
+
+Your system’s log files often include confidential information, with secrets appearing after a `#` symbol on each line. For security, everything after the first `#` should be removed before logs are exported.
+
+### **Input Format**
+
+* A single line containing a log entry.
+
+### **Output Format**
+
+* Print the redacted string, removing everything after `#`.
+
+### **Test Cases**
+
+1.
+
+Input: `TOKEN=abc#donotshare`
+Output: `TOKEN=abc`
+
+2.
+
+Input: `API_KEY=xyz123`
+Output: `API_KEY=xyz123`
+
+3.
+
+Input: `password#hiddenvalue`
+Output: `password`
+
+4.
+
+Input: `#topsecret`
+Output: (Empty line)
+
+5.
+
+Input: `visible#then#hidden`
+Output: `visible`
+
+6.
+
+Input: `HelloWorld`
+Output: `HelloWorld`
+
+7.
+
+Input: (Empty line)
+Output: (Empty line)
+
+---
+
+## **6. Ticket Code Decoder**
+
+The annual tech fest encodes event tickets by reversing the seat IDs. For example, a seat labeled “A12” is stored as “21A”. You must decode the ticket ID before printing it.
+
+### **Input Format**
+
+* A single line containing the reversed seat ID.
+
+### **Output Format**
+
+* Print the decoded seat ID.
+
+### **Test Cases**
+
+1.
+
+Input: `21A`
+Output: `A12`
+
+2.
+
+Input: `543ZY`
+Output: `YZ345`
+
+3.
+
+Input: `A`
+Output: `A`
+
+4.
+
+Input: `9B`
+Output: `B9`
+
+5.
+
+Input: `C0`
+Output: `0C`
+
+6.
+
+Input: `AAA`
+Output: `AAA`
+
+7.
+
+Input: (Empty line)
+Output: (Empty line)
+
+---
+
+## **7. Smart Product Label Generator**
+
+In your college’s innovation lab, student teams print product labels by combining their brand and model names. To make the label neat, if the brand name ends with the same character that the model name starts with, that character should not be duplicated.
+
+### **Input Format**
+
+* Two lines:
+
+  * Line 1: Brand name
+  * Line 2: Model name
+
+### **Output Format**
+
+* Print the combined label.
+
+### **Test Cases**
+
+1.
+
+Input:
+
+```
+Max
+Xtreme
+```
+
+Output: `Maxtreme`
+
+2.
+
+Input:
+
+```
+Nano
+Optic
+```
+
+Output: `NanoOptic`
+
+3.
+
+Input:
+
+```
+alpha
+alpha
+```
+
+Output: `alphaalpha`
+
+4.
+
+Input:
+
+```
+Light
+tastic
+```
+
+Output: `Lightastic`
+
+5.
+
+Input:
+
+```
+Zeno
+Omega
+```
+
+Output: `ZenoOmega`
+
+6.
+
+Input:
+
+```
+Fast
+Speed
+```
+
+Output: `FastSpeed`
+
+7.
+
+Input:
+
+```
+Power
+Ranger
+```
+
+Output: `PowerRanger`
+
+---
+
+## **8. Keyword Suggestion Engine**
+
+Your academic portal suggests topics as users type. When a query exactly matches a stored keyword, the system confirms it. Otherwise, it suggests users keep typing.
+
+### **Input Format**
+
+* Two lines:
+
+  * Line 1: Query string
+  * Line 2: Keyword string
+
+### **Output Format**
+
+* Print `"Exact match"` if identical, else `"Keep typing"`.
+
+### **Test Cases**
+
+1.
+
+Input:
+
+```
+pointers
+pointers
+```
+
+Output: `Exact match`
+
+2.
+
+Input:
+
+```
+Array
+array
+```
+
+Output: `Keep typing`
+
+3.
+
+Input:
+
+```
+C
+C
+```
+
+Output: `Exact match`
+
+4.
+
+Input:
+
+```
+program
+programs
+```
+
+Output: `Keep typing`
+
+5.
+
+Input:
+
+```
+OS
+OS
+```
+
+Output: `Exact match`
+
+6.
+
+Input:
+
+```
+Java
+JavaScript
+```
+
+Output: `Keep typing`
+
+7.
+
+Input:
+
+```
+Loops
+loops
+```
+
+Output: `Keep typing`
+
+---
+
+## **9. Readability Analyzer**
+
+A writing assistant tool for CS students measures readability by calculating the proportion of vowels to total letters. Write a program that counts vowels (`a, e, i, o, u` in any case) and letters, and prints the ratio as `vowels/letters`.
+
+### **Input Format**
+
+* A single line of text.
+
+### **Output Format**
+
+* Print `X/Y` where `X` is the number of vowels and `Y` is the number of letters.
+
+### **Test Cases**
+
+1.
+
+Input: `C is close to metal.`
+Output: `6/14`
+
+2.
+
+Input: `Hello`
+Output: `2/5`
+
+3.
+
+Input: `AEIOU`
+Output: `5/5`
+
+4.
+
+Input: `xyz`
+Output: `0/3`
+
+5.
+
+Input: `12345`
+Output: `0/0`
+
+6.
+
+Input: (Empty line)
+Output: `0/0`
+
+7.
+
+Input: `Education is key!`
+Output: `7/13`
+
+---
+
+## **10. Palindromic License Detector**
+
+The robotics club maintains robot license plates and highlights those that are palindromes — strings that read the same forward and backward. Plates may contain dashes or spaces, which should be ignored, and comparison should be case-insensitive.
+
+### **Input Format**
+
+* A single line containing a license plate string.
+
+### **Output Format**
+
+* Print `"PALINDROME"` if the plate reads the same both ways (ignoring spaces, dashes, and case), otherwise `"NOT PALINDROME"`.
+
+### **Test Cases**
+
+1.
+
+Input: `AB-cc-BA`
+Output: `PALINDROME`
+
+2.
+
+Input: `Race car`
+Output: `PALINDROME`
+
+3.
+
+Input: `XYx`
+Output: `PALINDROME`
+
+4.
+
+Input: `abc`
+Output: `NOT PALINDROME`
+
+5.
+
+Input: `A man a plan a canal Panama`
+Output: `PALINDROME`
+
+6.
+
+Input: `Level`
+Output: `PALINDROME`
+
+7.
+
+Input: `ByteXL`
+Output: `NOT PALINDROME`
+
