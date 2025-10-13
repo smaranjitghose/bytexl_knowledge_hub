@@ -52,6 +52,31 @@ Output: `TRIM 10`
 
 ---
 
+### **Solution**
+
+
+```c
+#include <stdio.h>
+#include <string.h>
+
+int main(void) {
+    char s[2005];
+    if (!fgets(s, sizeof(s), stdin)) return 0;
+    size_t len = strlen(s);
+    if (len > 0 && s[len - 1] == '\n') { s[--len] = '\0'; }
+    if (len <= 140) {
+        printf("OK");
+    } else {
+        printf("TRIM %lu", (unsigned long)(len - 140));
+    }
+    return 0;
+}
+
+```
+
+
+
+
 ## **2. Profile Name Mirror**
 
 The college portal stores a user’s display name securely before updating it across systems. To ensure correctness, the system needs to display a read-only mirror of whatever name the user has entered. Write a program that reads a user’s name, copies it into another string using `strcpy()`, and prints the mirrored copy so users can confirm their identity before submission.
@@ -102,6 +127,25 @@ Input: `ThisNameIsExactlyHundredCharactersLong..................................
 Output: Same string
 
 ---
+
+
+### **Solution**
+
+```c
+#include <stdio.h>
+#include <string.h>
+
+int main(void) {
+    char name[102], mirror[102];
+    if (!fgets(name, sizeof(name), stdin)) return 0;
+    size_t len = strlen(name);
+    if (len > 0 && name[len - 1] == '\n') name[len - 1] = '\0';
+    strcpy(mirror, name);
+    printf("%s", mirror);
+    return 0;
+}
+```
+
 
 ## **3. Case-Insensitive Username Filter**
 
@@ -197,7 +241,36 @@ code123
 
 Output: `UNIQUE`
 
----
+### **Solution**
+
+```c
+#include <stdio.h>
+#include <string.h>
+
+static char tolow(char c) {
+    if (c >= 'A' && c <= 'Z') return c + ('a' - 'A');
+    return c;
+}
+
+int main(void) {
+    char a[205], b[205];
+    if (!fgets(a, sizeof(a), stdin)) return 0;
+    if (!fgets(b, sizeof(b), stdin)) return 0;
+    size_t la = strlen(a), lb = strlen(b);
+    if (la > 0 && a[la - 1] == '\n') a[--la] = '\0';
+    if (lb > 0 && b[lb - 1] == '\n') b[--lb] = '\0';
+
+    if (la != lb) { printf("UNIQUE"); return 0; }
+
+    int same = 1;
+    for (size_t i = 0; i < la; i++) {
+        if (tolow(a[i]) != tolow(b[i])) { same = 0; break; }
+    }
+    printf("%s", same ? "DUPLICATE" : "UNIQUE");
+    return 0;
+}
+
+```
 
 ## **4. File Path Builder**
 
@@ -294,6 +367,33 @@ Output: `/tmp/`
 
 ---
 
+### **Solution**
+
+```c
+#include <stdio.h>
+#include <string.h>
+
+int main(void) {
+    char dir[205], file[205], path[410];
+    if (!fgets(dir, sizeof(dir), stdin)) return 0;
+    if (!fgets(file, sizeof(file), stdin)) return 0;
+
+    size_t ld = strlen(dir), lf = strlen(file);
+    if (ld > 0 && dir[ld - 1] == '\n') dir[--ld] = '\0';
+    if (lf > 0 && file[lf - 1] == '\n') file[--lf] = '\0';
+
+    path[0] = '\0';
+    strcat(path, dir);
+    if (ld == 0 || dir[ld - 1] != '/') strcat(path, "/");
+    strcat(path, file);
+
+    printf("%s", path);
+    return 0;
+}
+```
+
+
+
 ## **5. Secure Log Redactor**
 
 Your system’s log files often include confidential information, with secrets appearing after a `#` symbol on each line. For security, everything after the first `#` should be removed before logs are exported.
@@ -343,7 +443,28 @@ Output: `HelloWorld`
 Input: (Empty line)
 Output: (Empty line)
 
----
+
+```c
+#include <stdio.h>
+#include <string.h>
+
+int main(void) {
+    char src[2005], dst[2005];
+    if (!fgets(src, sizeof(src), stdin)) return 0;
+    size_t ls = strlen(src);
+    if (ls > 0 && src[ls - 1] == '\n') src[--ls] = '\0';
+
+    size_t i = 0, j = 0;
+    while (src[i] != '\0' && src[i] != '#') {
+        dst[j++] = src[i++];
+    }
+    dst[j] = '\0';
+    printf("%s", dst);
+    return 0;
+}
+```
+
+
 
 ## **6. Ticket Code Decoder**
 
@@ -394,7 +515,28 @@ Output: `AAA`
 Input: (Empty line)
 Output: (Empty line)
 
----
+
+```c
+#include <stdio.h>
+#include <string.h>
+
+int main(void) {
+    char s[205];
+    if (!fgets(s, sizeof(s), stdin)) return 0;
+    size_t n = strlen(s);
+    if (n > 0 && s[n - 1] == '\n') s[--n] = '\0';
+
+    if (n > 1) {
+        size_t i = 0, j = n - 1;
+        while (i < j) {
+            char t = s[i]; s[i] = s[j]; s[j] = t;
+            i++; j--;
+        }
+    }
+    printf("%s", s);
+    return 0;
+}
+```
 
 ## **7. Smart Product Label Generator**
 
@@ -490,7 +632,41 @@ Ranger
 
 Output: `PowerRanger`
 
----
+```c
+#include <stdio.h>
+#include <string.h>
+
+static char tolow(char c){ return (c >= 'A' && c <= 'Z') ? (c + 'a' - 'A') : c; }
+
+int main(void) {
+    char brand[205], model[205], label[410];
+    if (!fgets(brand, sizeof(brand), stdin)) return 0;
+    if (!fgets(model, sizeof(model), stdin)) return 0;
+
+    size_t lb = strlen(brand), lm = strlen(model);
+    if (lb > 0 && brand[lb - 1] == '\n') brand[--lb] = '\0';
+    if (lm > 0 && model[lm - 1] == '\n') model[--lm] = '\0';
+
+    // copy brand
+    size_t i = 0, k = 0;
+    for (; i < lb; i++) label[k++] = brand[i];
+
+    // decide starting index for model
+    size_t start = 0;
+    if (lb > 0 && lm > 0) {
+        char lastb = tolow(brand[lb - 1]);
+        char firstm = tolow(model[0]);
+        if (lastb == firstm) start = 1; // avoid duplication
+    }
+
+    for (size_t j = start; j < lm; j++) label[k++] = model[j];
+    label[k] = '\0';
+
+    printf("%s", label);
+    return 0;
+}
+
+```
 
 ## **8. Keyword Suggestion Engine**
 
@@ -583,10 +759,25 @@ Input:
 Loops
 loops
 ```
-
 Output: `Keep typing`
 
----
+```c
+#include <stdio.h>
+#include <string.h>
+
+int main(void) {
+    char query[205], keyword[205];
+    if (!fgets(query, sizeof(query), stdin)) return 0;
+    if (!fgets(keyword, sizeof(keyword), stdin)) return 0;
+
+    size_t lq = strlen(query), lk = strlen(keyword);
+    if (lq > 0 && query[lq - 1] == '\n') query[--lq] = '\0';
+    if (lk > 0 && keyword[lk - 1] == '\n') keyword[--lk] = '\0';
+
+    printf("%s", strcmp(query, keyword) == 0 ? "Exact match" : "Keep typing");
+    return 0;
+}
+```
 
 ## **9. Readability Analyzer**
 
@@ -637,7 +828,37 @@ Output: `0/0`
 Input: `Education is key!`
 Output: `7/13`
 
----
+```c
+#include <stdio.h>
+#include <string.h>
+
+static int is_letter(char c) {
+    return (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z');
+}
+static int is_vowel(char c) {
+    if (c >= 'A' && c <= 'Z') c = c + ('a' - 'A');
+    return c=='a'||c=='e'||c=='i'||c=='o'||c=='u';
+}
+
+int main(void) {
+    char s[2005];
+    if (!fgets(s, sizeof(s), stdin)) return 0;
+
+    size_t len = strlen(s);
+    if (len > 0 && s[len - 1] == '\n') s[--len] = '\0';
+
+    int letters = 0, vowels = 0;
+    for (size_t i = 0; i < len; i++) {
+        if (is_letter(s[i])) {
+            letters++;
+            if (is_vowel(s[i])) vowels++;
+        }
+    }
+    printf("%d/%d", vowels, letters);
+    return 0;
+}
+
+```
 
 ## **10. Palindromic License Detector**
 
@@ -687,4 +908,47 @@ Output: `PALINDROME`
 
 Input: `ByteXL`
 Output: `NOT PALINDROME`
+
+
+```c
+#include <stdio.h>
+#include <string.h>
+
+static int is_alnum_ascii(char c) {
+    if (c >= '0' && c <= '9') return 1;
+    if (c >= 'A' && c <= 'Z') return 1;
+    if (c >= 'a' && c <= 'z') return 1;
+    return 0;
+}
+static char tolow(char c) {
+    if (c >= 'A' && c <= 'Z') return c + ('a' - 'A');
+    return c;
+}
+
+int main(void) {
+    char in[2005], norm[2005];
+    if (!fgets(in, sizeof(in), stdin)) return 0;
+    size_t n = strlen(in);
+    if (n > 0 && in[n - 1] == '\n') in[--n] = '\0';
+
+    size_t k = 0;
+    for (size_t i = 0; i < n; i++) {
+        if (is_alnum_ascii(in[i])) norm[k++] = tolow(in[i]);
+    }
+    norm[k] = '\0';
+
+    int ispal = 1;
+    if (k > 1) {
+        size_t i = 0, j = k - 1;
+        while (i < j) {
+            if (norm[i] != norm[j]) { ispal = 0; break; }
+            i++; j--;
+        }
+    }
+    printf("%s", ispal ? "PALINDROME" : "NOT PALINDROME");
+    return 0;
+}
+
+
+```
 
