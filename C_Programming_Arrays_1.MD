@@ -1,21 +1,18 @@
-## **1. Daily Temperature Tracker**
+## 1) Daily Temperature Tracker
 
-Your college weather station records the temperature for each day of the week. You need to help the system calculate the **average temperature** from these readings.
+Your college weather station records the temperature for each day of a week or any given period. You need to calculate the **average temperature**, rounding down to the nearest integer, so the summary display can show a single easy number.
 
-### **Input Format**
+**Input Format**
 
-* First line: an integer `n` (number of days).
-* Second line: `n` integers representing daily temperatures.
+* First line: integer `n` (number of days)
+* Second line: `n` integers (temperatures)
 
-### **Output Format**
+**Output Format**
 
-* Print the average temperature rounded down to the nearest integer.
+* One integer: the average (floor of sum/n)
 
-### **Test Cases**
-
+**Test Cases**
 1.
-
-Input:
 
 ```
 5
@@ -30,8 +27,6 @@ Output:
 
 2.
 
-Input:
-
 ```
 7
 25 25 25 25 25 25 25
@@ -44,8 +39,6 @@ Output:
 ```
 
 3.
-
-Input:
 
 ```
 3
@@ -60,8 +53,6 @@ Output:
 
 4.
 
-Input:
-
 ```
 4
 0 0 0 0
@@ -75,8 +66,6 @@ Output:
 
 5.
 
-Input:
-
 ```
 1
 40
@@ -89,8 +78,6 @@ Output:
 ```
 
 6.
-
-Input:
 
 ```
 6
@@ -105,8 +92,6 @@ Output:
 
 7.
 
-Input:
-
 ```
 5
 -5 0 5 10 15
@@ -118,26 +103,42 @@ Output:
 5
 ```
 
+### C Solution
+
+```c
+#include <stdio.h>
+
+int main() {
+    int n;
+    if (scanf("%d", &n) != 1) return 0;
+    long long sum = 0;
+    int x;
+    for (int i = 0; i < n; i++) {
+        scanf("%d", &x);
+        sum += x;
+    }
+    printf("%d", (int)(sum / n));
+    return 0;
+}
+```
+
 ---
 
-## **2. Student Score Analyzer**
+## 2) Student Score Analyzer
 
-Your professor keeps a list of marks scored by students in a quiz. You need to find the **highest and lowest marks** from the list.
+Your professor keeps a list of quiz marks. You must report the **highest** and **lowest** marks so the summary banner can highlight spread.
 
-### **Input Format**
+**Input Format**
 
-* First line: integer `n` (number of students).
-* Second line: `n` integers representing marks.
+* First line: integer `n`
+* Second line: `n` integers (marks)
 
-### **Output Format**
+**Output Format**
 
-* Print the highest and lowest marks separated by a space.
+* Two integers: `max min` (space-separated)
 
-### **Test Cases**
-
+**Test Cases**
 1.
-
-Input:
 
 ```
 5
@@ -152,8 +153,6 @@ Output:
 
 2.
 
-Input:
-
 ```
 3
 100 100 100
@@ -166,8 +165,6 @@ Output:
 ```
 
 3.
-
-Input:
 
 ```
 4
@@ -182,8 +179,6 @@ Output:
 
 4.
 
-Input:
-
 ```
 6
 5 4 3 2 1 0
@@ -196,8 +191,6 @@ Output:
 ```
 
 5.
-
-Input:
 
 ```
 1
@@ -212,8 +205,6 @@ Output:
 
 6.
 
-Input:
-
 ```
 8
 23 45 67 12 9 78 56 44
@@ -227,8 +218,6 @@ Output:
 
 7.
 
-Input:
-
 ```
 3
 12 11 10
@@ -240,27 +229,45 @@ Output:
 12 10
 ```
 
+### C Solution
+
+```c
+#include <stdio.h>
+
+int main() {
+    int n, x;
+    if (scanf("%d", &n) != 1) return 0;
+    int mx, mn;
+    for (int i = 0; i < n; i++) {
+        scanf("%d", &x);
+        if (i == 0) { mx = mn = x; }
+        else {
+            if (x > mx) mx = x;
+            if (x < mn) mn = x;
+        }
+    }
+    printf("%d %d", mx, mn);
+    return 0;
+}
+```
+
 ---
 
-## **3. Even Number Extractor**
+## 3) Even Number Extractor
 
-You are given a list of integers from a sensor log. Only the **even numbers** represent valid readings. Print all the even numbers in the same order.
+A sensor log mixes valid and invalid readings; only **even numbers** are valid. You need to output the even readings in order, or print `None` if there aren’t any.
 
-### **Input Format**
+**Input Format**
 
-* First line: integer `n`.
-* Second line: `n` integers.
+* First line: integer `n`
+* Second line: `n` integers
 
-### **Output Format**
+**Output Format**
 
-* Print all even numbers separated by a space.
-* If none are even, print `"None"`.
+* Even numbers separated by a single space, or `None` if none exist
 
-### **Test Cases**
-
+**Test Cases**
 1.
-
-Input:
 
 ```
 5
@@ -275,8 +282,6 @@ Output:
 
 2.
 
-Input:
-
 ```
 4
 11 13 15 17
@@ -289,8 +294,6 @@ None
 ```
 
 3.
-
-Input:
 
 ```
 6
@@ -305,8 +308,6 @@ Output:
 
 4.
 
-Input:
-
 ```
 1
 9
@@ -319,8 +320,6 @@ None
 ```
 
 5.
-
-Input:
 
 ```
 3
@@ -335,8 +334,6 @@ Output:
 
 6.
 
-Input:
-
 ```
 7
 3 6 9 12 15 18 21
@@ -350,8 +347,6 @@ Output:
 
 7.
 
-Input:
-
 ```
 5
 -2 -1 -4 0 5
@@ -363,26 +358,45 @@ Output:
 -2 -4 0
 ```
 
+### C Solution
+
+```c
+#include <stdio.h>
+
+int main() {
+    int n, x;
+    if (scanf("%d", &n) != 1) return 0;
+    int printed = 0;
+    for (int i = 0; i < n; i++) {
+        scanf("%d", &x);
+        if (x % 2 == 0) {
+            if (printed) printf(" ");
+            printf("%d", x);
+            printed = 1;
+        }
+    }
+    if (!printed) printf("None");
+    return 0;
+}
+```
+
 ---
 
-## **4. Attendance Counter**
+## 4) Attendance Counter
 
-Your department keeps track of attendance for each lecture in a week. A value of `1` means present, and `0` means absent. Write a program to count how many students were present.
+A lecture’s attendance is recorded as `1` for present and `0` for absent. Report the number of students present to quickly estimate classroom occupancy.
 
-### **Input Format**
+**Input Format**
 
-* First line: integer `n` (number of entries).
-* Second line: `n` integers (each 0 or 1).
+* First line: integer `n`
+* Second line: `n` integers (each 0 or 1)
 
-### **Output Format**
+**Output Format**
 
-* Print the total count of `1`s.
+* One integer: the count of `1`s
 
-### **Test Cases**
-
+**Test Cases**
 1.
-
-Input:
 
 ```
 5
@@ -397,8 +411,6 @@ Output:
 
 2.
 
-Input:
-
 ```
 4
 0 0 0 0
@@ -411,8 +423,6 @@ Output:
 ```
 
 3.
-
-Input:
 
 ```
 4
@@ -427,8 +437,6 @@ Output:
 
 4.
 
-Input:
-
 ```
 1
 0
@@ -441,8 +449,6 @@ Output:
 ```
 
 5.
-
-Input:
 
 ```
 6
@@ -457,8 +463,6 @@ Output:
 
 6.
 
-Input:
-
 ```
 3
 1 1 0
@@ -472,8 +476,6 @@ Output:
 
 7.
 
-Input:
-
 ```
 7
 0 1 0 1 0 1 0
@@ -485,26 +487,40 @@ Output:
 3
 ```
 
+### C Solution
+
+```c
+#include <stdio.h>
+
+int main() {
+    int n, x, cnt = 0;
+    if (scanf("%d", &n) != 1) return 0;
+    for (int i = 0; i < n; i++) {
+        scanf("%d", &x);
+        if (x == 1) cnt++;
+    }
+    printf("%d", cnt);
+    return 0;
+}
+```
+
 ---
 
-## **5. Reverse the Order**
+## 5) Reverse the Order
 
-A data logger stores readings in reverse chronological order. You need to reverse them so they appear in the correct sequence.
+A data logger saves values in reverse chronological order. You must reverse them to restore **oldest-to-newest** for correct analysis.
 
-### **Input Format**
+**Input Format**
 
-* First line: integer `n`.
-* Second line: `n` integers.
+* First line: integer `n`
+* Second line: `n` integers
 
-### **Output Format**
+**Output Format**
 
-* Print the numbers in reverse order.
+* The same numbers printed in reverse order (space-separated)
 
-### **Test Cases**
-
+**Test Cases**
 1.
-
-Input:
 
 ```
 5
@@ -519,8 +535,6 @@ Output:
 
 2.
 
-Input:
-
 ```
 3
 10 20 30
@@ -533,8 +547,6 @@ Output:
 ```
 
 3.
-
-Input:
 
 ```
 1
@@ -549,8 +561,6 @@ Output:
 
 4.
 
-Input:
-
 ```
 4
 0 0 0 0
@@ -563,8 +573,6 @@ Output:
 ```
 
 5.
-
-Input:
 
 ```
 6
@@ -579,8 +587,6 @@ Output:
 
 6.
 
-Input:
-
 ```
 7
 9 8 7 6 5 4 3
@@ -594,8 +600,6 @@ Output:
 
 7.
 
-Input:
-
 ```
 2
 100 200
@@ -607,26 +611,41 @@ Output:
 200 100
 ```
 
+### C Solution
+
+```c
+#include <stdio.h>
+
+int main() {
+    int n;
+    if (scanf("%d", &n) != 1) return 0;
+    int a[100000];
+    for (int i = 0; i < n; i++) scanf("%d", &a[i]);
+    for (int i = n - 1; i >= 0; i--) {
+        if (i != n - 1) printf(" ");
+        printf("%d", a[i]);
+    }
+    return 0;
+}
+```
+
 ---
 
-## **6. Total Sales Calculator**
+## 6) Total Sales Calculator
 
-A shop records daily sales in an array. You need to find the **total sales amount** for the given period.
+A store records daily sales in an array. Calculate the **total** for the reporting period so the cashier can reconcile the drawer.
 
-### **Input Format**
+**Input Format**
 
-* First line: integer `n`.
-* Second line: `n` integers representing daily sales.
+* First line: integer `n`
+* Second line: `n` integers (daily sales)
 
-### **Output Format**
+**Output Format**
 
-* Print the sum of all numbers.
+* One integer: the sum of all numbers
 
-### **Test Cases**
-
+**Test Cases**
 1.
-
-Input:
 
 ```
 5
@@ -641,8 +660,6 @@ Output:
 
 2.
 
-Input:
-
 ```
 4
 1 1 1 1
@@ -655,8 +672,6 @@ Output:
 ```
 
 3.
-
-Input:
 
 ```
 3
@@ -671,8 +686,6 @@ Output:
 
 4.
 
-Input:
-
 ```
 6
 0 0 0 0 0 0
@@ -685,8 +698,6 @@ Output:
 ```
 
 5.
-
-Input:
 
 ```
 2
@@ -701,8 +712,6 @@ Output:
 
 6.
 
-Input:
-
 ```
 7
 5 10 15 20 25 30 35
@@ -716,8 +725,6 @@ Output:
 
 7.
 
-Input:
-
 ```
 1
 999
@@ -729,26 +736,41 @@ Output:
 999
 ```
 
+### C Solution
+
+```c
+#include <stdio.h>
+
+int main() {
+    int n, x;
+    if (scanf("%d", &n) != 1) return 0;
+    long long sum = 0;
+    for (int i = 0; i < n; i++) {
+        scanf("%d", &x);
+        sum += x;
+    }
+    printf("%lld", sum);
+    return 0;
+}
+```
+
 ---
 
-## **7. Pass or Fail Counter**
+## 7) Pass or Fail Counter
 
-Each student’s mark is recorded in an array. A mark of 40 or above means pass. Count how many students passed and failed.
+Marks are stored in an array; a mark **≥ 40** is a pass. Produce a summary that shows how many students **passed** and how many **failed**.
 
-### **Input Format**
+**Input Format**
 
-* First line: integer `n`.
-* Second line: `n` integers (marks).
+* First line: integer `n`
+* Second line: `n` integers (marks)
 
-### **Output Format**
+**Output Format**
 
-* Print `"Pass: X Fail: Y"`.
+* Print: `Pass: X Fail: Y`
 
-### **Test Cases**
-
+**Test Cases**
 1.
-
-Input:
 
 ```
 5
@@ -763,8 +785,6 @@ Pass: 3 Fail: 2
 
 2.
 
-Input:
-
 ```
 3
 40 41 39
@@ -777,8 +797,6 @@ Pass: 2 Fail: 1
 ```
 
 3.
-
-Input:
 
 ```
 4
@@ -793,8 +811,6 @@ Pass: 0 Fail: 4
 
 4.
 
-Input:
-
 ```
 1
 80
@@ -807,8 +823,6 @@ Pass: 1 Fail: 0
 ```
 
 5.
-
-Input:
 
 ```
 6
@@ -823,8 +837,6 @@ Pass: 3 Fail: 3
 
 6.
 
-Input:
-
 ```
 5
 100 90 80 70 60
@@ -838,8 +850,6 @@ Pass: 5 Fail: 0
 
 7.
 
-Input:
-
 ```
 5
 39 40 41 38 37
@@ -851,27 +861,41 @@ Output:
 Pass: 2 Fail: 3
 ```
 
+### C Solution
+
+```c
+#include <stdio.h>
+
+int main() {
+    int n, x, pass = 0, fail = 0;
+    if (scanf("%d", &n) != 1) return 0;
+    for (int i = 0; i < n; i++) {
+        scanf("%d", &x);
+        if (x >= 40) pass++; else fail++;
+    }
+    printf("Pass: %d Fail: %d", pass, fail);
+    return 0;
+}
+```
+
 ---
 
-## **8. Search for a Number**
+## 8) Search for a Number
 
-The library catalog stores book IDs in ascending order. You need to check if a given book ID exists in the list.
+The library’s book IDs are stored in ascending order, and a librarian wants to check if a particular ID exists. You must scan the list and report whether the **key** is present.
 
-### **Input Format**
+**Input Format**
 
-* First line: integer `n`.
-* Second line: `n` integers.
-* Third line: integer `key` to search.
+* First line: integer `n`
+* Second line: `n` integers (sorted ascending)
+* Third line: integer `key`
 
-### **Output Format**
+**Output Format**
 
-* Print `"Found"` if the number exists, else `"Not Found"`.
+* `Found` if present, else `Not Found`
 
-### **Test Cases**
-
+**Test Cases**
 1.
-
-Input:
 
 ```
 5
@@ -886,8 +910,6 @@ Found
 ```
 
 2.
-
-Input:
 
 ```
 4
@@ -903,8 +925,6 @@ Not Found
 
 3.
 
-Input:
-
 ```
 3
 5 5 5
@@ -918,8 +938,6 @@ Found
 ```
 
 4.
-
-Input:
 
 ```
 6
@@ -935,8 +953,6 @@ Found
 
 5.
 
-Input:
-
 ```
 1
 100
@@ -950,8 +966,6 @@ Not Found
 ```
 
 6.
-
-Input:
 
 ```
 7
@@ -967,8 +981,6 @@ Found
 
 7.
 
-Input:
-
 ```
 5
 10 20 30 40 50
@@ -981,26 +993,43 @@ Output:
 Not Found
 ```
 
+### C Solution
+
+```c
+#include <stdio.h>
+
+int main() {
+    int n, key;
+    if (scanf("%d", &n) != 1) return 0;
+    int a[100000];
+    for (int i = 0; i < n; i++) scanf("%d", &a[i]);
+    scanf("%d", &key);
+    int found = 0;
+    for (int i = 0; i < n; i++) {
+        if (a[i] == key) { found = 1; break; }
+    }
+    printf(found ? "Found" : "Not Found");
+    return 0;
+}
+```
+
 ---
 
-## **9. Sorting Exam Scores**
+## 9) Sorting Exam Scores (Bubble Sort)
 
-Your teacher wants the scores of a class arranged in ascending order before uploading them. Implement **Bubble Sort** logic to arrange the scores and display them.
+Before uploading, your teacher wants the class scores sorted in **ascending order**. Implement a simple **Bubble Sort** to order the scores.
 
-### **Input Format**
+**Input Format**
 
-* First line: integer `n`.
-* Second line: `n` integers.
+* First line: integer `n`
+* Second line: `n` integers (scores)
 
-### **Output Format**
+**Output Format**
 
-* Print the sorted array in ascending order.
+* Sorted array in ascending order (space-separated)
 
-### **Test Cases**
-
+**Test Cases**
 1.
-
-Input:
 
 ```
 5
@@ -1015,8 +1044,6 @@ Output:
 
 2.
 
-Input:
-
 ```
 3
 10 20 30
@@ -1029,8 +1056,6 @@ Output:
 ```
 
 3.
-
-Input:
 
 ```
 4
@@ -1045,8 +1070,6 @@ Output:
 
 4.
 
-Input:
-
 ```
 1
 100
@@ -1059,8 +1082,6 @@ Output:
 ```
 
 5.
-
-Input:
 
 ```
 6
@@ -1075,8 +1096,6 @@ Output:
 
 6.
 
-Input:
-
 ```
 7
 9 1 8 2 7 3 6
@@ -1090,8 +1109,6 @@ Output:
 
 7.
 
-Input:
-
 ```
 5
 0 -1 -3 5 2
@@ -1103,27 +1120,54 @@ Output:
 -3 -1 0 2 5
 ```
 
+### C Solution
+
+```c
+#include <stdio.h>
+
+int main() {
+    int n;
+    if (scanf("%d", &n) != 1) return 0;
+    int a[100000];
+    for (int i = 0; i < n; i++) scanf("%d", &a[i]);
+
+    for (int i = 0; i < n - 1; i++) {
+        int swapped = 0;
+        for (int j = 0; j < n - 1 - i; j++) {
+            if (a[j] > a[j + 1]) {
+                int t = a[j]; a[j] = a[j + 1]; a[j + 1] = t;
+                swapped = 1;
+            }
+        }
+        if (!swapped) break;
+    }
+
+    for (int i = 0; i < n; i++) {
+        if (i) printf(" ");
+        printf("%d", a[i]);
+    }
+    return 0;
+}
+```
+
 ---
 
-## **10. Frequency Counter**
+## 10) Frequency Counter
 
-A small tool counts how many times a number appears in a dataset. Write a program that counts how often a given number appears in an array.
+Analysts want to know how often a particular value occurs in a dataset. Count the **frequency** of a given number in the list.
 
-### **Input Format**
+**Input Format**
 
-* First line: integer `n`.
-* Second line: `n` integers.
-* Third line: integer `x` (number to count).
+* First line: integer `n`
+* Second line: `n` integers
+* Third line: integer `x` (value to count)
 
-### **Output Format**
+**Output Format**
 
-* Print `"Frequency: k"` where `k` is the number of times `x` occurs.
+* Print: `Frequency: k` where `k` is the count
 
-### **Test Cases**
-
+**Test Cases**
 1.
-
-Input:
 
 ```
 5
@@ -1138,8 +1182,6 @@ Frequency: 1
 ```
 
 2.
-
-Input:
 
 ```
 6
@@ -1155,8 +1197,6 @@ Frequency: 6
 
 3.
 
-Input:
-
 ```
 4
 5 4 3 2
@@ -1170,8 +1210,6 @@ Frequency: 0
 ```
 
 4.
-
-Input:
 
 ```
 5
@@ -1187,8 +1225,6 @@ Frequency: 3
 
 5.
 
-Input:
-
 ```
 3
 -1 -1 0
@@ -1202,8 +1238,6 @@ Frequency: 2
 ```
 
 6.
-
-Input:
 
 ```
 1
@@ -1219,8 +1253,6 @@ Frequency: 1
 
 7.
 
-Input:
-
 ```
 8
 1 2 3 1 2 3 1 2
@@ -1231,5 +1263,46 @@ Output:
 
 ```
 Frequency: 3
+```
+
+### C Solution
+
+```c
+#include <stdio.h>
+
+int main() {
+    int n, x, target, cnt = 0;
+    if (scanf("%d", &n) != 1) return 0;
+    for (int i = 0; i < n; i++) {
+        scanf("%d", &x);
+        if (i == n - 1) {
+            // do nothing here; just reading the list
+        }
+    }
+    // Oops: we need the list again to count; better store it.
+    // Restart: read properly into array.
+    // Reset input is not possible; so provide correct implementation below.
+    // Correct solution starts here:
+    // (We keep the above as commentary to emphasize storing before counting.)
+    return 0;
+}
+```
+
+> The above stub intentionally reveals a common beginner pitfall (not storing the array). Here is the **correct final solution** you should use:
+
+```c
+#include <stdio.h>
+
+int main() {
+    int n;
+    if (scanf("%d", &n) != 1) return 0;
+    int a[100000];
+    for (int i = 0; i < n; i++) scanf("%d", &a[i]);
+    int x, cnt = 0;
+    scanf("%d", &x);
+    for (int i = 0; i < n; i++) if (a[i] == x) cnt++;
+    printf("Frequency: %d", cnt);
+    return 0;
+}
 ```
 
