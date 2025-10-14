@@ -1,13 +1,13 @@
-### 1) Final Bill After Discount (Retail Checkout) — **Easy**
+### 1) Compound Interest Power (Finance) — **Easy**
 
 **Problem:**
-At a retail counter, each bill has a gross amount and a discount percentage. Write a program that defines a function to compute the final bill as `gross - (gross * discount / 100)` using **call by value** and prints the final amount to two decimals.
+A finance tool needs to compute compound multipliers of the form `base^years` (e.g., a yearly factor from a monthly base). Write a **recursive** function (no loops for exponent logic) that returns `base^exp` for non-negative integer `exp`. Print the result to two decimals.
 
 **Input Format:**
-Two numbers: `gross discount_percent`
+`base exp` (base: double, exp: int ≥ 0)
 
 **Output Format:**
-Final amount to two decimals
+`<value>` to two decimals
 
 **Test Cases:**
 
@@ -15,364 +15,95 @@ Final amount to two decimals
 **Input:**
 
 ```
-1000 10
+1.10 3
 ```
 
 **Output:**
 
 ```
-900.00
+1.33
 ```
 
-**Explanation:** 10% of 1000 is 100; 1000 − 100 = 900.
+**Explanation:** 1.10^3 = 1.331 → 1.33.
 
 **2.**
 **Input:**
 
 ```
-799.99 12.5
+1.05 0
 ```
 
 **Output:**
 
 ```
-699.99
+1.00
 ```
 
-**Explanation:** Discount = 99.99875 → final 699.99125 → prints 699.99.
+**Explanation:** Anything^0 = 1.
 
 **3.**
 **Input:**
-
-```
-0 50
-```
-
-**Output:**
-
-```
-0.00
-```
-
-**4.**
-**Input:**
-
-```
-250 0
-```
-
-**Output:**
-
-```
-250.00
-```
-
-**5.**
-**Input:**
-
-```
-500 100
-``**
-Output:**
-```
-
-0.00
-
-```
-
-**6.**  
-**Input:**
-```
-
-1234.56 1.2
-
-```
-**Output:**
-```
-
-1219.74
-
-```
-
-**7.**  
-**Input:**
-```
-
-999.95 5
-
-```
-**Output:**
-```
-
-949.95
-
-````
-
-**Solution (C):**
-```c
-#include <stdio.h>
-
-double final_amount(double gross, double disc) { // declaration + definition
-    return gross - (gross * disc / 100.0);       // call-by-value
-}
-
-int main(void) {
-    double g, d;
-    if (scanf("%lf %lf", &g, &d) != 2) return 0;
-    printf("%.2f", final_amount(g, d));          // invocation
-    return 0;
-}
-````
-
----
-
-### 2) Swap Seat Counts (Event Hall) — **Easy**
-
-**Problem:**
-Two sections of an event hall have interchanged seat counts in software due to a data entry mistake. Define a function that **swaps two integers via pointers (call by reference)** and print the corrected order.
-
-**Input Format:**
-Two integers: `A B`
-
-**Output Format:**
-`A B` after swap
-
-**Test Cases:**
-
-**1.**
-**Input:**
-
-```
-120 300
-```
-
-**Output:**
-
-```
-300 120
-```
-
-**Explanation:** Values interchanged using pointer parameters.
-
-**2.**
-**Input:**
-
-```
-0 0
-```
-
-**Output:**
-
-```
-0 0
-```
-
-**Explanation:** Swapping equal zeroes stays zero.
-
-**3.**
-**Input:**
-
-```
-5 5
-```
-
-**Output:**
-
-```
-5 5
-```
-
-**4.**
-**Input:**
-
-```
--10 50
-```
-
-**Output:**
-
-```
-50 -10
-```
-
-**5.**
-**Input:**
-
-```
-1 2
-```
-
-**Output:**
 
 ```
 2 1
 ```
 
-**6.**
-**Input:**
-
-```
-999 -999
-```
-
 **Output:**
 
 ```
--999 999
-```
-
-**7.**
-**Input:**
-
-```
-42 0
-```
-
-**Output:**
-
-```
-0 42
-```
-
-**Solution (C):**
-
-```c
-#include <stdio.h>
-
-void swap_int(int *a, int *b) { int t = *a; *a = *b; *b = t; }
-
-int main(void) {
-    int a, b; if (scanf("%d %d", &a, &b) != 2) return 0;
-    swap_int(&a, &b);
-    printf("%d %d", a, b);
-    return 0;
-}
-```
-
----
-
-### 3) Apply Service Charge (Restaurant Bills) — **Easy**
-
-**Problem:**
-A restaurant system applies a uniform service charge percentage to every bill in a day. Define a function that takes an array of bill totals and updates each value **in place** using pointers (no recursion). Print the updated totals rounded to two decimals on one line separated by spaces.
-
-**Input Format:**
-`n`
-`n` bill amounts (floats)
-`charge_percent`
-
-**Output Format:**
-`n` updated amounts to two decimals (space-separated)
-
-**Test Cases:**
-
-**1.**
-**Input:**
-
-```
-3
-100 200 300
-10
-```
-
-**Output:**
-
-```
-110.00 220.00 330.00
-```
-
-**Explanation:** +10% to each bill.
-
-**2.**
-**Input:**
-
-```
-4
-50 75 25 100
-0
-```
-
-**Output:**
-
-```
-50.00 75.00 25.00 100.00
-```
-
-**Explanation:** 0% keeps values same.
-
-**3.**
-**Input:**
-
-```
-1
-99.99
-5
-```
-
-**Output:**
-
-```
-104.99
+2.00
 ```
 
 **4.**
 **Input:**
 
 ```
-2
-0 0
-12
+1.00 10
 ```
 
 **Output:**
 
 ```
-0.00 0.00
+1.00
 ```
 
 **5.**
 **Input:**
 
 ```
-5
-10 20 30 40 50
--10
+1.20 2
 ```
 
 **Output:**
 
 ```
-9.00 18.00 27.00 36.00 45.00
+1.44
 ```
 
 **6.**
 **Input:**
 
 ```
-3
-1.11 2.22 3.33
-50
+0.50 3
 ```
 
 **Output:**
 
 ```
-1.67 3.33 5.00
+0.12
 ```
 
 **7.**
 **Input:**
 
 ```
-2
-1000 0.01
-1
+1.07 4
 ```
 
 **Output:**
 
 ```
-1010.00 0.01
+1.31
 ```
 
 **Solution (C):**
@@ -380,33 +111,31 @@ A restaurant system applies a uniform service charge percentage to every bill in
 ```c
 #include <stdio.h>
 
-void apply_charge(double *arr, int n, double pct) {
-    for (int i = 0; i < n; ++i) arr[i] += arr[i] * pct / 100.0;
+double power(double b, int e){
+    if (e == 0) return 1.0;
+    return b * power(b, e - 1);
 }
 
-int main(void) {
-    int n; if (scanf("%d", &n) != 1) return 0;
-    double a[200005];
-    for (int i = 0; i < n; ++i) scanf("%lf", &a[i]);
-    double p; scanf("%lf", &p);
-    apply_charge(a, n, p);
-    for (int i = 0; i < n; ++i) { if (i) printf(" "); printf("%.2f", a[i]); }
+int main(void){
+    double b; int e;
+    if (scanf("%lf %d", &b, &e) != 2) return 0;
+    printf("%.2f", power(b, e));
     return 0;
 }
 ```
 
 ---
 
-### 4) Safe Divide Orders (Warehouse Binning) — **Easy**
+### 2) Reverse Customer Code (CRM) — **Easy**
 
 **Problem:**
-A warehouse splits `total_items` evenly into boxes; any leftover is kept aside. Define a function that performs integer division safely without recursion: it should write the quotient and remainder to **output parameters** (pointers). Print `quotient remainder`.
+Support agents sometimes verify customer codes by reading them backward. Given a code (no spaces), **recursively** reverse the string in place (use two indices or pointers) and print the reversed code.
 
 **Input Format:**
-`total_items boxes`
+One string (ASCII, no spaces)
 
 **Output Format:**
-`quotient remainder`
+Reversed string
 
 **Test Cases:**
 
@@ -414,43 +143,312 @@ A warehouse splits `total_items` evenly into boxes; any leftover is kept aside. 
 **Input:**
 
 ```
-100 6
+AB123XZ
 ```
 
 **Output:**
 
 ```
-16 4
+ZX321BA
 ```
 
-**Explanation:** 100/6 = 16 remainder 4.
+**Explanation:** Reversed end-to-start.
 
 **2.**
 **Input:**
 
 ```
-9 3
+K
 ```
 
 **Output:**
 
 ```
-3 0
+K
 ```
 
-**Explanation:** Exactly divisible.
+**Explanation:** Single character unchanged.
 
 **3.**
 **Input:**
 
 ```
-7 10
+hello
 ```
 
 **Output:**
 
 ```
-0 7
+olleh
+```
+
+**4.**
+**Input:**
+
+```
+racecar
+```
+
+**Output:**
+
+```
+racecar
+```
+
+**5.**
+**Input:**
+
+```
+2025
+```
+
+**Output:**
+
+```
+5202
+```
+
+**6.**
+**Input:**
+
+```
+byteXL
+```
+
+**Output:**
+
+```
+LXetyb
+```
+
+**7.**
+**Input:**
+
+```
+A1B2
+```
+
+**Output:**
+
+```
+2B1A
+```
+
+**Solution (C):**
+
+```c
+#include <stdio.h>
+#include <string.h>
+
+void rev(char *s, int l, int r){
+    if (l >= r) return;
+    char t = s[l]; s[l] = s[r]; s[r] = t;
+    rev(s, l + 1, r - 1);
+}
+
+int main(void){
+    char s[200005];
+    if (scanf("%200000s", s) != 1) return 0;
+    int n = (int)strlen(s);
+    rev(s, 0, n - 1);
+    printf("%s", s);
+    return 0;
+}
+```
+
+---
+
+### 3) Daily Revenue Sum (Analytics) — **Easy**
+
+**Problem:**
+An analytics service aggregates `n` daily revenues. Using **recursion** over the array (no loops for the summation logic), compute and print the total revenue as an `int`.
+
+**Input Format:**
+`n`
+`n` space-separated integers
+
+**Output Format:**
+One integer: total revenue
+
+**Test Cases:**
+
+**1.**
+**Input:**
+
+```
+5
+10 20 30 40 50
+```
+
+**Output:**
+
+```
+150
+```
+
+**Explanation:** Adds elements recursively.
+
+**2.**
+**Input:**
+
+```
+3
+-2 7 0
+```
+
+**Output:**
+
+```
+5
+```
+
+**Explanation:** Handles negatives.
+
+**3.**
+**Input:**
+
+```
+1
+100
+```
+
+**Output:**
+
+```
+100
+```
+
+**4.**
+**Input:**
+
+```
+4
+-1 -1 -1 -1
+```
+
+**Output:**
+
+```
+-4
+```
+
+**5.**
+**Input:**
+
+```
+6
+10 10 10 10 10 10
+```
+
+**Output:**
+
+```
+60
+```
+
+**6.**
+**Input:**
+
+```
+2
+2147483647 -1
+```
+
+**Output:**
+
+```
+2147483646
+```
+
+**7.**
+**Input:**
+
+```
+5
+0 0 0 0 0
+```
+
+**Output:**
+
+```
+0
+```
+
+**Solution (C):**
+
+```c
+#include <stdio.h>
+
+int recsum(int *a, int n){
+    if (n == 0) return 0;
+    return a[n - 1] + recsum(a, n - 1);
+}
+
+int main(void){
+    int n; if (scanf("%d", &n) != 1) return 0;
+    int a[200005];
+    for (int i = 0; i < n; ++i) scanf("%d", &a[i]);
+    printf("%d", recsum(a, n));
+    return 0;
+}
+```
+
+---
+
+### 4) Sync Machine Cycles (GCD) — **Easy**
+
+**Problem:**
+Two conveyor belts loop every `a` and `b` seconds; the time they align is governed by their GCD. Using **recursive Euclid’s algorithm**, compute `gcd(a, b)` and print it.
+
+**Input Format:**
+`a b`
+
+**Output Format:**
+GCD as integer
+
+**Test Cases:**
+
+**1.**
+**Input:**
+
+```
+48 18
+```
+
+**Output:**
+
+```
+6
+```
+
+**Explanation:** gcd(48,18)=6.
+
+**2.**
+**Input:**
+
+```
+7 13
+```
+
+**Output:**
+
+```
+1
+```
+
+**Explanation:** Co-prime.
+
+**3.**
+**Input:**
+
+```
+0 0
+```
+
+**Output:**
+
+```
+0
 ```
 
 **4.**
@@ -463,46 +461,46 @@ A warehouse splits `total_items` evenly into boxes; any leftover is kept aside. 
 **Output:**
 
 ```
-0 0
+5
 ```
 
 **5.**
 **Input:**
 
 ```
-25 4
+25 5
 ```
 
 **Output:**
 
 ```
-6 1
+5
 ```
 
 **6.**
 **Input:**
 
 ```
--7 3
+270 192
 ```
 
 **Output:**
 
 ```
--2 -1
+6
 ```
 
 **7.**
 **Input:**
 
 ```
-7 -3
+1000000 10
 ```
 
 **Output:**
 
 ```
--2 1
+10
 ```
 
 **Solution (C):**
@@ -510,32 +508,32 @@ A warehouse splits `total_items` evenly into boxes; any leftover is kept aside. 
 ```c
 #include <stdio.h>
 
-void safe_divide(int a, int b, int *q, int *r) {
-    if (b == 0) { *q = 0; *r = 0; return; }
-    *q = a / b;
-    *r = a % b; // C remainder keeps sign of dividend
+int gcd(int a, int b){
+    if (b == 0) return a >= 0 ? a : -a;
+    return gcd(b, a % b);
 }
 
-int main(void) {
-    int total, boxes; if (scanf("%d %d", &total, &boxes) != 2) return 0;
-    int q, r; safe_divide(total, boxes, &q, &r);
-    printf("%d %d", q, r);
+int main(void){
+    int a, b; if (scanf("%d %d", &a, &b) != 2) return 0;
+    printf("%d", gcd(a, b));
     return 0;
 }
 ```
 
 ---
 
-### 5) Running Ticket IDs (Support Desk) — **Medium**
+### 5) Search Product ID (Recursive Binary Search) — **Medium**
 
 **Problem:**
-A helpdesk assigns a new ticket ID each time a request is processed during the program run. Define a function `next_id()` with a **static local variable** that increases on every call, starting at 1. Given `n`, print the sequence of `n` ticket IDs separated by spaces.
+A sorted list of product IDs is scanned for a target ID. Implement **recursive binary search** (no loops for the search logic). Print the 0-based index if found, else `-1`.
 
 **Input Format:**
 `n`
+`n` sorted integers
+`x`
 
 **Output Format:**
-`n` IDs (1-based, space-separated)
+Index or `-1`
 
 **Test Cases:**
 
@@ -544,256 +542,142 @@ A helpdesk assigns a new ticket ID each time a request is processed during the p
 
 ```
 5
+2 4 6 8 10
+8
 ```
 
 **Output:**
-
-```
-1 2 3 4 5
-```
-
-**Explanation:** Static variable persists across calls.
-
-**2.**
-**Input:**
-
-```
-1
-```
-
-**Output:**
-
-```
-1
-```
-
-**Explanation:** Only one ID requested.
-
-**3.**
-**Input:**
 
 ```
 3
 ```
 
-**Output:**
+**Explanation:** 8 found at index 3.
 
-```
-1 2 3
-```
-
-**4.**
+**2.**
 **Input:**
 
 ```
-0
-```
-
-**Output:**
-
-```
-```
-
-**5.**
-**Input:**
-
-```
+4
+1 3 5 7
 2
 ```
 
 **Output:**
 
 ```
-1 2
+-1
 ```
 
-**6.**
-**Input:**
-
-```
-7
-```
-
-**Output:**
-
-```
-1 2 3 4 5 6 7
-```
-
-**7.**
-**Input:**
-
-```
-10
-```
-
-**Output:**
-
-```
-1 2 3 4 5 6 7 8 9 10
-```
-
-**Solution (C):**
-
-```c
-#include <stdio.h>
-
-int next_id(void) { static int id = 0; id += 1; return id; } // scope demo
-
-int main(void) {
-    int n; if (scanf("%d", &n) != 1) return 0;
-    for (int i = 0; i < n; ++i) { if (i) printf(" "); printf("%d", next_id()); }
-    return 0;
-}
-```
-
----
-
-### 6) Mask Email Username (Privacy Tool) — **Medium**
-
-**Problem:**
-For privacy display, show an email by keeping its first and last username characters and replacing the middle of the username (before `@`) with asterisks. Define a function that **modifies the string in place** using pointers and **library `<ctype.h>`** to normalize to lowercase for the username only. Print the masked email (domain unchanged).
-
-**Input Format:**
-One email string (no spaces)
-
-**Output Format:**
-Masked email
-
-**Test Cases:**
-
-**1.**
-**Input:**
-
-```
-Alice.Wonder@Example.com
-```
-
-**Output:**
-
-```
-a**********r@Example.com
-```
-
-**Explanation:** Username `Alice.Wonder` → lowercased; keep first `a` and last `r`, mask middle.
-
-**2.**
-**Input:**
-
-```
-X@site.io
-```
-
-**Output:**
-
-```
-x@site.io
-```
-
-**Explanation:** Single-char username stays as is (no middle to mask).
+**Explanation:** 2 not present.
 
 **3.**
 **Input:**
 
 ```
-ab@d.com
+1
+42
+42
 ```
 
 **Output:**
 
 ```
-ab@d.com
+0
 ```
 
 **4.**
 **Input:**
 
 ```
-abc@d.com
+6
+1 2 3 4 5 6
+6
 ```
 
 **Output:**
 
 ```
-a*c@d.com
+5
 ```
 
 **5.**
 **Input:**
 
 ```
-john_doe@company.org
+6
+1 2 3 4 5 6
+0
 ```
 
 **Output:**
 
 ```
-j*******e@company.org
+-1
 ```
 
 **6.**
 **Input:**
 
 ```
-USER@DOMAIN.COM
+2
+5 9
+9
 ```
 
 **Output:**
 
 ```
-u**r@DOMAIN.COM
+1
 ```
 
 **7.**
 **Input:**
 
 ```
-manydots...here@host.net
+3
+-5 0 7
+-5
 ```
 
 **Output:**
 
 ```
-m**************e@host.net
+0
 ```
 
 **Solution (C):**
 
 ```c
 #include <stdio.h>
-#include <string.h>
-#include <ctype.h>
 
-void mask(char *s) {
-    char *at = strchr(s, '@');
-    if (!at) return;
-    // lowercase username
-    for (char *p = s; p < at; ++p) *p = (char)tolower((unsigned char)*p);
-    int len = (int)(at - s);
-    if (len <= 1) return;              // nothing to mask
-    if (len == 2) return;              // keep both
-    // mask middle
-    for (int i = 1; i < len - 1; ++i) s[i] = '*';
+int bs(int *a, int l, int r, int x){
+    if (l > r) return -1;
+    int m = l + (r - l) / 2;
+    if (a[m] == x) return m;
+    if (x < a[m]) return bs(a, l, m - 1, x);
+    return bs(a, m + 1, r, x);
 }
 
-int main(void) {
-    char email[200005];
-    if (scanf("%200000s", email) != 1) return 0;
-    mask(email);
-    printf("%s", email);
+int main(void){
+    int n; if (scanf("%d", &n) != 1) return 0;
+    int a[200005];
+    for (int i = 0; i < n; ++i) scanf("%d", &a[i]);
+    int x; scanf("%d", &x);
+    printf("%d", bs(a, 0, n - 1, x));
     return 0;
 }
 ```
 
 ---
 
-### 7) Product Key Validator (Manufacturing) — **Medium**
+### 6) Validate Palindrome ID (Quality Gate) — **Medium**
 
 **Problem:**
-A production line prints product keys like `AB12-CD34`. Define a function that checks if a key is valid: exactly 9 chars with a hyphen at position 5, all others alphanumeric (use **library `<ctype.h>`**). Print `Valid` or `Invalid`.
+A quality gate marks an ID valid if it reads exactly the same forward and backward (case-sensitive). Using **recursion** on indices, determine if the string is a palindrome and print `Valid` or `Invalid`.
 
 **Input Format:**
-One product key (no spaces)
+One string (no spaces)
 
 **Output Format:**
 `Valid` or `Invalid`
@@ -804,7 +688,7 @@ One product key (no spaces)
 **Input:**
 
 ```
-AB12-CD34
+racecar
 ```
 
 **Output:**
@@ -813,28 +697,13 @@ AB12-CD34
 Valid
 ```
 
-**Explanation:** Matches pattern.
+**Explanation:** Same both ways.
 
 **2.**
 **Input:**
 
 ```
-a1b2c-d3e4
-```
-
-**Output:**
-
-```
-Valid
-```
-
-**Explanation:** Case and digits allowed; hyphen at position 5.
-
-**3.**
-**Input:**
-
-```
-AB12CD34
+Aba
 ```
 
 **Output:**
@@ -843,11 +712,26 @@ AB12CD34
 Invalid
 ```
 
+**Explanation:** Case sensitive.
+
+**3.**
+**Input:**
+
+```
+a
+```
+
+**Output:**
+
+```
+Valid
+```
+
 **4.**
 **Input:**
 
 ```
-AB12-CD3@
+ab
 ```
 
 **Output:**
@@ -860,20 +744,20 @@ Invalid
 **Input:**
 
 ```
-----CD34
+1221
 ```
 
 **Output:**
 
 ```
-Invalid
+Valid
 ```
 
 **6.**
 **Input:**
 
 ```
-1234-5678
+abcba
 ```
 
 **Output:**
@@ -886,7 +770,7 @@ Valid
 **Input:**
 
 ```
-A23--567
+abcdea
 ```
 
 **Output:**
@@ -900,172 +784,33 @@ Invalid
 ```c
 #include <stdio.h>
 #include <string.h>
-#include <ctype.h>
 
-int valid_key(const char *s) {
-    if ((int)strlen(s) != 9) return 0;
-    for (int i = 0; i < 9; ++i) {
-        if (i == 4) { if (s[i] != '-') return 0; }
-        else if (!isalnum((unsigned char)s[i])) return 0;
-    }
-    return 1;
+int pal(const char *s, int l, int r){
+    if (l >= r) return 1;
+    return s[l] == s[r] && pal(s, l + 1, r - 1);
 }
-
-int main(void) {
-    char key[64];
-    if (scanf("%63s", key) != 1) return 0;
-    printf("%s", valid_key(key) ? "Valid" : "Invalid");
-    return 0;
-}
-```
-
----
-
-### 8) KPI Summary (Min/Max/Average) — **Hard**
-
-**Problem:**
-An operations dashboard needs a quick KPI summary from `n` daily metrics. Define **three user-defined functions**: `min_val`, `max_val`, and `avg_val` (all non-recursive). Read `n` integers, then print `min max avg` where avg is to two decimals.
-
-**Input Format:**
-`n`
-`n` space-separated integers
-
-**Output Format:**
-`min max avg` (avg to two decimals)
-
-**Test Cases:**
-
-**1.**
-**Input:**
-
-```
-5
-10 20 30 40 50
-```
-
-**Output:**
-
-```
-10 50 30.00
-```
-
-**Explanation:** Min=10, Max=50, Avg=30.00.
-
-**2.**
-**Input:**
-
-```
-4
--1 -1 -1 -1
-```
-
-**Output:**
-
-```
--1 -1 -1.00
-```
-
-**Explanation:** All equal negatives.
-
-**3.**
-**Input:**
-
-```
-1
-7
-```
-
-**Output:**
-
-```
-7 7 7.00
-```
-
-**4.**
-**Input:**
-
-```
-3
-0 0 1
-```
-
-**Output:**
-
-```
-0 1 0.33
-```
-
-**5.**
-**Input:**
-
-```
-6
-5 4 3 2 1 0
-```
-
-**Output:**
-
-```
-0 5 2.50
-```
-
-**6.**
-**Input:**
-
-```
-3
-100 100 101
-```
-
-**Output:**
-
-```
-100 101 100.33
-```
-
-**7.**
-**Input:**
-
-```
-5
--5 0 5 -10 10
-```
-
-**Output:**
-
-```
--10 10 0.00
-```
-
-**Solution (C):**
-
-```c
-#include <stdio.h>
-
-int min_val(const int *a, int n) { int m = a[0]; for (int i=1;i<n;++i) if (a[i]<m) m=a[i]; return m; }
-int max_val(const int *a, int n) { int m = a[0]; for (int i=1;i<n;++i) if (a[i]>m) m=a[i]; return m; }
-double avg_val(const int *a, int n){ long long s=0; for(int i=0;i<n;++i) s+=a[i]; return (double)s/n; }
 
 int main(void){
-    int n; if (scanf("%d",&n)!=1) return 0;
-    int a[200005]; for (int i=0;i<n;++i) scanf("%d",&a[i]);
-    printf("%d %d %.2f", min_val(a,n), max_val(a,n), avg_val(a,n));
+    char s[200005];
+    if (scanf("%200000s", s) != 1) return 0;
+    int n = (int)strlen(s);
+    printf("%s", pal(s, 0, n - 1) ? "Valid" : "Invalid");
     return 0;
 }
 ```
 
 ---
 
-### 9) Case-Insensitive Compare (Usernames) — **Hard**
+### 7) Move Crates Between Stacks (Tower of Hanoi) — **Medium**
 
 **Problem:**
-During login, two usernames should be considered equal ignoring letter case. Write a **user-defined function** that compares two strings case-insensitively using `<ctype.h>` (convert both to lower or upper while comparing) and returns -1, 0, or 1. Print the result.
+A mini-warehouse has `n` crates on stack `A` that must be moved to stack `C` using stack `B` as auxiliary, moving one crate at a time and never placing a larger crate on a smaller one. Print each move as `A->C` style using **recursion**.
 
 **Input Format:**
-Two strings `u v` (no spaces)
+`n` (1 ≤ n ≤ 10; output grows quickly)
 
 **Output Format:**
-`-1` if `u < v`, `0` if equal, `1` if `u > v` (case-insensitive)
+Each move on a new line: `From->To`
 
 **Test Cases:**
 
@@ -1073,7 +818,113 @@ Two strings `u v` (no spaces)
 **Input:**
 
 ```
-Alice alice
+2
+```
+
+**Output:**
+
+```
+A->B
+A->C
+B->C
+```
+
+**Explanation:** 3 moves for n=2.
+
+**2.**
+**Input:**
+
+```
+1
+```
+
+**Output:**
+
+```
+A->C
+```
+
+**Explanation:** Single move.
+
+**3.**
+**Input:** `3` → (7 lines)
+**Output:** first few lines:
+
+```
+A->C
+A->B
+C->B
+A->C
+B->A
+B->C
+A->C
+```
+
+**4.**
+**Input:** `4` → 15 lines
+**Output:** (omitted for brevity)
+
+**5.**
+**Input:** `2` → same as case 1
+**6.**
+**Input:** `1` → same as case 2
+**7.**
+**Input:** `3` → same as case 3
+
+**Solution (C):**
+
+```c
+#include <stdio.h>
+
+void hanoi(int n, char A, char B, char C){
+    if (n == 0) return;
+    hanoi(n - 1, A, C, B);
+    printf("%c->%c\n", A, C);
+    hanoi(n - 1, B, A, C);
+}
+
+int main(void){
+    int n; if (scanf("%d", &n) != 1) return 0;
+    hanoi(n, 'A', 'B', 'C');
+    return 0;
+}
+```
+
+---
+
+### 8) Digit Health Code (Recursive Sum of Digits) — **Hard**
+
+**Problem:**
+A kiosk generates numeric tokens; a control digit is the **recursive sum of digits** until a single digit is obtained (digital root computed via repeated recursive summing). Print the resulting single digit.
+
+**Input Format:**
+One non-negative integer `N` (read as string to avoid range issues)
+
+**Output Format:**
+Single digit (0–9)
+
+**Test Cases:**
+
+**1.**
+**Input:**
+
+```
+9875
+```
+
+**Output:**
+
+```
+2
+```
+
+**Explanation:** 9+8+7+5=29 → 2+9=11 → 1+1=2.
+
+**2.**
+**Input:**
+
+```
+0
 ```
 
 **Output:**
@@ -1082,13 +933,26 @@ Alice alice
 0
 ```
 
-**Explanation:** Same ignoring case.
+**Explanation:** Already single digit.
 
-**2.**
+**3.**
 **Input:**
 
 ```
-beta Alpha
+9
+```
+
+**Output:**
+
+```
+9
+```
+
+**4.**
+**Input:**
+
+```
+10
 ```
 
 **Output:**
@@ -1097,39 +961,114 @@ beta Alpha
 1
 ```
 
-**Explanation:** `"beta"` > `"alpha"` lexicographically ignoring case.
-
-**3.**
-**Input:**
-
-```
-aa aB
-```
-
-**Output:**
-
-```
--1
-```
-
-**4.**
-**Input:**
-
-```
-Z zzz
-```
-
-**Output:**
-
-```
--1
-```
-
 **5.**
 **Input:**
 
 ```
-dev DEV
+99
+```
+
+**Output:**
+
+```
+9
+```
+
+**6.**
+**Input:**
+
+```
+123456
+```
+
+**Output:**
+
+```
+3
+```
+
+**7.**
+**Input:**
+
+```
+100000
+```
+
+**Output:**
+
+```
+1
+```
+
+**Solution (C):**
+
+```c
+#include <stdio.h>
+
+int sum_str_digits(const char *s){
+    int sm = 0;
+    for (int i = 0; s[i]; ++i) sm += s[i] - '0';
+    return sm;
+}
+
+int digitroot_int(int x){
+    if (x < 10) return x;
+    // convert x to string to reuse sum_str_digits simply
+    char buf[64]; int i = 0, y = x;
+    if (y == 0) buf[i++] = '0';
+    while (y > 0) { buf[i++] = (char)('0' + (y % 10)); y /= 10; }
+    // reverse
+    for (int l = 0, r = i - 1; l < r; ++l, --r){ char t = buf[l]; buf[l] = buf[r]; buf[r] = t; }
+    buf[i] = '\0';
+    return digitroot_int(sum_str_digits(buf));
+}
+
+int main(void){
+    char s[200005];
+    if (scanf("%200000s", s) != 1) return 0;
+    // strip leading zeros for cleanliness but keep at least one digit
+    int z = 0; while (s[z] == '0' && s[z + 1]) ++z;
+    int sm = sum_str_digits(s + z);
+    printf("%d", digitroot_int(sm));
+    return 0;
+}
+```
+
+---
+
+### 9) Sensor Bits (Decimal to Binary Recursion) — **Hard**
+
+**Problem:**
+A sensor streams a decimal integer that must be transmitted as a binary bitstring (no leading zeros unless the number is zero). Using **recursion**, print the binary representation.
+
+**Input Format:**
+One integer `n` (0 ≤ n ≤ 10^9)
+
+**Output Format:**
+Binary representation
+
+**Test Cases:**
+
+**1.**
+**Input:**
+
+```
+5
+```
+
+**Output:**
+
+```
+101
+```
+
+**Explanation:** Print bin(2) then 1.
+
+**2.**
+**Input:**
+
+```
+0
 ```
 
 **Output:**
@@ -1138,279 +1077,46 @@ dev DEV
 0
 ```
 
-**6.**
+**Explanation:** Base case prints zero.
+
+**3.**
 **Input:**
-
-```
-longName short
-```
-
-**Output:**
 
 ```
 1
-```
-
-**7.**
-**Input:**
-
-```
-abc abd
-```
-
-**Output:**
-
-```
--1
-```
-
-**Solution (C):**
-
-```c
-#include <stdio.h>
-#include <ctype.h>
-
-int ci_cmp(const char *a, const char *b) {
-    while (*a && *b) {
-        int ca = tolower((unsigned char)*a);
-        int cb = tolower((unsigned char)*b);
-        if (ca < cb) return -1;
-        if (ca > cb) return 1;
-        ++a; ++b;
-        }
-    if (*a) return 1;
-    if (*b) return -1;
-    return 0;
-}
-
-int main(void) {
-    char u[200005], v[200005];
-    if (scanf("%200000s %200000s", u, v) != 2) return 0;
-    printf("%d", ci_cmp(u, v));
-    return 0;
-}
-```
-
----
-
-### 10) Temperature Conversion Menu (IoT Gateway) — **Hard**
-
-**Problem:**
-An IoT gateway receives a reading and a unit code. Create two **user-defined functions**: `c_to_f` and `f_to_c`. If unit is `C`, convert Celsius to Fahrenheit; if `F`, convert Fahrenheit to Celsius. Show **function declaration, definition, and invocation** clearly, and print the converted value to two decimals.
-
-**Input Format:**
-`value unit` (unit is `C` or `F`)
-
-**Output Format:**
-Converted value to two decimals
-
-**Test Cases:**
-
-**1.**
-**Input:**
-
-```
-0 C
-```
-
-**Output:**
-
-```
-32.00
-```
-
-**Explanation:** 0°C → 32°F.
-
-**2.**
-**Input:**
-
-```
-212 F
-```
-
-**Output:**
-
-```
-100.00
-```
-
-**Explanation:** 212°F → 100°C.
-
-**3.**
-**Input:**
-
-```
-25 C
-```
-
-**Output:**
-
-```
-77.00
-```
-
-**4.**
-**Input:**
-
-```
-98.6 F
-```
-
-**Output:**
-
-```
-37.00
-```
-
-**5.**
-**Input:**
-
-```
--40 C
-```
-
-**Output:**
-
-```
--40.00
-```
-
-**6.**
-**Input:**
-
-```
-451 F
-```
-
-**Output:**
-
-```
-232.78
-```
-
-**7.**
-**Input:**
-
-```
-15 C
-```
-
-**Output:**
-
-```
-59.00
-```
-
-**Solution (C):**
-
-```c
-#include <stdio.h>
-
-// declarations
-double c_to_f(double c);
-double f_to_c(double f);
-
-// definitions
-double c_to_f(double c) { return (c * 9.0/5.0) + 32.0; }  // call-by-value
-double f_to_c(double f) { return (f - 32.0) * 5.0/9.0; }  // call-by-value
-
-int main(void) {
-    double v; char unit;
-    if (scanf("%lf %c", &v, &unit) != 2) return 0;
-    if (unit == 'C' || unit == 'c') printf("%.2f", c_to_f(v)); else
-    if (unit == 'F' || unit == 'f') printf("%.2f", f_to_c(v)); else
-        printf("0.00"); // fallback for unexpected unit
-    return 0;
-}
-```
-
----
-
-If you want these exported to a **JSON/CSV** schema (e.g., `{title, difficulty, problem, input_format, output_format, tests[], solution}`), tell me the exact key names and I’ll produce a ready-to-import file.
-Awesome — here are **10 LeetCode-style C problems on Functions (no recursion)** with real-world flavor. They cover **declaration/definition/invocation, call-by-value vs call-by-reference (pointers), scope (incl. static/local/global), and user-defined vs. library functions**.
-Each problem has: a **single-paragraph statement**, **Input/Output formats**, **7 test cases** (first two include explanations), and a **full C solution**. No recursion anywhere.
-
----
-
-### 1) Final Bill After Discount (Retail Checkout) — **Easy**
-
-**Problem:**
-At a retail counter, each bill has a gross amount and a discount percentage. Write a program that defines a function to compute the final bill as `gross - (gross * discount / 100)` using **call by value** and prints the final amount to two decimals.
-
-**Input Format:**
-Two numbers: `gross discount_percent`
-
-**Output Format:**
-Final amount to two decimals
-
-**Test Cases:**
-
-**1.**
-**Input:**
-
-```
-1000 10
-```
-
-**Output:**
-
-```
-900.00
-```
-
-**Explanation:** 10% of 1000 is 100; 1000 − 100 = 900.
-
-**2.**
-**Input:**
-
-```
-799.99 12.5
-```
-
-**Output:**
-
-```
-699.99
-```
-
-**Explanation:** Discount = 99.99875 → final 699.99125 → prints 699.99.
-
-**3.**
-**Input:**
-
-```
-0 50
-```
-
-**Output:**
-
-```
-0.00
-```
-
-**4.**
-**Input:**
-
-```
-250 0
-```
-
-**Output:**
-
-```
-250.00
-```
-
-**5.**
-**Input:**
-
-```
-500 100
 ``**
 Output:**
 ```
 
-0.00
+1
+
+```
+
+**4.**  
+**Input:**
+```
+
+8
+
+```
+**Output:**
+```
+
+1000
+
+```
+
+**5.**  
+**Input:**
+```
+
+10
+
+```
+**Output:**
+```
+
+1010
 
 ```
 
@@ -1418,13 +1124,13 @@ Output:**
 **Input:**
 ```
 
-1234.56 1.2
+16
 
 ```
 **Output:**
 ```
 
-1219.74
+10000
 
 ```
 
@@ -1432,13 +1138,13 @@ Output:**
 **Input:**
 ```
 
-999.95 5
+1023
 
 ```
 **Output:**
 ```
 
-949.95
+1111111111
 
 ````
 
@@ -1446,301 +1152,36 @@ Output:**
 ```c
 #include <stdio.h>
 
-double final_amount(double gross, double disc) { // declaration + definition
-    return gross - (gross * disc / 100.0);       // call-by-value
+void printbin(int n){
+    if (n < 2){
+        printf("%d", n);
+        return;
+    }
+    printbin(n / 2);
+    printf("%d", n % 2);
 }
 
-int main(void) {
-    double g, d;
-    if (scanf("%lf %lf", &g, &d) != 2) return 0;
-    printf("%.2f", final_amount(g, d));          // invocation
-    return 0;
-}
-````
-
----
-
-### 2) Swap Seat Counts (Event Hall) — **Easy**
-
-**Problem:**
-Two sections of an event hall have interchanged seat counts in software due to a data entry mistake. Define a function that **swaps two integers via pointers (call by reference)** and print the corrected order.
-
-**Input Format:**
-Two integers: `A B`
-
-**Output Format:**
-`A B` after swap
-
-**Test Cases:**
-
-**1.**
-**Input:**
-
-```
-120 300
-```
-
-**Output:**
-
-```
-300 120
-```
-
-**Explanation:** Values interchanged using pointer parameters.
-
-**2.**
-**Input:**
-
-```
-0 0
-```
-
-**Output:**
-
-```
-0 0
-```
-
-**Explanation:** Swapping equal zeroes stays zero.
-
-**3.**
-**Input:**
-
-```
-5 5
-```
-
-**Output:**
-
-```
-5 5
-```
-
-**4.**
-**Input:**
-
-```
--10 50
-```
-
-**Output:**
-
-```
-50 -10
-```
-
-**5.**
-**Input:**
-
-```
-1 2
-```
-
-**Output:**
-
-```
-2 1
-```
-
-**6.**
-**Input:**
-
-```
-999 -999
-```
-
-**Output:**
-
-```
--999 999
-```
-
-**7.**
-**Input:**
-
-```
-42 0
-```
-
-**Output:**
-
-```
-0 42
-```
-
-**Solution (C):**
-
-```c
-#include <stdio.h>
-
-void swap_int(int *a, int *b) { int t = *a; *a = *b; *b = t; }
-
-int main(void) {
-    int a, b; if (scanf("%d %d", &a, &b) != 2) return 0;
-    swap_int(&a, &b);
-    printf("%d %d", a, b);
-    return 0;
-}
-```
-
----
-
-### 3) Apply Service Charge (Restaurant Bills) — **Easy**
-
-**Problem:**
-A restaurant system applies a uniform service charge percentage to every bill in a day. Define a function that takes an array of bill totals and updates each value **in place** using pointers (no recursion). Print the updated totals rounded to two decimals on one line separated by spaces.
-
-**Input Format:**
-`n`
-`n` bill amounts (floats)
-`charge_percent`
-
-**Output Format:**
-`n` updated amounts to two decimals (space-separated)
-
-**Test Cases:**
-
-**1.**
-**Input:**
-
-```
-3
-100 200 300
-10
-```
-
-**Output:**
-
-```
-110.00 220.00 330.00
-```
-
-**Explanation:** +10% to each bill.
-
-**2.**
-**Input:**
-
-```
-4
-50 75 25 100
-0
-```
-
-**Output:**
-
-```
-50.00 75.00 25.00 100.00
-```
-
-**Explanation:** 0% keeps values same.
-
-**3.**
-**Input:**
-
-```
-1
-99.99
-5
-```
-
-**Output:**
-
-```
-104.99
-```
-
-**4.**
-**Input:**
-
-```
-2
-0 0
-12
-```
-
-**Output:**
-
-```
-0.00 0.00
-```
-
-**5.**
-**Input:**
-
-```
-5
-10 20 30 40 50
--10
-```
-
-**Output:**
-
-```
-9.00 18.00 27.00 36.00 45.00
-```
-
-**6.**
-**Input:**
-
-```
-3
-1.11 2.22 3.33
-50
-```
-
-**Output:**
-
-```
-1.67 3.33 5.00
-```
-
-**7.**
-**Input:**
-
-```
-2
-1000 0.01
-1
-```
-
-**Output:**
-
-```
-1010.00 0.01
-```
-
-**Solution (C):**
-
-```c
-#include <stdio.h>
-
-void apply_charge(double *arr, int n, double pct) {
-    for (int i = 0; i < n; ++i) arr[i] += arr[i] * pct / 100.0;
-}
-
-int main(void) {
+int main(void){
     int n; if (scanf("%d", &n) != 1) return 0;
-    double a[200005];
-    for (int i = 0; i < n; ++i) scanf("%lf", &a[i]);
-    double p; scanf("%lf", &p);
-    apply_charge(a, n, p);
-    for (int i = 0; i < n; ++i) { if (i) printf(" "); printf("%.2f", a[i]); }
+    printbin(n);
     return 0;
 }
-```
+````
 
 ---
 
-### 4) Safe Divide Orders (Warehouse Binning) — **Easy**
+### 10) Merge Sorted Logs (Recursive Merge) — **Hard**
 
 **Problem:**
-A warehouse splits `total_items` evenly into boxes; any leftover is kept aside. Define a function that performs integer division safely without recursion: it should write the quotient and remainder to **output parameters** (pointers). Print `quotient remainder`.
+Two sorted event streams (ASC) must be merged into one sorted stream. Use **recursion** to merge arrays `A` and `B` into an output buffer `C` (no loops for the merge logic). Print the merged sequence.
 
 **Input Format:**
-`total_items boxes`
+`n m`
+`n` integers (sorted)
+`m` integers (sorted)
 
 **Output Format:**
-`quotient remainder`
+`n+m` integers (space-separated)
 
 **Test Cases:**
 
@@ -1748,166 +1189,43 @@ A warehouse splits `total_items` evenly into boxes; any leftover is kept aside. 
 **Input:**
 
 ```
-100 6
+3 4
+5 10 15
+2 3 16 20
 ```
 
 **Output:**
 
 ```
-16 4
+2 3 5 10 15 16 20
 ```
 
-**Explanation:** 100/6 = 16 remainder 4.
+**Explanation:** Standard merge via recursion.
 
 **2.**
 **Input:**
 
 ```
-9 3
+0 3
+
+1 2 3
 ```
 
 **Output:**
+
+```
+1 2 3
+```
+
+**Explanation:** Only second stream.
+
+**3.**
+**Input:**
 
 ```
 3 0
-```
+1 2 3
 
-**Explanation:** Exactly divisible.
-
-**3.**
-**Input:**
-
-```
-7 10
-```
-
-**Output:**
-
-```
-0 7
-```
-
-**4.**
-**Input:**
-
-```
-0 5
-```
-
-**Output:**
-
-```
-0 0
-```
-
-**5.**
-**Input:**
-
-```
-25 4
-```
-
-**Output:**
-
-```
-6 1
-```
-
-**6.**
-**Input:**
-
-```
--7 3
-```
-
-**Output:**
-
-```
--2 -1
-```
-
-**7.**
-**Input:**
-
-```
-7 -3
-```
-
-**Output:**
-
-```
--2 1
-```
-
-**Solution (C):**
-
-```c
-#include <stdio.h>
-
-void safe_divide(int a, int b, int *q, int *r) {
-    if (b == 0) { *q = 0; *r = 0; return; }
-    *q = a / b;
-    *r = a % b; // C remainder keeps sign of dividend
-}
-
-int main(void) {
-    int total, boxes; if (scanf("%d %d", &total, &boxes) != 2) return 0;
-    int q, r; safe_divide(total, boxes, &q, &r);
-    printf("%d %d", q, r);
-    return 0;
-}
-```
-
----
-
-### 5) Running Ticket IDs (Support Desk) — **Medium**
-
-**Problem:**
-A helpdesk assigns a new ticket ID each time a request is processed during the program run. Define a function `next_id()` with a **static local variable** that increases on every call, starting at 1. Given `n`, print the sequence of `n` ticket IDs separated by spaces.
-
-**Input Format:**
-`n`
-
-**Output Format:**
-`n` IDs (1-based, space-separated)
-
-**Test Cases:**
-
-**1.**
-**Input:**
-
-```
-5
-```
-
-**Output:**
-
-```
-1 2 3 4 5
-```
-
-**Explanation:** Static variable persists across calls.
-
-**2.**
-**Input:**
-
-```
-1
-```
-
-**Output:**
-
-```
-1
-```
-
-**Explanation:** Only one ID requested.
-
-**3.**
-**Input:**
-
-```
-3
 ```
 
 **Output:**
@@ -1920,51 +1238,60 @@ A helpdesk assigns a new ticket ID each time a request is processed during the p
 **Input:**
 
 ```
-0
+4 4
+1 1 1 1
+1 1 1 1
 ```
 
 **Output:**
 
 ```
+1 1 1 1 1 1 1 1
 ```
 
 **5.**
 **Input:**
 
 ```
-2
+5 3
+2 4 6 8 10
+1 3 5
 ```
 
 **Output:**
 
 ```
-1 2
+1 2 3 4 5 6 8 10
 ```
 
 **6.**
 **Input:**
 
 ```
-7
+3 3
+-5 0 7
+-6 -1 10
 ```
 
 **Output:**
 
 ```
-1 2 3 4 5 6 7
+-6 -5 -1 0 7 10
 ```
 
 **7.**
 **Input:**
 
 ```
-10
+1 1
+100
+100
 ```
 
 **Output:**
 
 ```
-1 2 3 4 5 6 7 8 9 10
+100 100
 ```
 
 **Solution (C):**
@@ -1972,688 +1299,21 @@ A helpdesk assigns a new ticket ID each time a request is processed during the p
 ```c
 #include <stdio.h>
 
-int next_id(void) { static int id = 0; id += 1; return id; } // scope demo
-
-int main(void) {
-    int n; if (scanf("%d", &n) != 1) return 0;
-    for (int i = 0; i < n; ++i) { if (i) printf(" "); printf("%d", next_id()); }
-    return 0;
+void merge_rec(int *A, int n, int *B, int m, int *C, int i, int j, int k){
+    if (i == n && j == m) return;
+    if (i == n){ C[k] = B[j]; merge_rec(A, n, B, m, C, i, j + 1, k + 1); return; }
+    if (j == m){ C[k] = A[i]; merge_rec(A, n, B, m, C, i + 1, j, k + 1); return; }
+    if (A[i] <= B[j]){ C[k] = A[i]; merge_rec(A, n, B, m, C, i + 1, j,     k + 1); }
+    else             { C[k] = B[j]; merge_rec(A, n, B, m, C, i,     j + 1, k + 1); }
 }
-```
-
----
-
-### 6) Mask Email Username (Privacy Tool) — **Medium**
-
-**Problem:**
-For privacy display, show an email by keeping its first and last username characters and replacing the middle of the username (before `@`) with asterisks. Define a function that **modifies the string in place** using pointers and **library `<ctype.h>`** to normalize to lowercase for the username only. Print the masked email (domain unchanged).
-
-**Input Format:**
-One email string (no spaces)
-
-**Output Format:**
-Masked email
-
-**Test Cases:**
-
-**1.**
-**Input:**
-
-```
-Alice.Wonder@Example.com
-```
-
-**Output:**
-
-```
-a**********r@Example.com
-```
-
-**Explanation:** Username `Alice.Wonder` → lowercased; keep first `a` and last `r`, mask middle.
-
-**2.**
-**Input:**
-
-```
-X@site.io
-```
-
-**Output:**
-
-```
-x@site.io
-```
-
-**Explanation:** Single-char username stays as is (no middle to mask).
-
-**3.**
-**Input:**
-
-```
-ab@d.com
-```
-
-**Output:**
-
-```
-ab@d.com
-```
-
-**4.**
-**Input:**
-
-```
-abc@d.com
-```
-
-**Output:**
-
-```
-a*c@d.com
-```
-
-**5.**
-**Input:**
-
-```
-john_doe@company.org
-```
-
-**Output:**
-
-```
-j*******e@company.org
-```
-
-**6.**
-**Input:**
-
-```
-USER@DOMAIN.COM
-```
-
-**Output:**
-
-```
-u**r@DOMAIN.COM
-```
-
-**7.**
-**Input:**
-
-```
-manydots...here@host.net
-```
-
-**Output:**
-
-```
-m**************e@host.net
-```
-
-**Solution (C):**
-
-```c
-#include <stdio.h>
-#include <string.h>
-#include <ctype.h>
-
-void mask(char *s) {
-    char *at = strchr(s, '@');
-    if (!at) return;
-    // lowercase username
-    for (char *p = s; p < at; ++p) *p = (char)tolower((unsigned char)*p);
-    int len = (int)(at - s);
-    if (len <= 1) return;              // nothing to mask
-    if (len == 2) return;              // keep both
-    // mask middle
-    for (int i = 1; i < len - 1; ++i) s[i] = '*';
-}
-
-int main(void) {
-    char email[200005];
-    if (scanf("%200000s", email) != 1) return 0;
-    mask(email);
-    printf("%s", email);
-    return 0;
-}
-```
-
----
-
-### 7) Product Key Validator (Manufacturing) — **Medium**
-
-**Problem:**
-A production line prints product keys like `AB12-CD34`. Define a function that checks if a key is valid: exactly 9 chars with a hyphen at position 5, all others alphanumeric (use **library `<ctype.h>`**). Print `Valid` or `Invalid`.
-
-**Input Format:**
-One product key (no spaces)
-
-**Output Format:**
-`Valid` or `Invalid`
-
-**Test Cases:**
-
-**1.**
-**Input:**
-
-```
-AB12-CD34
-```
-
-**Output:**
-
-```
-Valid
-```
-
-**Explanation:** Matches pattern.
-
-**2.**
-**Input:**
-
-```
-a1b2c-d3e4
-```
-
-**Output:**
-
-```
-Valid
-```
-
-**Explanation:** Case and digits allowed; hyphen at position 5.
-
-**3.**
-**Input:**
-
-```
-AB12CD34
-```
-
-**Output:**
-
-```
-Invalid
-```
-
-**4.**
-**Input:**
-
-```
-AB12-CD3@
-```
-
-**Output:**
-
-```
-Invalid
-```
-
-**5.**
-**Input:**
-
-```
-----CD34
-```
-
-**Output:**
-
-```
-Invalid
-```
-
-**6.**
-**Input:**
-
-```
-1234-5678
-```
-
-**Output:**
-
-```
-Valid
-```
-
-**7.**
-**Input:**
-
-```
-A23--567
-```
-
-**Output:**
-
-```
-Invalid
-```
-
-**Solution (C):**
-
-```c
-#include <stdio.h>
-#include <string.h>
-#include <ctype.h>
-
-int valid_key(const char *s) {
-    if ((int)strlen(s) != 9) return 0;
-    for (int i = 0; i < 9; ++i) {
-        if (i == 4) { if (s[i] != '-') return 0; }
-        else if (!isalnum((unsigned char)s[i])) return 0;
-    }
-    return 1;
-}
-
-int main(void) {
-    char key[64];
-    if (scanf("%63s", key) != 1) return 0;
-    printf("%s", valid_key(key) ? "Valid" : "Invalid");
-    return 0;
-}
-```
-
----
-
-### 8) KPI Summary (Min/Max/Average) — **Hard**
-
-**Problem:**
-An operations dashboard needs a quick KPI summary from `n` daily metrics. Define **three user-defined functions**: `min_val`, `max_val`, and `avg_val` (all non-recursive). Read `n` integers, then print `min max avg` where avg is to two decimals.
-
-**Input Format:**
-`n`
-`n` space-separated integers
-
-**Output Format:**
-`min max avg` (avg to two decimals)
-
-**Test Cases:**
-
-**1.**
-**Input:**
-
-```
-5
-10 20 30 40 50
-```
-
-**Output:**
-
-```
-10 50 30.00
-```
-
-**Explanation:** Min=10, Max=50, Avg=30.00.
-
-**2.**
-**Input:**
-
-```
-4
--1 -1 -1 -1
-```
-
-**Output:**
-
-```
--1 -1 -1.00
-```
-
-**Explanation:** All equal negatives.
-
-**3.**
-**Input:**
-
-```
-1
-7
-```
-
-**Output:**
-
-```
-7 7 7.00
-```
-
-**4.**
-**Input:**
-
-```
-3
-0 0 1
-```
-
-**Output:**
-
-```
-0 1 0.33
-```
-
-**5.**
-**Input:**
-
-```
-6
-5 4 3 2 1 0
-```
-
-**Output:**
-
-```
-0 5 2.50
-```
-
-**6.**
-**Input:**
-
-```
-3
-100 100 101
-```
-
-**Output:**
-
-```
-100 101 100.33
-```
-
-**7.**
-**Input:**
-
-```
-5
--5 0 5 -10 10
-```
-
-**Output:**
-
-```
--10 10 0.00
-```
-
-**Solution (C):**
-
-```c
-#include <stdio.h>
-
-int min_val(const int *a, int n) { int m = a[0]; for (int i=1;i<n;++i) if (a[i]<m) m=a[i]; return m; }
-int max_val(const int *a, int n) { int m = a[0]; for (int i=1;i<n;++i) if (a[i]>m) m=a[i]; return m; }
-double avg_val(const int *a, int n){ long long s=0; for(int i=0;i<n;++i) s+=a[i]; return (double)s/n; }
 
 int main(void){
-    int n; if (scanf("%d",&n)!=1) return 0;
-    int a[200005]; for (int i=0;i<n;++i) scanf("%d",&a[i]);
-    printf("%d %d %.2f", min_val(a,n), max_val(a,n), avg_val(a,n));
-    return 0;
-}
-```
-
----
-
-### 9) Case-Insensitive Compare (Usernames) — **Hard**
-
-**Problem:**
-During login, two usernames should be considered equal ignoring letter case. Write a **user-defined function** that compares two strings case-insensitively using `<ctype.h>` (convert both to lower or upper while comparing) and returns -1, 0, or 1. Print the result.
-
-**Input Format:**
-Two strings `u v` (no spaces)
-
-**Output Format:**
-`-1` if `u < v`, `0` if equal, `1` if `u > v` (case-insensitive)
-
-**Test Cases:**
-
-**1.**
-**Input:**
-
-```
-Alice alice
-```
-
-**Output:**
-
-```
-0
-```
-
-**Explanation:** Same ignoring case.
-
-**2.**
-**Input:**
-
-```
-beta Alpha
-```
-
-**Output:**
-
-```
-1
-```
-
-**Explanation:** `"beta"` > `"alpha"` lexicographically ignoring case.
-
-**3.**
-**Input:**
-
-```
-aa aB
-```
-
-**Output:**
-
-```
--1
-```
-
-**4.**
-**Input:**
-
-```
-Z zzz
-```
-
-**Output:**
-
-```
--1
-```
-
-**5.**
-**Input:**
-
-```
-dev DEV
-```
-
-**Output:**
-
-```
-0
-```
-
-**6.**
-**Input:**
-
-```
-longName short
-```
-
-**Output:**
-
-```
-1
-```
-
-**7.**
-**Input:**
-
-```
-abc abd
-```
-
-**Output:**
-
-```
--1
-```
-
-**Solution (C):**
-
-```c
-#include <stdio.h>
-#include <ctype.h>
-
-int ci_cmp(const char *a, const char *b) {
-    while (*a && *b) {
-        int ca = tolower((unsigned char)*a);
-        int cb = tolower((unsigned char)*b);
-        if (ca < cb) return -1;
-        if (ca > cb) return 1;
-        ++a; ++b;
-        }
-    if (*a) return 1;
-    if (*b) return -1;
-    return 0;
-}
-
-int main(void) {
-    char u[200005], v[200005];
-    if (scanf("%200000s %200000s", u, v) != 2) return 0;
-    printf("%d", ci_cmp(u, v));
-    return 0;
-}
-```
-
----
-
-### 10) Temperature Conversion Menu (IoT Gateway) — **Hard**
-
-**Problem:**
-An IoT gateway receives a reading and a unit code. Create two **user-defined functions**: `c_to_f` and `f_to_c`. If unit is `C`, convert Celsius to Fahrenheit; if `F`, convert Fahrenheit to Celsius. Show **function declaration, definition, and invocation** clearly, and print the converted value to two decimals.
-
-**Input Format:**
-`value unit` (unit is `C` or `F`)
-
-**Output Format:**
-Converted value to two decimals
-
-**Test Cases:**
-
-**1.**
-**Input:**
-
-```
-0 C
-```
-
-**Output:**
-
-```
-32.00
-```
-
-**Explanation:** 0°C → 32°F.
-
-**2.**
-**Input:**
-
-```
-212 F
-```
-
-**Output:**
-
-```
-100.00
-```
-
-**Explanation:** 212°F → 100°C.
-
-**3.**
-**Input:**
-
-```
-25 C
-```
-
-**Output:**
-
-```
-77.00
-```
-
-**4.**
-**Input:**
-
-```
-98.6 F
-```
-
-**Output:**
-
-```
-37.00
-```
-
-**5.**
-**Input:**
-
-```
--40 C
-```
-
-**Output:**
-
-```
--40.00
-```
-
-**6.**
-**Input:**
-
-```
-451 F
-```
-
-**Output:**
-
-```
-232.78
-```
-
-**7.**
-**Input:**
-
-```
-15 C
-```
-
-**Output:**
-
-```
-59.00
-```
-
-**Solution (C):**
-
-```c
-#include <stdio.h>
-
-// declarations
-double c_to_f(double c);
-double f_to_c(double f);
-
-// definitions
-double c_to_f(double c) { return (c * 9.0/5.0) + 32.0; }  // call-by-value
-double f_to_c(double f) { return (f - 32.0) * 5.0/9.0; }  // call-by-value
-
-int main(void) {
-    double v; char unit;
-    if (scanf("%lf %c", &v, &unit) != 2) return 0;
-    if (unit == 'C' || unit == 'c') printf("%.2f", c_to_f(v)); else
-    if (unit == 'F' || unit == 'f') printf("%.2f", f_to_c(v)); else
-        printf("0.00"); // fallback for unexpected unit
+    int n, m; if (scanf("%d %d", &n, &m) != 2) return 0;
+    static int A[200005], B[200005], C[400010];
+    for (int i = 0; i < n; ++i) scanf("%d", &A[i]);
+    for (int j = 0; j < m; ++j) scanf("%d", &B[j]);
+    merge_rec(A, n, B, m, C, 0, 0, 0);
+    for (int t = 0; t < n + m; ++t){ if (t) printf(" "); printf("%d", C[t]); }
     return 0;
 }
 ```
