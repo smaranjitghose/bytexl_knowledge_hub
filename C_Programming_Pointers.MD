@@ -1364,6 +1364,4 @@ int main() {
 ```
 
 
----
 
-All solutions use only `int`, `float`, `char`, arrays, and pointers as requested. Each includes exactly 7 test cases covering edge cases like empty input, negatives, duplicates, and single elements.
