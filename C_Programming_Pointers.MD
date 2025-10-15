@@ -1,1270 +1,266 @@
-## 1) The Memory Inspector
+### **1. Medical Record Swapper**  
+**Max Score:** 5 | **Difficulty:** Easy  
 
-A debugging tool needs to show the address of a variable to help you verify memory layout. Given an integer, display its **value** and the **memory address** where it’s stored, using a pointer.
+In a busy hospital triage system, two patient IDs were accidentally logged in reverse order due to a keyboard misinput; to correct this without extra memory, you must write a C program that reads two patient IDs and swaps their values directly in memory using pointers.
 
-**Input Format**
+**Input Format:**  
+- One line with two space-separated integers: `id1 id2`  
 
-* One integer `x`.
-
-**Output Format**
-
-* Line 1: `Value: X`
-* Line 2: `Address: Y` (print with `%p`)
-
-**Test Cases**
-1.
-**Input:**
-
+**Output Format:**  
 ```
-0
+Before correction: Patient A = X, Patient B = Y  
+After correction: Patient A = Y, Patient B = X
 ```
 
-**Output:**
-
+**Sample Input:**  
 ```
-Value: 0
-Address: 0x...
+1045 2089
 ```
 
-2.
-
-**Input:**
-
+**Sample Output:**  
 ```
-5
-```
-
-**Output:**
-
-```
-Value: 5
-Address: 0x...
-```
-
-3.
-
-**Input:**
-
-```
--10
-```
-
-**Output:**
-
-```
-Value: -10
-Address: 0x...
-```
-
-4.
-
-**Input:**
-
-```
-12345
-```
-
-**Output:**
-
-```
-Value: 12345
-Address: 0x...
-```
-
-5.
-
-**Input:**
-
-```
-999999
-```
-
-**Output:**
-
-```
-Value: 999999
-Address: 0x...
-```
-
-6.
-
-**Input:**
-
-```
-1
-```
-
-**Output:**
-
-```
-Value: 1
-Address: 0x...
-```
-
-7.
-
-**Input:**
-
-```
--1
-```
-
-**Output:**
-
-```
-Value: -1
-Address: 0x...
-```
-
-> Note: The exact pointer value differs per run/environment.
-
-### C Solution
-
-```c
-#include <stdio.h>
-
-int main(void) {
-    int x;
-    if (scanf("%d", &x) != 1) return 0;
-    int *p = &x;
-    printf("Value: %d\n", *p);
-    printf("Address: %p", (void*)p);
-    return 0;
-}
+Before correction: Patient A = 1045, Patient B = 2089  
+After correction: Patient A = 2089, Patient B = 1045
 ```
 
 ---
 
-## 2) The Memory Swapper
+### **2. Voice Assistant Vowel Analyzer**  
+**Max Score:** 5 | **Difficulty:** Easy  
 
-You’re simulating a register swap. Two integers are provided; swap their values **using pointers only**.
+To improve speech recognition accuracy in a smart home voice assistant, you need to analyze user commands by counting vowels (a, e, i, o, u—case-insensitive) using efficient pointer-based string traversal instead of library functions.
 
-**Input Format**
+**Input Format:**  
+- One line: a single spoken word (no spaces)  
 
-* Two integers `a b`.
-
-**Output Format**
-
-* Two integers after swap: `a b`.
-
-**Test Cases**
-1.
-**Input:**
-
+**Output Format:**  
 ```
-1 2
+Vowel count in command: X
 ```
 
-**Output:**
-
+**Sample Input:**  
 ```
-2 1
-```
-
-2.
-
-**Input:**
-
-```
-0 0
+Activate
 ```
 
-**Output:**
-
+**Sample Output:**  
 ```
-0 0
-```
-
-3.
-
-**Input:**
-
-```
--5 10
-```
-
-**Output:**
-
-```
-10 -5
-```
-
-4.
-
-**Input:**
-
-```
-7 -7
-```
-
-**Output:**
-
-```
--7 7
-```
-
-5.
-
-**Input:**
-
-```
-100 200
-```
-
-**Output:**
-
-```
-200 100
-```
-
-6.
-
-**Input:**
-
-```
-42 42
-```
-
-**Output:**
-
-```
-42 42
-```
-
-7.
-
-**Input:**
-
-```
--1 -2
-```
-
-**Output:**
-
-```
--2 -1
-```
-
-### C Solution
-
-```c
-#include <stdio.h>
-int main(void){
-    int a,b; if (scanf("%d %d",&a,&b)!=2) return 0;
-    int *p=&a,*q=&b, t=*p; *p=*q; *q=t;
-    printf("%d %d", a, b);
-    return 0;
-}
+Vowel count in command: 4
 ```
 
 ---
 
-## 3) The Number Mover
+### **3. Warehouse Inventory Sorter**  
+**Max Score:** 5 | **Difficulty:** Easy  
 
-Given `n` and an array, print all elements **using pointer arithmetic** (no `a[i]`).
+A logistics robot in a smart warehouse must sort incoming product IDs in ascending order for shelf placement, and to conserve memory on its embedded controller, you’ll implement an in-place sorting algorithm using only pointer arithmetic.
 
-**Input Format**
+**Input Format:**  
+- First line: `n` (number of products)  
+- Second line: `n` space-separated integers (product IDs)  
 
-* `n`
-* `n` integers
+**Output Format:**  
+```
+Sorted inventory: X1 X2 ... Xn
+```
 
-**Output Format**
-
-* All `n` integers, space-separated.
-
-**Test Cases**
-1.
-**Input:**
-
+**Sample Input:**  
 ```
 5
-1 2 3 4 5
+304 102 506 203 405
 ```
 
-**Output:**
-
+**Sample Output:**  
 ```
-1 2 3 4 5
-```
-
-2.
-
-**Input:**
-
-```
-1
-9
+Sorted inventory: 102 203 304 405 506
 ```
 
-**Output:**
+---
 
+### **4. Flight Data Reverser**  
+**Max Score:** 5 | **Difficulty:** Easy  
+
+An aviation diagnostics tool needs to simulate ascent profiles by reversing a sequence of recorded descent altitudes; to do this efficiently on an aircraft’s onboard computer, you’ll reverse the altitude array using pointer-based swapping from both ends.
+
+**Input Format:**  
+- First line: `n` (number of altitude readings)  
+- Next `n` lines: one integer per line (altitude in feet)  
+
+**Output Format:**  
 ```
-9
+Original descent log: A1 A2 ... An  
+Reversed (ascent simulation): An ... A2 A1
 ```
 
-3.
-
-**Input:**
-
+**Sample Input:**  
 ```
 3
--1 0 1
+10000
+5000
+1000
 ```
 
-**Output:**
-
+**Sample Output:**  
 ```
--1 0 1
+Original descent log: 10000 5000 1000  
+Reversed (ascent simulation): 1000 5000 10000
 ```
 
-4.
+---
 
-**Input:**
+### **5. Sensor Data Comparator**  
+**Max Score:** 5 | **Difficulty:** Easy  
 
+In a climate-controlled laboratory, two temperature sensors report real-time readings, and a safety module must instantly identify the higher value using pointer dereferencing to decide whether to activate the emergency cooling system.
+
+**Input Format:**  
+- One line: two space-separated floats `temp1 temp2`  
+
+**Output Format:**  
+```
+Critical temperature detected: X.XX°C
+```
+
+**Sample Input:**  
+```
+23.5 27.8
+```
+
+**Sample Output:**  
+```
+Critical temperature detected: 27.80°C
+```
+
+---
+
+### **6. Password Length Validator**  
+**Max Score:** 5 | **Difficulty:** Easy  
+
+On a legacy security terminal with no standard string libraries, you must validate user password length during registration by manually traversing the input string with pointers to count characters for policy compliance.
+
+**Input Format:**  
+- One line: password string (no spaces)  
+
+**Output Format:**  
+```
+Password length: X characters
+```
+
+**Sample Input:**  
+```
+SecurePass2024
+```
+
+**Sample Output:**  
+```
+Password length: 14 characters
+```
+
+---
+
+### **7. Smart Home Energy Aggregator**  
+**Max Score:** 5 | **Difficulty:** Easy  
+
+A microcontroller in a smart home system collects hourly energy usage (in kWh) from sensors and must compute the total daily consumption using pointer arithmetic to minimize CPU cycles and extend battery life.
+
+**Input Format:**  
+- First line: `n` (number of hours)  
+- Second line: `n` space-separated floats  
+
+**Output Format:**  
+```
+Total energy consumed: X.XX kWh
+```
+
+**Sample Input:**  
 ```
 4
-10 10 10 10
+1.2 0.8 1.5 0.9
 ```
 
-**Output:**
-
+**Sample Output:**  
 ```
-10 10 10 10
-```
-
-5.
-
-**Input:**
-
-```
-6
-3 2 1 6 5 4
-```
-
-**Output:**
-
-```
-3 2 1 6 5 4
-```
-
-6.
-
-**Input:**
-
-```
-2
--5 -6
-```
-
-**Output:**
-
-```
--5 -6
-```
-
-7.
-
-**Input:**
-
-```
-7
-0 1 0 1 0 1 0
-```
-
-**Output:**
-
-```
-0 1 0 1 0 1 0
-```
-
-### C Solution
-
-```c
-#include <stdio.h>
-int main(void){
-    int n; if (scanf("%d",&n)!=1) return 0;
-    int a[100000];
-    for(int i=0;i<n;i++) scanf("%d",&a[i]);
-    int *p=a;
-    for(int i=0;i<n;i++,p++){
-        if(i) printf(" ");
-        printf("%d", *p);
-    }
-    return 0;
-}
+Total energy consumed: 4.40 kWh
 ```
 
 ---
 
-## 4) The Running Total (Pointer Traversal)
+### **8. Customer Feedback Emphasis Detector**  
+**Max Score:** 5 | **Difficulty:** Easy  
 
-A performance monitor stores readings in an array. Traverse via a pointer and compute the **sum** (no indexing).
+A restaurant’s automated feedback analyzer scans online reviews for emotional emphasis by counting occurrences of a specific character (like '!') using pointer-based string scanning to gauge customer excitement without regex or libraries.
 
-**Input Format**
+**Input Format:**  
+- First line: review string (no spaces)  
+- Second line: character to count  
 
-* `n`
-* `n` integers
+**Output Format:**  
+```
+Emphasis markers ('X'): Y
+```
 
-**Output Format**
+**Sample Input:**  
+```
+GreatFood!!!
+!
+```
 
-* Single integer: sum.
+**Sample Output:**  
+```
+Emphasis markers ('!'): 3
+```
 
-**Test Cases**
-1.
-**Input:**
+---
 
+### **9. Agricultural Yield Monitor**  
+**Max Score:** 5 | **Difficulty:** Easy  
+
+A drone monitoring crop health across multiple fields records yield estimates per plot, and to quickly flag underperforming zones on its resource-limited processor, it must find the minimum yield using pointer traversal through the data array.
+
+**Input Format:**  
+- First line: `n` (number of plots)  
+- Second line: `n` space-separated floats (yield in kg)  
+
+**Output Format:**  
+```
+Lowest yield detected: X.XX kg
+```
+
+**Sample Input:**  
 ```
 5
-1 2 3 4 5
+120.5 98.2 105.0 87.3 110.8
 ```
 
-**Output:**
-
+**Sample Output:**  
 ```
-15
-```
-
-2.
-
-**Input:**
-
-```
-3
--1 -2 -3
-```
-
-**Output:**
-
-```
--6
-```
-
-3.
-
-**Input:**
-
-```
-4
-0 0 0 0
-```
-
-**Output:**
-
-```
-0
-```
-
-4.
-
-**Input:**
-
-```
-1
-999
-```
-
-**Output:**
-
-```
-999
-```
-
-5.
-
-**Input:**
-
-```
-6
-5 10 15 20 25 30
-```
-
-**Output:**
-
-```
-105
-```
-
-6.
-
-**Input:**
-
-```
-2
--5 5
-```
-
-**Output:**
-
-```
-0
-```
-
-7.
-
-**Input:**
-
-```
-7
-1 1 1 1 1 1 1
-```
-
-**Output:**
-
-```
-7
-```
-
-### C Solution
-
-```c
-#include <stdio.h>
-int main(void){
-    int n; if (scanf("%d",&n)!=1) return 0;
-    int a[100000];
-    for(int i=0;i<n;i++) scanf("%d",&a[i]);
-    long long sum=0;
-    int *p=a, *end=a+n;
-    while(p<end){ sum += *p; p++; }
-    printf("%lld", sum);
-    return 0;
-}
+Lowest yield detected: 87.30 kg
 ```
 
 ---
 
-## 5) Pointer vs Array Demonstrator
+### **10. IoT Firmware Command Duplicator**  
+**Max Score:** 5 | **Difficulty:** Easy  
 
-Show that an array name behaves like a pointer to its first element: print **first** and **last** element using pointer dereference and arithmetic (no indexing).
+An IoT device with strict firmware size limits receives a configuration command and must create a backup copy in a separate memory buffer using raw pointer operations—without any standard string functions—to ensure safe recovery after reboots.
 
-**Input Format**
+**Input Format:**  
+- One line: command string (no spaces)  
 
-* `n`
-* `n` integers
-
-**Output Format**
-
-* Two integers: `first last`.
-
-**Test Cases**
-1.
-**Input:**
-
-```
-5
-10 20 30 40 50
-```
-
-**Output:**
-
-```
-10 50
-```
-
-2.
-
-**Input:**
-
-```
-1
-7
-```
-
-**Output:**
-
-```
-7 7
-```
-
-3.
-
-**Input:**
-
-```
-3
--1 0 1
-```
-
-**Output:**
-
-```
--1 1
-```
-
-4.
-
-**Input:**
-
-```
-4
-5 5 5 5
-```
-
-**Output:**
-
-```
-5 5
-```
-
-5.
-
-**Input:**
-
-```
-6
-2 4 6 8 10 12
-```
-
-**Output:**
-
-```
-2 12
-```
-
-6.
-
-**Input:**
-
-```
-2
--9 9
-```
-
-**Output:**
-
-```
--9 9
-```
-
-7.
-
-**Input:**
-
-```
-7
-3 2 1 0 1 2 3
-```
-
-**Output:**
-
-```
-3 3
-```
-
-### C Solution
-
-```c
-#include <stdio.h>
-int main(void){
-    int n; if (scanf("%d",&n)!=1) return 0;
-    int a[100000];
-    for(int i=0;i<n;i++) scanf("%d",&a[i]);
-    int *p = a;
-    int *q = a + (n - 1);
-    printf("%d %d", *p, *q);
-    return 0;
-}
-```
-
----
-
-## 6) Null Pointer Guard
-
-Read a `flag`. If `0`, set pointer to `NULL` and print `Invalid access`. If `1`, point to a valid variable and print it.
-
-**Input Format**
-
-* One integer `flag` (0 or 1).
-* If `flag=1`, the next line has an integer `x` to store and print.
-
-**Output Format**
-
-* If `flag=0`: `Invalid access`
-* If `flag=1`: `Pointer is valid: X`
-
-**Test Cases**
-1.
-**Input:**
-
-```
-0
-```
-
-**Output:**
-
-```
-Invalid access
-```
-
-2.
-
-**Input:**
-
-```
-1
-5
-```
-
-**Output:**
-
-```
-Pointer is valid: 5
-```
-
-3.
-
-**Input:**
-
-```
-1
--10
-```
-
-**Output:**
-
-```
-Pointer is valid: -10
-```
-
-4.
-
-**Input:**
-
-```
-0
-```
-
-**Output:**
-
-```
-Invalid access
-```
-
-5.
-
-**Input:**
-
-```
-1
-0
-```
-
-**Output:**
-
-```
-Pointer is valid: 0
-```
-
-6.
-
-**Input:**
-
-```
-1
-12345
-```
-
-**Output:**
-
-```
-Pointer is valid: 12345
-```
-
-7.
-
-**Input:**
-
-```
-1
--1
-```
-
-**Output:**
-
-```
-Pointer is valid: -1
-```
-
-### C Solution
-
-```c
-#include <stdio.h>
-int main(void){
-    int flag; if (scanf("%d",&flag)!=1) return 0;
-    int *p = NULL;
-    int x;
-    if (flag==0){
-        printf("Invalid access");
-    } else {
-        if (scanf("%d",&x)!=1) return 0;
-        p = &x;
-        printf("Pointer is valid: %d", *p);
-    }
-    return 0;
-}
-```
-
----
-
-## 7) Dynamic Sensor Reader (Simulated)
-
-Given `n` readings, print only the **first `k`** using pointer increments to simulate moving through allocated memory.
-
-**Input Format**
-
-* `n k`
-* `n` integers
-
-**Output Format**
-
-* First `k` integers, space-separated.
-* If `k=0`, print nothing (empty output).
-
-**Test Cases**
-1.
-**Input:**
-
-```
-5 3
-10 20 30 40 50
-```
-
-**Output:**
-
-```
-10 20 30
-```
-
-2.
-
-**Input:**
-
-```
-5 5
-1 2 3 4 5
-```
-
-**Output:**
-
-```
-1 2 3 4 5
-```
-
-3.
-
-**Input:**
-
-```
-5 0
-9 8 7 6 5
-```
-
-**Output:**
-
-```
-```
-
-4.
-
-**Input:**
-
-```
-3 2
--1 -2 -3
-```
-
-**Output:**
-
-```
--1 -2
-```
-
-5.
-
-**Input:**
-
-```
-6 4
-0 1 0 1 0 1
-```
-
-**Output:**
-
-```
-0 1 0 1
-```
-
-6.
-
-**Input:**
-
-```
-1 1
-42
-```
-
-**Output:**
-
-```
-42
-```
-
-7.
-
-**Input:**
-
-```
-7 6
-2 4 6 8 10 12 14
-```
-
-**Output:**
-
-```
-2 4 6 8 10 12
-```
-
-### C Solution
-
-```c
-#include <stdio.h>
-int main(void){
-    int n,k; if (scanf("%d %d",&n,&k)!=2) return 0;
-    int a[100000];
-    for(int i=0;i<n;i++) scanf("%d",&a[i]);
-    if (k<0) k=0; if (k>n) k=n;
-    int *p=a;
-    for(int i=0;i<k;i++,p++){
-        if(i) printf(" ");
-        printf("%d", *p);
-    }
-    return 0;
-}
-```
-
----
-
-## 8) The Memory Leak Demonstrator (Dangling Pointer)
-
-Illustrate a **dangling pointer**: take the address of a variable inside a block and show that using that pointer after the block ends is unsafe. Do **not** dereference after scope; just print the pointer value and a warning.
-
-**Input Format**
-
-* No input.
-
-**Output Format**
-
-* Two lines:
-
-  * Inside block: `Inside: value=V, addr=%p`
-  * Outside block: `Outside: dangling pointer detected at %p (do not dereference)`
-
-**Test Cases**
-1.
-**Input:**
-
-```
-```
-
-**Output:**
-
-```
-Inside: value=123, addr=0x...
-Outside: dangling pointer detected at 0x... (do not dereference)
-```
-
-2–7. *(Same pattern; addresses vary.)*
-
-### C Solution
-
-```c
-#include <stdio.h>
-int main(void){
-    int *dangling = NULL;
-    {
-        int local = 123;
-        dangling = &local;
-        printf("Inside: value=%d, addr=%p\n", local, (void*)dangling);
-    }
-    /* local is out of scope here; dangling is invalid to dereference */
-    printf("Outside: dangling pointer detected at %p (do not dereference)", (void*)dangling);
-    return 0;
-}
-```
-
----
-
-## 9) The Reversed Road
-
-Given distances between waypoints, print them **in reverse** using a pointer that starts at the last element and moves backward.
-
-**Input Format**
-
-* `n`
-* `n` integers
-
-**Output Format**
-
-* Elements in reverse order, space-separated.
-
-**Test Cases**
-1.
-**Input:**
-
-```
-5
-1 2 3 4 5
-```
-
-**Output:**
-
-```
-5 4 3 2 1
-```
-
-2.
-
-**Input:**
-
-```
-1
-7
-```
-
-**Output:**
-
-```
-7
-```
-
-3.
-
-**Input:**
-
-```
-3
--1 0 1
-```
-
-**Output:**
-
-```
-1 0 -1
-```
-
-4.
-
-**Input:**
-
-```
-4
-10 10 10 10
-```
-
-**Output:**
-
-```
-10 10 10 10
-```
-
-5.
-
-**Input:**
-
-```
-6
-3 2 1 6 5 4
-```
-
-**Output:**
-
-```
-4 5 6 1 2 3
-```
-
-6.
-
-**Input:**
-
-```
-2
--5 -6
-```
-
-**Output:**
-
-```
--6 -5
-```
-
-7.
-
-**Input:**
-
-```
-7
-0 1 0 1 0 1 0
-```
-
-**Output:**
-
-```
-0 1 0 1 0 1 0
-```
-
-### C Solution
-
-```c
-#include <stdio.h>
-int main(void){
-    int n; if (scanf("%d",&n)!=1) return 0;
-    int a[100000];
-    for(int i=0;i<n;i++) scanf("%d",&a[i]);
-    int *p = a + (n - 1);
-    for(int i=0;i<n;i++,p--){
-        if(i) printf(" ");
-        printf("%d", *p);
-    }
-    return 0;
-}
-```
-
----
-
-## 10) Memory Offset Finder
-
-Given an array and offset `k`, print the value at position `k` using pointer arithmetic (no indexing). If `k` is out of range, print `Invalid`.
-
-**Input Format**
-
-* `n k`
-* `n` integers
-
-**Output Format**
-
-* If `0 ≤ k < n`: the integer at offset `k`
-* Else: `Invalid`
-
-**Test Cases**
-1.
-**Input:**
-
-```
-5 0
-10 20 30 40 50
-```
-
-**Output:**
-
-```
-10
-```
-
-2.
-
-**Input:**
-
+**Output Format:**  
 ```
-5 4
-10 20 30 40 50
+Original command: SOURCE  
+Backup buffer: SOURCE
 ```
 
-**Output:**
-
-```
-50
-```
-
-3.
-
-**Input:**
-
-```
-3 1
--1 0 1
-```
-
-**Output:**
-
-```
-0
-```
-
-4.
-
-**Input:**
-
-```
-4 3
-5 5 5 5
-```
-
-**Output:**
-
-```
-5
-```
-
-5.
-
-**Input:**
-
-```
-6 5
-2 4 6 8 10 12
-```
-
-**Output:**
-
-```
-12
-```
-
-6.
-
-**Input:**
-
-```
-2 2
-7 9
+**Sample Input:**  
 ```
-
-**Output:**
-
-```
-Invalid
-```
-
-7.
-
-**Input:**
-
+REBOOT_DEVICE
 ```
-1 0
-42
-```
-
-**Output:**
 
+**Sample Output:**  
 ```
-42
-```
-
-### C Solution
-
-```c
-#include <stdio.h>
-int main(void){
-    int n, k; if (scanf("%d %d",&n,&k)!=2) return 0;
-    int a[100000];
-    for(int i=0;i<n;i++) scanf("%d",&a[i]);
-    if (k < 0 || k >= n) {
-        printf("Invalid");
-        return 0;
-    }
-    int *base = a;
-    int *ptr = base + k;
-    printf("%d", *ptr);
-    return 0;
-}
+Original command: REBOOT_DEVICE  
+Backup buffer: REBOOT_DEVICE
 ```
 
